@@ -10,17 +10,26 @@
     "overrides": [
     ],
     "parserOptions": {
+        "project": "tsconfig.json",
         "ecmaVersion": "latest",
-        "sourceType": "module",
-        "project": ["tsconfig.json"]
+        "sourceType": "module"
     },
     "plugins": [
         "react"
     ],
     "rules": {
-        "@typescript-eslint/indent": ["error", 4], // indentation of 4 spaces
-        "@typescript-eslint/semi": ["error", "always"], // include ";",
-        "@typescript-eslint/space-before-function-paren": "off", // disable space before function paren
-        "@typescript-eslint/quotes": ["error", "double", { "allowTemplateLiterals": true }] // always double quotes, allow template literals
+        // pure settings
+        "padded-blocks": "off",
+        "no-trailing-spaces": "off",
+        "arrow-body-style": ["error", "as-needed"],
+
+        // typescript settings
+        "@typescript-eslint/indent": ["error", 4],
+        "@typescript-eslint/semi": ["error", "always"],
+        "@typescript-eslint/space-before-function-paren": "off",
+        "@typescript-eslint/quotes": ["error", "double", { "allowTemplateLiterals": true }],
+
+        // react settings
+        "react/self-closing-comp": ["error", { "component": true, "html": true }]
     }
 }
