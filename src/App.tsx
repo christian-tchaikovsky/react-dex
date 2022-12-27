@@ -1,11 +1,11 @@
 import React from "react";
-import styles from "./App.module.sass";
 import { Button } from "@/components/UI/Button";
+import styles from "./App.module.sass";
 
 function App(): JSX.Element {
     return (
         <div className={styles.app}>
-            <Button>Test</Button>
+            <Button>Sign In</Button>
         </div>
     );
 }
