@@ -3,6 +3,8 @@ import { Input } from "@/components/UI/Input";
 import { SubmitHandler, useForm, Controller } from "react-hook-form";
 import Banner from "@/assets/image/im-sign-up-banner.png";
 import styles from "./SignIn.module.sass";
+import { Password } from "@/components/UI/Password";
+import { Button } from "@/components/UI/Button";
 
 interface Inputs {
     login: string
@@ -41,7 +43,7 @@ export const SignIn: FC = () => {
                         control={control}
                         name="password"
                         render={({ field: { onChange, value }, fieldState: { error } }) => (
-                            <Input
+                            <Password
                                 label="Password"
                                 value={value}
                                 onChange={onChange}
@@ -51,6 +53,7 @@ export const SignIn: FC = () => {
                             />
                         )}
                     />
+                    <Button type="submit" fullWidth>Sign In</Button>
                 </form>
             </div>
             <div className={styles.right}>
