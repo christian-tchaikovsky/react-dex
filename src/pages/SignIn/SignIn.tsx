@@ -25,7 +25,7 @@ const validationSchema = Yup.object<Record<keyof Inputs, Yup.AnySchema>>({
     password: Yup.string()
         .trim()
         .required("Required")
-        .matches(/^[a-zA-Z]+$/, "Invalid character entered")
+        .matches(/^[a-zA-Z0-9]+$/, "Invalid character entered")
         .min(5, "Password must be at least 5 characters")
         .max(24, "Password must be at most 24 characters")
 });
