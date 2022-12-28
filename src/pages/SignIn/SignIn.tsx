@@ -1,5 +1,7 @@
 import React, { FC } from "react";
 import { Input } from "@/components/UI/Input";
+import { Button } from "@/components/UI/Button";
+import { Password } from "@/components/UI/Password";
 import { SubmitHandler, useForm, Controller } from "react-hook-form";
 import Banner from "@/assets/image/im-sign-up-banner.png";
 import styles from "./SignIn.module.sass";
@@ -41,7 +43,7 @@ export const SignIn: FC = () => {
                         control={control}
                         name="password"
                         render={({ field: { onChange, value }, fieldState: { error } }) => (
-                            <Input
+                            <Password
                                 label="Password"
                                 value={value}
                                 onChange={onChange}
@@ -51,6 +53,7 @@ export const SignIn: FC = () => {
                             />
                         )}
                     />
+                    <Button type="submit" fullWidth>Sign In</Button>
                 </form>
             </div>
             <div className={styles.right}>

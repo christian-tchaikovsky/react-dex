@@ -28,7 +28,7 @@ export const Password: FC<Props> = (props) => {
     return (
         <div className={classNames(styles.wrapper, className)}>
             <label className={styles.label}>{label}</label>
-            <div className={styles.input}>
+            <div className={classNames(styles.input, { [styles.block]: fullWidth })}>
                 <InputBase
                     className={styles.password}
                     type={state ? "text" : "password"}
