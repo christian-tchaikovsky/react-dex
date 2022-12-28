@@ -5,6 +5,8 @@ import { Password } from "@/components/UI/Password";
 import { SubmitHandler, useForm, Controller } from "react-hook-form";
 import Banner from "@/assets/image/im-sign-up-banner.png";
 import styles from "./SignIn.module.sass";
+import { Password } from "@/components/UI/Password";
+import { Button } from "@/components/UI/Button";
 
 interface Inputs {
     login: string
