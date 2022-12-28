@@ -5,7 +5,7 @@ import styles from "./App.module.sass";
 function App(): JSX.Element {
     return (
         <div className={styles.app}>
-            <Button>Sign In</Button>
+            <Button icon="add">Sign In</Button>
         </div>
     );
 }

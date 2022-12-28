@@ -32,8 +32,8 @@ export const Button: FC<Props> = (props) => {
             )}
             {...rest}
         >
-            {children}
-            <Icon name={icon}/>
+            <span className={styles.text}>{children}</span>
+            <Icon className={styles.icon} name={icon}/>
         </button>
     );
 };
