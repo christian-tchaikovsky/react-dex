@@ -1,0 +1,46 @@
+@import "@/styles/sass/_colors.sass"
+
+.wrapper
+  display: block
+
+.label
+  display: block
+  font-style: normal
+  font-weight: 500
+  font-size: 14px
+  margin-bottom: 4px
+
+.input
+  display: block
+  background-color: $lightest-grey-secondary
+  border-radius: 4px
+  padding: 0 12px
+  height: 40px
+  font-style: normal
+  font-weight: 500
+  font-size: 14px
+  border: none
+
+  &.error
+    border: 1px solid $lightest-red
+
+  &:hover:enabled
+    background-color: $lightest-grey-primary
+
+  &:focus
+    box-shadow: 0 0 5px #D9D9D9
+    outline: none
+
+  &:disabled
+    color: $lightest-grey-primary
+
+span.error
+  display: block
+  color: $lightest-red
+  font-style: normal
+  font-weight: 500
+  font-size: 12px
+  margin-top: 2px
+
+.fullWidth
+  width: 100%
