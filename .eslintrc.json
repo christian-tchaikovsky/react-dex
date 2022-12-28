@@ -26,6 +26,7 @@
         // typescript settings
         "@typescript-eslint/indent": ["error", 4],
         "@typescript-eslint/semi": ["error", "always"],
+        "@typescript-eslint/no-misused-promises": "off",
         "@typescript-eslint/strict-boolean-expressions": "off",
         "@typescript-eslint/space-before-function-paren": "off",
         "@typescript-eslint/quotes": ["error", "double", { "allowTemplateLiterals": true }],

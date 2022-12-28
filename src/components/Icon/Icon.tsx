@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { IconKeys, icons } from "@/assets/image";
+import { IconKeys, icons } from "@/assets/icons";
 
 interface Props {
     name?: IconKeys

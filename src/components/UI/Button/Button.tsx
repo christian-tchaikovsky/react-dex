@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import classNames from "classnames";
 import { Icon } from "@/components/Icon";
-import { IconKeys } from "@/assets/image";
+import { IconKeys } from "@/assets/icons";
 import styles from "./Button.module.sass";
 
 interface Props {
