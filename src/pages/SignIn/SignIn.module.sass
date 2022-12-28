@@ -1,31 +1,52 @@
-@import "@/styles/sass/_colors.sass"
+@import "@/styles/sass/index.sass"
 
 .auth
+  display: flex
   width: 100%
   height: 100vh
-  display: flex
 
 .left
   display: flex
-  justify-items: center
-  align-items: center
-  height: 100%
   padding: 0 120px
+  align-items: center
+  justify-content: center
+  +breakpointDown($device--desktop-l)
+    width: 100%
+    padding: 0 20px
 
-  .form
-    width: 360px
+.right
+  flex-grow: 1
+  display: flex
+  align-items: center
+  justify-content: center
+  background-color: $light-blue
+  +breakpointDown($device--desktop-l)
+    display: none
+
+.form
+  width: 360px
+  flex-shrink: 0
+  +breakpointDown($device--mobile-l)
+    width: 100%
+
+  .title
+    margin-bottom: 30px
 
   .input
     margin-bottom: 25px
 
-.right
-  height: 100%
-  flex-grow: 1
-  position: relative
-  background-color: $light-blue
+  .bottom
+    text-align: center
+    margin-top: 25px
 
-  .banner
-    position: absolute
-    top: 50%
-    left: 50%
-    transform: translate(-50%, -50%)
+  .typography
+    display: inline-block
+
+  .link
+    display: inline-block
+    margin-left: 5px
+
+.banner
+  display: block
+  max-width: 600px
+  margin: 0 40px
