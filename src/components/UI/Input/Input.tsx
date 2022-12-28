@@ -1,6 +1,7 @@
 import React, { FC } from "react";
-import styles from "./Input.module.sass";
 import classNames from "classnames";
+import InputBase from "@/components/UI/InputBase/InputBase";
+import styles from "./Input.module.sass";
 
 interface Props {
     onChange: React.ChangeEventHandler<HTMLInputElement>
@@ -21,17 +22,12 @@ export const Input: FC<Props> = (props) => {
     return (
         <div className={classNames(styles.wrapper, className)}>
             <label className={styles.label}>{label}</label>
-            <input
-                type="text"
-                value={value}
+            <InputBase
                 onChange={onChange}
+                value={value}
+                fullWidth={fullWidth}
+                error={error}
                 disabled={disabled}
-                className={classNames(
-                    styles.input, {
-                        [styles.error]: error,
-                        [styles.fullWidth]: fullWidth
-                    }
-                )}
                 {...rest}
             />
             {error && <span className={styles.error}>{error}</span>}
