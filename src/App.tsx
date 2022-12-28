@@ -1,11 +1,13 @@
-import React from "react";
-import { Button } from "@/components/UI/Button";
+import React, { useState } from "react";
+import { Input } from "@/components/UI/Input";
 import styles from "./App.module.sass";
 
 function App(): JSX.Element {
+    const [value, setValue] = useState("");
+
     return (
         <div className={styles.app}>
-            <Button icon="add">Sign In</Button>
+            <Input type="number" error="Required" label="Login" onChange={e => setValue(e.target.value)} value={value}/>
         </div>
     );
 }
