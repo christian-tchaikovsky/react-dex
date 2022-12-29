@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useEffect, useRef, useState } from "react";
 import { useAppDispatch } from "@/hooks";
 import { removeNotification } from "@/store/reducers/notificationReducer";
 import { Transition } from "react-transition-group";
@@ -14,6 +14,7 @@ interface Props {
 
 export const Notification: FC<Props> = ({ id, message, delay, type = "error" }) => {
     const [state, setState] = useState(true);
+    const nodeRef = useRef(null);
     const dispatch = useAppDispatch();
 
     useEffect(() => {
@@ -36,11 +37,14 @@ export const Notification: FC<Props> = ({ id, message, delay, type = "error" }) 
         <Transition
             in={state}
             mountOnEnter
+            unmountOnExit
             timeout={350}
+            nodeRef={nodeRef}
             onExited={onExit}
         >
             {state => (
                 <div
+                    ref={nodeRef}
                     onClick={onClick}
                     className={classNames(
                         styles.notification,
