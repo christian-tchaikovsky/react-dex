@@ -4,9 +4,10 @@ const HTTP = axios.create({ baseURL: process.env.REACT_APP_API_ENDPOINT });
 
 HTTP.interceptors.request.use(
     config => {
-        const token = localStorage.getItem("token");
+        const user = localStorage.getItem("user");
 
-        if (config.headers && token) {
+        if (config.headers && user) {
+            const token: string = JSON.parse(user).token;
             config.headers.Authorization = `Bearer ${token}`;
         }
 

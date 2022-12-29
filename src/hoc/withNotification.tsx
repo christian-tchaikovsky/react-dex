@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import { useAppSelector } from "@/hooks";
 import { Notification } from "@/components/Notification";
+import { NotificationLayout } from "@/layouts/NotificationLayout";
 
 const withNotification = (Component: React.ComponentType, delay: number): () => JSX.Element => {
     function WithNotification(): JSX.Element {
@@ -26,16 +27,9 @@ const withNotification = (Component: React.ComponentType, delay: number): () => 
             <React.Fragment>
                 <Component/>
                 {renderNotifications && (
-                    <div
-                        style={{
-                            position: "absolute",
-                            right: "20px",
-                            top: "20px",
-                            overflow: "hidden"
-                        }}
-                    >
+                    <NotificationLayout>
                         {renderNotifications}
-                    </div>
+                    </NotificationLayout>
                 )}
             </React.Fragment>
         );

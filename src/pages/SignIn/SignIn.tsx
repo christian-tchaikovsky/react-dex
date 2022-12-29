@@ -4,17 +4,20 @@ import { Input } from "@/components/UI/Input";
 import { Button } from "@/components/UI/Button";
 import { Password } from "@/components/UI/Password";
 import { Typography } from "@/components/UI/Typography";
-import { addNotification } from "@/store/reducers/notificationReducer";
 import { SubmitHandler, useForm, Controller } from "react-hook-form";
+import { addNotification } from "@/store/reducers/notificationReducer";
 import { validationSchema } from "@/pages/SignIn/schema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { ILoginRequest } from "@/models/ILogin";
+import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "@/hooks";
 import { login } from "@/api/login";
+import { AxiosError } from "axios";
 import Banner from "@/assets/image/im-sign-up-banner.png";
 import styles from "./SignIn.module.sass";
 
 export const SignIn: FC = () => {
+    const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const { control, handleSubmit } = useForm<ILoginRequest>({
         resolver: yupResolver(validationSchema),
@@ -26,11 +29,24 @@ export const SignIn: FC = () => {
 
     const onSubmit: SubmitHandler<ILoginRequest> = async data => {
         try {
-            const res = await login(data);
-            const responseData = res.data;
+            const response = await login(data);
+            const responseData = response.data;
+
             localStorage.setItem("user", JSON.stringify(responseData));
-        } catch {
-            dispatch(addNotification("User with the specified username / password was not found"));
+            dispatch(addNotification({
+                message: "You have successfully logged in",
+                type: "success"
+            }));
+
+            navigate("/");
+        } catch (e) {
+            const error = e as AxiosError;
+
+            if (error.response?.status === 401) {
+                dispatch(addNotification(
+                    "User with the specified username / password was not found"
+                ));
+            }
         }
     };
 
