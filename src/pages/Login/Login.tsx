@@ -1,19 +1,20 @@
 import React, { FC } from "react";
-import { Link } from "@/components/UI/Link";
-import { Input } from "@/components/UI/Input";
-import { Button } from "@/components/UI/Button";
-import { Password } from "@/components/UI/Password";
+import { AuthLayout } from "@/layouts/AuthLayout";
 import { Typography } from "@/components/UI/Typography";
+import { Input } from "@/components/UI/Input";
+import { Password } from "@/components/UI/Password";
+import { Button } from "@/components/UI/Button";
+import { Link } from "@/components/UI/Link";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { SubmitHandler, useForm, Controller } from "react-hook-form";
 import { addNotification } from "@/store/reducers/notificationReducer";
 import { validationSchema } from "@/pages/Login/schema";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { ILoginRequest } from "@/models/ILogin";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "@/hooks";
 import { login } from "@/api/login";
 import { AxiosError } from "axios";
-import Banner from "@/assets/image/im-sign-up-banner.png";
+import Banner from "@/assets/image/im-sign-in-banner.png";
 import styles from "./Login.module.sass";
 
 export const Login: FC = () => {
@@ -53,48 +54,43 @@ export const Login: FC = () => {
     };
 
     return (
-        <div className={styles.auth}>
-            <div className={styles.left}>
-                <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-                    <Typography tag="h1" size="large" className={styles.title}>Sign In</Typography>
-                    <Controller
-                        control={control}
-                        name="login"
-                        render={({ field: { onChange, value }, fieldState: { error } }) => (
-                            <Input
-                                label="Login"
-                                value={value}
-                                onChange={onChange}
-                                className={styles.input}
-                                error={error?.message}
-                                fullWidth
-                            />
-                        )}
-                    />
-                    <Controller
-                        control={control}
-                        name="password"
-                        render={({ field: { onChange, value }, fieldState: { error } }) => (
-                            <Password
-                                label="Password"
-                                value={value}
-                                onChange={onChange}
-                                className={styles.input}
-                                error={error?.message}
-                                fullWidth
-                            />
-                        )}
-                    />
-                    <Button type="submit" fullWidth>Sign In</Button>
-                    <div className={styles.bottom}>
-                        <Typography className={styles.typography} color="secondary">Not a member yet?</Typography>
-                        <Link className={styles.link} to="/register">Sign up</Link>
-                    </div>
-                </form>
-            </div>
-            <div className={styles.right}>
-                <img className={styles.banner} src={Banner} alt="Banner"/>
-            </div>
-        </div>
+        <AuthLayout image={Banner}>
+            <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+                <Typography tag="h1" size="large" className={styles.title}>Sign In</Typography>
+                <Controller
+                    control={control}
+                    name="login"
+                    render={({ field: { onChange, value }, fieldState: { error } }) => (
+                        <Input
+                            label="Login"
+                            value={value}
+                            onChange={onChange}
+                            className={styles.input}
+                            error={error?.message}
+                            fullWidth
+                        />
+                    )}
+                />
+                <Controller
+                    control={control}
+                    name="password"
+                    render={({ field: { onChange, value }, fieldState: { error } }) => (
+                        <Password
+                            label="Password"
+                            value={value}
+                            onChange={onChange}
+                            className={styles.input}
+                            error={error?.message}
+                            fullWidth
+                        />
+                    )}
+                />
+                <Button type="submit" fullWidth>Sign In</Button>
+                <div className={styles.bottom}>
+                    <Typography className={styles.typography} color="secondary">Not a member yet?</Typography>
+                    <Link className={styles.link} to="/register">Sign up</Link>
+                </div>
+            </form>
+        </AuthLayout>
     );
 };
