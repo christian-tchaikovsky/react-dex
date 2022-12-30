@@ -7,6 +7,7 @@ import { ReactComponent as Create } from "./ic-create.svg";
 import { ReactComponent as Delete } from "./ic-delete.svg";
 import { ReactComponent as Profile } from "./ic-profile.svg";
 import { ReactComponent as CloseEye } from "./ic-close-eye.svg";
+import { ReactComponent as Checkmark } from "./ic-checkmark.svg";
 import { ReactComponent as PersonGroup } from "./ic-group-person.svg";
 
 export const icons = {
@@ -19,6 +20,7 @@ export const icons = {
     delete: Delete,
     profile: Profile,
     close_eye: CloseEye,
+    checkmark: Checkmark,
     person_group: PersonGroup
 };
 
