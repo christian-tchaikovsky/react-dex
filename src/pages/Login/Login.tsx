@@ -6,7 +6,7 @@ import { Password } from "@/components/UI/Password";
 import { Typography } from "@/components/UI/Typography";
 import { SubmitHandler, useForm, Controller } from "react-hook-form";
 import { addNotification } from "@/store/reducers/notificationReducer";
-import { validationSchema } from "@/pages/SignIn/schema";
+import { validationSchema } from "@/pages/Login/schema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { ILoginRequest } from "@/models/ILogin";
 import { useNavigate } from "react-router-dom";
@@ -14,9 +14,9 @@ import { useAppDispatch } from "@/hooks";
 import { login } from "@/api/login";
 import { AxiosError } from "axios";
 import Banner from "@/assets/image/im-sign-up-banner.png";
-import styles from "./SignIn.module.sass";
+import styles from "./Login.module.sass";
 
-export const SignIn: FC = () => {
+export const Login: FC = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const { control, handleSubmit } = useForm<ILoginRequest>({
@@ -31,8 +31,10 @@ export const SignIn: FC = () => {
         try {
             const response = await login(data);
             const responseData = response.data;
-
-            localStorage.setItem("user", JSON.stringify(responseData));
+            const { name, avatarUrl, token } = responseData;
+            
+            localStorage.setItem("user", JSON.stringify({ name, avatarUrl }));
+            localStorage.setItem("token", token);
             dispatch(addNotification({
                 message: "You have successfully logged in",
                 type: "success"
