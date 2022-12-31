@@ -2,9 +2,12 @@
 @import "@/styles/sass/_mixins.sass"
 
 .checkbox
-  position: relative
-  cursor: pointer
   display: block
+
+.label
+  display: block
+  cursor: pointer
+  position: relative
   font-style: normal
   font-weight: 500
   font-size: 14px
@@ -21,6 +24,12 @@
     width: 0
     left: 0
     top: 0
+
+  &.error
+    color: $lightest-red
+
+    .mark
+      border-color: $lightest-red
 
 .mark
   display: inline-block
@@ -44,3 +53,11 @@
       background-position: center
       background-repeat: no-repeat
       background-image: url("~@/assets/icons/ic-checkmark.svg")
+
+span
+  &.error
+    display: block
+    color: $lightest-red
+    font-style: normal
+    font-weight: 500
+    font-size: 12px
