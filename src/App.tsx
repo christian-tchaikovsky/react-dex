@@ -20,6 +20,7 @@ function App(): JSX.Element {
                     <Route path="/" element={<Navigate to="/teams"/>}/>
                     <Route path="/teams" element={<div>Teams</div>}/>
                     <Route path="/players" element={<div>Players</div>}/>
+                    <Route path="/profile" element={<div>Profile</div>}/>
                 </Route>
             </Routes>
         </div>

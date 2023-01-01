@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import { AuthLayout } from "@/layouts/AuthLayout";
 import { Typography } from "@/components/UI/Typography";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { addNotification } from "@/store/reducers/notificationReducer";
 import { Input } from "@/components/UI/Input";
 import { Password } from "@/components/UI/Password";
 import { Button } from "@/components/UI/Button";
@@ -14,7 +15,6 @@ import { register } from "@/api/register";
 import { useAppDispatch } from "@/hooks";
 import { useNavigate } from "react-router-dom";
 import { AxiosError } from "axios";
-import { addNotification } from "@/store/reducers/notificationReducer";
 import Banner from "@/assets/image/im-sign-up-banner.png";
 import styles from "./Register.module.sass";
 
