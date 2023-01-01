@@ -18,7 +18,8 @@ export const validationSchema = Yup.object<Record<keyof IFields, Yup.AnySchema>>
         .oneOf([Yup.ref("password"), null], "Passwords must match"),
     userName: Yup.string()
         .required("Required")
-        .min(5, "Name must be at least 5 characters")
+        .matches(/^[a-zA-Z]+$/, "Invalid character entered")
+        .min(2, "Name must be at least 5 characters")
         .max(24, "Name must be at most 24 characters"),
     agreement: Yup.boolean()
         .oneOf([true], "You must be accept the agreement")
