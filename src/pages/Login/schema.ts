@@ -1,7 +1,7 @@
 import * as Yup from "yup";
-import { ILoginRequest } from "@/models/ILogin";
+import { IRequest } from "@/models/ILogin";
 
-export const validationSchema = Yup.object<Record<keyof ILoginRequest, Yup.AnySchema>>({
+export const validationSchema = Yup.object<Record<keyof IRequest, Yup.AnySchema>>({
     login: Yup.string()
         .trim()
         .required("Required")

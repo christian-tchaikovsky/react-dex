@@ -9,7 +9,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { SubmitHandler, useForm, Controller } from "react-hook-form";
 import { addNotification } from "@/store/reducers/notificationReducer";
 import { validationSchema } from "@/pages/Login/schema";
-import { ILoginRequest } from "@/models/ILogin";
+import { IRequest } from "@/models/ILogin";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "@/hooks";
 import { login } from "@/api/login";
@@ -20,7 +20,7 @@ import styles from "./Login.module.sass";
 export const Login: FC = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
-    const { control, handleSubmit } = useForm<ILoginRequest>({
+    const { control, handleSubmit } = useForm<IRequest>({
         resolver: yupResolver(validationSchema),
         defaultValues: {
             login: "",
@@ -28,7 +28,7 @@ export const Login: FC = () => {
         }
     });
 
-    const onSubmit: SubmitHandler<ILoginRequest> = async data => {
+    const onSubmit: SubmitHandler<IRequest> = async data => {
         try {
             const response = await login(data);
             const responseData = response.data;

@@ -1,22 +1,22 @@
-interface IRegisterRequest {
+interface IRequest {
     userName: string
     login: string
     password: string
 }
 
-interface IRegisterResponse {
+interface IResponse {
     name: string
     avatarUrl: string
     token: string
 }
 
-interface IRegisterFields extends IRegisterRequest {
+interface IFields extends IRequest {
     confirmPassword: string
     agreement: boolean
 }
 
 export type {
-    IRegisterFields,
-    IRegisterRequest,
-    IRegisterResponse
+    IFields,
+    IRequest,
+    IResponse
 };

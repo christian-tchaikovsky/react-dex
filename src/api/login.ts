@@ -1,9 +1,9 @@
 import HTTP from "@/axios/axios";
 import { AxiosResponse } from "axios";
-import { ILoginRequest, ILoginResponse } from "@/models/ILogin";
+import { IRequest, IResponse } from "@/models/ILogin";
 
-async function login(data: ILoginRequest): Promise<AxiosResponse<ILoginResponse>> {
-    return await HTTP.post<string, AxiosResponse<ILoginResponse>>("/Auth/SignIn", data);
+async function login(data: IRequest): Promise<AxiosResponse<IResponse>> {
+    return await HTTP.post<string, AxiosResponse<IResponse>>("/Auth/SignIn", data);
 }
 
 export {

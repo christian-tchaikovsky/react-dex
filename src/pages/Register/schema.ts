@@ -1,7 +1,7 @@
 import * as Yup from "yup";
-import { IRegisterFields } from "@/models/IRegister";
+import { IFields } from "@/models/IRegister";
 
-export const validationSchema = Yup.object<Record<keyof IRegisterFields, Yup.AnySchema>>({
+export const validationSchema = Yup.object<Record<keyof IFields, Yup.AnySchema>>({
     login: Yup.string()
         .trim()
         .required("Required")

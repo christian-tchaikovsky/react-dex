@@ -9,12 +9,19 @@ import { Checkbox } from "@/components/UI/Checkbox";
 import { Link } from "@/components/UI/Link";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { validationSchema } from "./schema";
-import { IRegisterFields } from "@/models/IRegister";
+import { IFields } from "@/models/IRegister";
+import { register } from "@/api/register";
+import { useAppDispatch } from "@/hooks";
+import { useNavigate } from "react-router-dom";
+import { AxiosError } from "axios";
+import { addNotification } from "@/store/reducers/notificationReducer";
 import Banner from "@/assets/image/im-sign-up-banner.png";
 import styles from "./Register.module.sass";
 
 export const Register: FC = () => {
-    const { control, handleSubmit } = useForm<IRegisterFields>({
+    const navigate = useNavigate();
+    const dispatch = useAppDispatch();
+    const { control, handleSubmit } = useForm<IFields>({
         resolver: yupResolver(validationSchema),
         defaultValues: {
             userName: "",
@@ -25,8 +32,30 @@ export const Register: FC = () => {
         }
     });
 
-    const onSubmit: SubmitHandler<IRegisterFields> = data => {
-        console.log(data);
+    const onSubmit: SubmitHandler<IFields> = async data => {
+        try {
+            const { userName, login, password } = data;
+            const response = await register({ userName, login, password });
+            const responseData = response.data;
+            const { name, avatarUrl, token } = responseData;
+
+            localStorage.setItem("user", JSON.stringify({ name, avatarUrl }));
+            localStorage.setItem("token", token);
+            dispatch(addNotification({
+                message: "You have successfully registered",
+                type: "success"
+            }));
+
+            navigate("/");
+        } catch (e) {
+            const error = e as AxiosError;
+
+            if (error.response?.status === 409) {
+                dispatch(addNotification(
+                    "User with the specified login already exist"
+                ));
+            }
+        }
     };
     
     return (

@@ -1,15 +1,15 @@
-interface ILoginRequest {
+interface IRequest {
     login: string
     password: string
 }
 
-interface ILoginResponse {
+interface IResponse {
     name: string
     avatarUrl: string
     token: string
 }
 
 export type {
-    ILoginRequest,
-    ILoginResponse
+    IRequest,
+    IResponse
 };
