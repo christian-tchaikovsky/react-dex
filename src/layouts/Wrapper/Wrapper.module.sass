@@ -9,12 +9,12 @@ $paddings: $device--desktop-l 40px, $device--desktop-s 20px
     +breakpointDown($size)
       padding: $padding
 
-.Wrapper
-  display: flex
-  display: -ms-flexbox
-  -ms-flex-direction: row
-  flex-direction: row
+.wrapper
   height: 100vh
+
+.content
+  display: flex
+  height: calc(100vh - 80px)
 
   main
     padding: 40px
