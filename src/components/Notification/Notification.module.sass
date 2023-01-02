@@ -1,0 +1,57 @@
+@import "@/styles/sass/_colors.sass"
+
+$type--success: success $green
+$type--error: error $light-red
+$type--warning: warning $orange
+$type--info: info $blue
+$types: $type--success, $type--error, $type--warning, $type--info
+
+=generate_types()
+  @each $type, $color in $types
+    &.#{$type}
+      background-color: $color
+
+.notification
+  display: block
+  padding: 10px
+  border-radius: 4px
+  min-width: 150px
+  color: #ffffff
+  cursor: pointer
+
+  &:not(:last-child)
+    margin-bottom: 5px
+
+  +generate_types
+
+.animation-entered
+  animation: back-in-right 1s forwards
+
+.animation-exiting
+  animation: back-out-right 1s forwards
+
+@keyframes back-in-right
+  0%
+    transform: translateX(2000px) scale(0.7)
+    opacity: 0.7
+
+  80%
+    transform: translateX(0px) scale(0.7)
+    opacity: 0.7
+
+  100%
+    transform: scale(1)
+    opacity: 1
+
+@keyframes back-out-right
+  0%
+    transform: scale(1)
+    opacity: 1
+
+  20%
+    transform: translateX(0px) scale(0.7)
+    opacity: 0.7
+
+  100%
+    transform: translateX(2000px) scale(0.7)
+    opacity: 0.7
