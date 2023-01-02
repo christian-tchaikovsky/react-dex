@@ -3,7 +3,7 @@ import { Anchor } from "@/components/UI/Anchor";
 import styles from "./SideBar.module.sass";
 
 export const SideBar: FC = (): JSX.Element => (
-    <header className={styles.sideBar}>
+    <div className={styles.sideBar}>
         <nav className={styles.navigation}>
             <div className={styles.main}>
                 <Anchor
@@ -32,5 +32,5 @@ export const SideBar: FC = (): JSX.Element => (
                 </Anchor>
             </div>
         </nav>
-    </header>
+    </div>
 );
