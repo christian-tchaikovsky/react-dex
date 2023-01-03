@@ -1,26 +1,27 @@
 import React, { FC } from "react";
-import { AuthLayout } from "@/layouts/AuthLayout";
-import { Typography } from "@/components/UI/Typography";
-import { Input } from "@/components/UI/Input";
-import { Password } from "@/components/UI/Password";
-import { Button } from "@/components/UI/Button";
-import { Link } from "@/components/UI/Link";
+import { AuthLayout } from "@/modules/auth/layouts/AuthLayout";
+import { Typography } from "@/common/components/UI/Typography";
+import { Input } from "@/common/components/UI/Input";
+import { Password } from "@/common/components/UI/Password";
+import { Button } from "@/common/components/UI/Button";
+import { Link } from "@/common/components/UI/Link";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SubmitHandler, useForm, Controller } from "react-hook-form";
-import { addNotification } from "@/store/reducers/notificationReducer";
+import { addNotification } from "@/common/reducers/notificationReducer";
 import { validationSchema } from "@/pages/Login/schema";
-import { IRequest } from "@/models/ILogin";
+import { IFields } from "@/modules/auth/interfaces/ILogin";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "@/hooks";
+import { useAppDispatch } from "@/common/hooks";
 import { login } from "@/api/login";
 import { AxiosError } from "axios";
-import Banner from "@/assets/image/im-sign-in-banner.png";
+import { paths } from "@/routes/constants/paths";
+import Banner from "@/common/assets/image/im-sign-in-banner.png";
 import styles from "./Login.module.sass";
 
 export const Login: FC = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
-    const { control, handleSubmit } = useForm<IRequest>({
+    const { control, handleSubmit } = useForm<IFields>({
         resolver: yupResolver(validationSchema),
         defaultValues: {
             login: "",
@@ -28,7 +29,7 @@ export const Login: FC = () => {
         }
     });
 
-    const onSubmit: SubmitHandler<IRequest> = async data => {
+    const onSubmit: SubmitHandler<IFields> = async data => {
         try {
             const response = await login(data);
             const responseData = response.data;
@@ -41,7 +42,7 @@ export const Login: FC = () => {
                 type: "success"
             }));
 
-            navigate("/");
+            navigate(paths.main);
         } catch (e) {
             const error = e as AxiosError;
 

@@ -1,21 +1,22 @@
 import React, { FC } from "react";
-import { AuthLayout } from "@/layouts/AuthLayout";
-import { Typography } from "@/components/UI/Typography";
+import { AuthLayout } from "@/modules/auth/layouts/AuthLayout";
+import { Typography } from "@/common/components/UI/Typography";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { addNotification } from "@/store/reducers/notificationReducer";
-import { Input } from "@/components/UI/Input";
-import { Password } from "@/components/UI/Password";
-import { Button } from "@/components/UI/Button";
-import { Checkbox } from "@/components/UI/Checkbox";
-import { Link } from "@/components/UI/Link";
+import { addNotification } from "@/common/reducers/notificationReducer";
+import { Input } from "@/common/components/UI/Input";
+import { Password } from "@/common/components/UI/Password";
+import { Button } from "@/common/components/UI/Button";
+import { Checkbox } from "@/common/components/UI/Checkbox";
+import { Link } from "@/common/components/UI/Link";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { validationSchema } from "./schema";
-import { IFields } from "@/models/IRegister";
+import { IFields } from "@/modules/auth/interfaces/IRegister";
 import { register } from "@/api/register";
-import { useAppDispatch } from "@/hooks";
+import { useAppDispatch } from "@/common/hooks";
 import { useNavigate } from "react-router-dom";
 import { AxiosError } from "axios";
-import Banner from "@/assets/image/im-sign-up-banner.png";
+import { paths } from "@/routes/constants/paths";
+import Banner from "@/common/assets/image/im-sign-up-banner.png";
 import styles from "./Register.module.sass";
 
 export const Register: FC = () => {
@@ -46,7 +47,7 @@ export const Register: FC = () => {
                 type: "success"
             }));
 
-            navigate("/");
+            navigate(paths.main);
         } catch (e) {
             const error = e as AxiosError;
 

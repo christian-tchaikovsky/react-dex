@@ -1,6 +1,6 @@
 import React, { FC } from "react";
-import { Typography } from "@/components/UI/Typography";
-import NotFound from "@/assets/image/im-no-match.png";
+import { Typography } from "@/common/components/UI/Typography";
+import NotFound from "@/common/assets/image/im-no-match.png";
 import styles from "./NoMatch.module.sass";
 
 export const NoMatch: FC = () => (

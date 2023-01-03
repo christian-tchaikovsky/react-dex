@@ -1,4 +1,5 @@
 import { FC, useEffect } from "react";
+import { paths } from "@/routes/constants/paths";
 
 export const Logout: FC = () => {
     
@@ -7,7 +8,7 @@ export const Logout: FC = () => {
         localStorage.clear();
 
         // locate to login page
-        window.location.href = "/login";
+        window.location.href = paths.login;
     }, []);
     
     return null;

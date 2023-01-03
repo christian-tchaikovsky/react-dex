@@ -1,0 +1,55 @@
+@import "@/common/styles/sass/_colors.sass"
+
+.button
+  display: block
+  cursor: pointer
+  font-weight: 500
+  font-style: normal
+  border-radius: 4px
+  font-size: 15px
+  padding: 0 20px
+  height: 40px
+  border: none
+  color: white
+
+.text
+  display: inline-block
+
+.icon
+  display: inline-block
+  vertical-align: middle
+  margin-left: 10px
+
+.primary
+  background-color: $red
+
+  &:hover
+    background-color: $light-red
+
+  &:active
+    background-color: $dark-red
+
+  &:disabled
+    background-color: $lightest-grey-secondary
+    color: $lightest-grey-primary
+
+.secondary
+  background-color: white
+  border: 1px solid $light-grey
+  color: $light-grey
+
+  &:hover
+    background-color: $lightest-grey-primary
+
+  &:active
+    background-color: $light-grey
+    border: 1px solid $grey
+    color: $grey
+
+  &:disabled
+    background-color: $lightest-grey-secondary
+    border: 1px solid $light-grey
+    color: $lightest-grey-primary
+
+.fullWidth
+  width: 100%

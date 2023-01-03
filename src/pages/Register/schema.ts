@@ -1,5 +1,5 @@
 import * as Yup from "yup";
-import { IFields } from "@/models/IRegister";
+import { IFields } from "@/modules/auth/interfaces/IRegister";
 
 export const validationSchema = Yup.object<Record<keyof IFields, Yup.AnySchema>>({
     login: Yup.string()

@@ -1,0 +1,63 @@
+@import "@/common/styles/sass/_colors.sass"
+@import "@/common/styles/sass/_mixins.sass"
+
+.checkbox
+  display: block
+
+.label
+  display: block
+  cursor: pointer
+  position: relative
+  font-style: normal
+  font-weight: 500
+  font-size: 14px
+  color: $grey
+  +disableSelection
+
+  &:hover
+    .mark
+      border-color: $red
+
+  input
+    position: absolute
+    height: 0
+    width: 0
+    left: 0
+    top: 0
+
+  &.error
+    color: $lightest-red
+
+    .mark
+      border-color: $lightest-red
+
+.mark
+  display: inline-block
+  border-radius: 2px
+  margin-right: 10px
+  width: 12px
+  height: 12px
+  border: 1px solid $light-grey
+
+  &.checked
+    position: relative
+    border-color: $red
+    background-color: $red
+
+    &:after
+      content: ""
+      display: block
+      position: absolute
+      width: 100%
+      height: 100%
+      background-position: center
+      background-repeat: no-repeat
+      background-image: url("~@/common/assets/icons/ic-checkmark.svg")
+
+span
+  &.error
+    display: block
+    color: $lightest-red
+    font-style: normal
+    font-weight: 500
+    font-size: 12px

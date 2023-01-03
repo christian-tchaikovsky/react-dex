@@ -1,5 +1,5 @@
 import * as Yup from "yup";
-import { IRequest } from "@/models/ILogin";
+import { IRequest } from "@/modules/auth/interfaces/ILogin";
 
 export const validationSchema = Yup.object<Record<keyof IRequest, Yup.AnySchema>>({
     login: Yup.string()
