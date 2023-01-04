@@ -1,0 +1,26 @@
+@import "@/common/styles/sass/index.sass"
+
+.paging
+  display: flex
+  list-style: none
+
+.page, .next, .prev, .break
+  display: flex
+  justify-content: center
+  align-items: center
+  cursor: pointer
+  width: 40px
+  height: 40px
+  border-radius: 4px
+  color: $grey
+  font-style: normal
+  font-weight: 500
+  font-size: 14px
+  +disableSelection
+  +breakpointDown($device--tablet-m)
+    width: 28px
+    height: 28px
+
+  &.active
+    background-color: $red
+    color: #ffffff

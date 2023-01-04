@@ -1,6 +1,8 @@
 import { ReactComponent as Add } from "./ic-add.svg";
 import { ReactComponent as Eye } from "./ic-eye.svg";
 import { ReactComponent as Logo } from "./ic-logo.svg";
+import { ReactComponent as Prev } from "./ic-prev.svg";
+import { ReactComponent as Next } from "./ic-next.svg";
 import { ReactComponent as Input } from "./ic-input.svg";
 import { ReactComponent as Person } from "./ic-person.svg";
 import { ReactComponent as Search } from "./ic-search.svg";
@@ -15,6 +17,8 @@ export const icons = {
     add: Add,
     eye: Eye,
     logo: Logo,
+    prev: Prev,
+    next: Next,
     input: Input,
     person: Person,
     search: Search,

@@ -1,4 +1,18 @@
 .teams
+  display: flex
+  flex-direction: column
+  height: 100%
+
+.top
+  display: flex
+  justify-content: space-between
+
+.main
   display: grid
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr))
+  grid-template-rows: 300px
   gap: 25px
+  margin: 30px 0
+
+.bottom
+  margin-top: auto
