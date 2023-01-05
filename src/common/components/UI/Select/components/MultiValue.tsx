@@ -24,14 +24,6 @@ export function MultiValue<T>(props: MultiValueProps<T>): JSX.Element {
         .map((x: any) => x.label);
 
     return index >= maxToShow
-        ? (
-            <MoreSelectedBadge
-                items={overflow}
-            />
-        )
-        : (
-            <components.MultiValue {...props}>
-                {children}
-            </components.MultiValue>
-        );
+        ? <MoreSelectedBadge items={overflow}/>
+        : <components.MultiValue {...props}>{children}</components.MultiValue>;
 }
