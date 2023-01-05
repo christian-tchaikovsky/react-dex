@@ -7,16 +7,29 @@ import { Button } from "@/common/components/UI/Button";
 import { Search } from "@/common/components/UI/Search";
 import { Paginate } from "@/common/components/Paginate";
 import { useNavigate } from "react-router-dom";
-import styles from "./Teams.module.sass";
 import { Select } from "@/common/components/UI/Select/Select";
+import { MultiValue } from "react-select";
+import styles from "./Teams.module.sass";
+
+interface OptionType {
+    value: number | string
+    label: string
+}
+
+const options: OptionType[] = [
+    { value: 6, label: "6" },
+    { value: 12, label: "12" },
+    { value: 24, label: "24" }
+];
 
 export const Teams: FC = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
-    const { teams, loading } = useAppSelector(state => state.teams);
     const [search, setSearch] = useState("");
     const [page, setPage] = useState(1);
     const [size] = useState(6);
+    const [option, setOption] = useState<MultiValue<OptionType>>([]);
+    const { teams, loading } = useAppSelector(state => state.teams);
 
     useEffect(() => {
         dispatch(fetchTeams({
@@ -57,7 +70,12 @@ export const Teams: FC = () => {
                     count={Math.ceil(teams!.count / teams!.size)}
                     onChange={e => setPage(e.selected)}
                 />
-                <Select/>
+                <Select
+                    options={options}
+                    isMulti={true}
+                    value={option}
+                    onChange={e => setOption(e)}
+                />
             </div>
         </div>
     );
