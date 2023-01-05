@@ -8,49 +8,39 @@ import { Search } from "@/common/components/UI/Search";
 import { Paginate } from "@/common/components/Paginate";
 import { useNavigate } from "react-router-dom";
 import { Select } from "@/common/components/UI/Select/Select";
-import { MultiValue } from "react-select";
+import { sizes } from "@/common/constants/sizeOptions";
+import { ISizes } from "@/common/interfaces/ISizes";
+import { SingleValue } from "react-select";
 import styles from "./Teams.module.sass";
-
-interface OptionType {
-    value: number | string
-    label: string
-}
-
-const options: OptionType[] = [
-    { value: 6, label: "6" },
-    { value: 12, label: "12" },
-    { value: 24, label: "24" }
-];
 
 export const Teams: FC = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const [search, setSearch] = useState("");
     const [page, setPage] = useState(1);
-    const [size] = useState(6);
-    const [option, setOption] = useState<MultiValue<OptionType>>([]);
+    const [option, setOption] = useState<SingleValue<ISizes>>(sizes[0]);
     const { teams, loading } = useAppSelector(state => state.teams);
 
     useEffect(() => {
         dispatch(fetchTeams({
             Page: page,
-            PageSize: size
+            PageSize: 6
         }));
-    }, [page, size]);
+    }, [page]);
 
     if (loading) return <Loader/>;
 
     return (
         <div className={styles.teams}>
             <div className={styles.top}>
-                <Search 
-                    onChange={e => setSearch(e.target.value)} 
+                <Search
                     value={search}
+                    onChange={e => setSearch(e.target.value)}
                 />
-                <Button 
-                    onClick={() => navigate("/teams/add")} 
-                    variant="primary" 
+                <Button
                     icon="add"
+                    variant="primary"
+                    onClick={() => navigate("/teams/add")}
                 >
                     Add
                 </Button>
@@ -59,21 +49,21 @@ export const Teams: FC = () => {
                 {teams?.data.map(data => (
                     <Card
                         key={data.id}
-                        image={data.imageUrl}
                         title={data.name}
+                        image={data.imageUrl}
                         subtitle={`Year of foundation: ${data.foundationYear}`}
                     />
                 ))}
             </div>
             <div className={styles.bottom}>
                 <Paginate
-                    count={Math.ceil(teams!.count / teams!.size)}
                     onChange={e => setPage(e.selected)}
+                    count={Math.ceil(teams!.count / teams!.size)}
                 />
                 <Select
-                    options={options}
-                    isMulti={true}
                     value={option}
+                    options={sizes}
+                    isMulti={false}
                     onChange={e => setOption(e)}
                 />
             </div>
