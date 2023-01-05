@@ -18,13 +18,19 @@ export function style<
             ...styles
         }),
         option: (styles) => ({
-            ...styles
-
+            ...styles,
+            fontSize: "14px",
+            color: "#9C9C9C",
+            backgroundColor: "transparent"
+        }),
+        valueContainer: (styles) => ({
+            ...styles,
+            fontSize: "14px"
         }),
         multiValue: (styles) => ({
             ...styles,
-            backgroundColor: "#E4163A",
-            color: "white"
+            color: "white",
+            backgroundColor: "#E4163A"
         }),
         multiValueLabel: (styles) => ({
             ...styles,
