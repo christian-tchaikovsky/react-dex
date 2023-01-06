@@ -20,8 +20,7 @@ export function style<
         option: (styles) => ({
             ...styles,
             fontSize: "14px",
-            color: "#9C9C9C",
-            backgroundColor: "transparent"
+            cursor: "pointer"
         }),
         valueContainer: (styles) => ({
             ...styles,

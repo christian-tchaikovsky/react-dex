@@ -6,17 +6,24 @@ import styles from "./Paginate.module.sass";
 interface Props {
     count: number
     onChange: (e: { selected: number }) => void
+    value?: number
 }
 
 export const Paginate: FC<Props> = (props) => {
-    const { count, onChange } = props;
-    
+    const { count, onChange, value } = props;
+
+    const forcePage = value ? value - 1 : undefined;
+
+    function onHandleChange(e: { selected: number }): void {
+        e.selected = e.selected + 1;
+        onChange(e);
+    }
+
     return (
         <ReactPaginate
             breakLabel="..."
-            nextLabel={<Icon name="next" />}
-            previousLabel={<Icon name="prev" />}
-            onPageChange={onChange}
+            onPageChange={onHandleChange}
+            forcePage={forcePage}
             pageRangeDisplayed={1}
             pageCount={count}
             disabledClassName={styles.disabled}
@@ -26,6 +33,8 @@ export const Paginate: FC<Props> = (props) => {
             breakLinkClassName={styles.break}
             pageLinkClassName={styles.page}
             nextLinkClassName={styles.next}
+            nextLabel={<Icon name="next" />}
+            previousLabel={<Icon name="prev" />}
         />
     );
 };
