@@ -6,9 +6,6 @@ interface State {
     teams: IResponse | null
     loading: boolean
     error: boolean
-    name: string | null
-    page: number
-    size: number
 }
 
 export const fetchTeams = createAsyncThunk<IResponse, IRequest, {}>(
@@ -22,10 +19,7 @@ export const fetchTeams = createAsyncThunk<IResponse, IRequest, {}>(
 const initialState: State = {
     teams: null,
     loading: true,
-    error: false,
-    name: null,
-    page: 1,
-    size: 6
+    error: false
 };
 
 const userSlice = createSlice({
