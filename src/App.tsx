@@ -1,4 +1,5 @@
 import React from "react";
+import { Add } from "@/pages/Teams/Add";
 import { Login } from "@/pages/Login";
 import { Logout } from "@/pages/Logout";
 import { NoMatch } from "@/pages/NoMatch";
@@ -18,6 +19,7 @@ function App(): JSX.Element {
             <Route path={paths.other} element={<NoMatch/>}/>
             <Route element={<PrivateRoute/>}>
                 <Route path={paths.teams} element={<Teams/>}/>
+                <Route path={paths.teams_add} element={<Add/>}/>
                 <Route path={paths.players} element={<div>Players</div>}/>
                 <Route path={paths.profile} element={<div>Profile</div>}/>
                 <Route path={paths.main} element={<Navigate to={paths.teams}/>}/>

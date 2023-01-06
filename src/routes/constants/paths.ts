@@ -6,5 +6,7 @@ export const paths = {
     players: "/players",
     profile: "/profile",
     register: "/register",
-    other: "*"
+    other: "*",
+
+    teams_add: "/teams/add"
 };

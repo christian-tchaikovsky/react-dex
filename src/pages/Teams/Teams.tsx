@@ -10,6 +10,7 @@ import { Paginate } from "@/common/components/Paginate";
 import { useNavigate } from "react-router-dom";
 import { Select } from "@/common/components/UI/Select/Select";
 import { sizes } from "@/common/constants/sizes";
+import { paths } from "@/routes/constants/paths";
 import { ISizes } from "@/common/interfaces/ISizes";
 import { SingleValue } from "react-select";
 import styles from "./Teams.module.sass";
@@ -43,7 +44,7 @@ export const Teams: FC = () => {
                 <Button
                     icon="add"
                     variant="primary"
-                    onClick={() => navigate("/teams/add")}
+                    onClick={() => navigate(paths.teams_add)}
                 >
                     Add
                 </Button>
