@@ -7,11 +7,10 @@ import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { IFields } from "@/modules/teams/interfaces/IAdd";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import { validationSchema } from "./schema";
-import { upload } from "@/api/image";
 import styles from "./Teams.module.sass";
 
 export const Add: FC = () => {
-    const { handleSubmit, register, control } = useForm<IFields>({
+    const { handleSubmit, register, control, getValues } = useForm<IFields>({
         resolver: yupResolver(validationSchema)
     });
 
@@ -19,12 +18,7 @@ export const Add: FC = () => {
         console.log(data);
     };
 
-    const onHandleUpload = async (file: File): Promise<string> => {
-        const data = new FormData();
-        data.append("file", file);
-        const response = await upload(data);
-        return response.data;
-    };
+    console.log(getValues());
 
     return (
         <div className={styles["teams-add"]}>
@@ -40,13 +34,7 @@ export const Add: FC = () => {
                         name="imageUrl"
                         render={({ field: { onChange } }) => (
                             <Upload 
-                                onChange={async e => {
-                                    if (!e.target.files?.[0]) return;
-
-                                    const file = e.target.files[0];
-                                    const str = onHandleUpload(file);
-                                    onChange(str);
-                                }}
+                                onChange={e => onChange(e)}
                                 className={styles.upload} 
                             />
                         )}

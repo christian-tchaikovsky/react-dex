@@ -1,24 +1,41 @@
 import React, { FC, useState } from "react";
+import { upload } from "@/api/image";
 import classNames from "classnames";
 import styles from "./Upload.module.sass";
+import { useAppDispatch } from "@/common/hooks";
+import { addNotification } from "@/common/reducers/notificationReducer";
 
 interface Props {
-    onChange: React.ChangeEventHandler<HTMLInputElement>
+    onChange: (e: string) => void
     className?: string
 }
 
 export const Upload: FC<Props> = (props) => {
     const { onChange, className } = props;
+    const dispatch = useAppDispatch();
     const [preview, setPreview] = useState<string | null>(null);
 
-    function onHandleChange(e: React.ChangeEvent<HTMLInputElement>): void {
-        if (!e.target.files) return;
+    async function onHandleUpload(e: React.ChangeEvent<HTMLInputElement>): Promise<void> {
+        if (!e.target.files?.[0]) {
+            setPreview(null);
+            return;
+        }
 
-        e.target.files[0]
-            ? setPreview(URL.createObjectURL(e.target.files[0]))
-            : setPreview(null);
+        const data = new FormData();
+        const file = e.target.files[0];
+        data.append("file", file);
 
-        onChange(e);
+        try {
+            const response = await upload(data);
+            setPreview(URL.createObjectURL(file));
+            dispatch(addNotification({
+                message: "Image successfully uploaded",
+                type: "success"
+            }));
+            onChange(response.data);
+        } catch (e) {
+            dispatch(addNotification("Image was not uploaded"));
+        }
     }
 
     return (
@@ -28,7 +45,7 @@ export const Upload: FC<Props> = (props) => {
                 type="file"
                 accept="image/*"
                 className={styles.input}
-                onChange={onHandleChange}
+                onChange={onHandleUpload}
             />
             {preview && (
                 <img
