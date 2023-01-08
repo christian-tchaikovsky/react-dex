@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import { Upload } from "@/common/components/UI/Upload/Upload";
 import { Typography } from "@/common/components/UI/Typography";
 import { Input } from "@/common/components/UI/Input";
+import { Number } from "@/common/components/UI/Number";
 import { Button } from "@/common/components/UI/Button";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { IFields } from "@/modules/teams/interfaces/IAdd";
@@ -48,7 +49,6 @@ export const Add: FC = () => {
                             {...register("division")}
                             label="Division"
                             className={styles.input}
-
                             fullWidth
                         />
                         <Input
@@ -57,11 +57,17 @@ export const Add: FC = () => {
                             className={styles.input}
                             fullWidth
                         />
-                        <Input
-                            {...register("foundationYear")}
-                            label="Year of foundation"
-                            className={styles.input}
-                            fullWidth
+                        <Controller
+                            control={control}
+                            name="foundationYear"
+                            render={({ field: { onChange } }) => (
+                                <Number
+                                    label="Year of foundation"
+                                    onChange={e => onChange(e)}
+                                    className={styles.input}
+                                    fullWidth
+                                />
+                            )}
                         />
                         <div className={styles.actions}>
                             <Button
