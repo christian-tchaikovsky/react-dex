@@ -4,17 +4,16 @@ import { IFields } from "@/modules/teams/interfaces/IAdd";
 export const validationSchema = Yup.object<Record<keyof IFields, Yup.AnySchema>>({
     name: Yup.string()
         .trim()
-        .required("Required")
-        .matches(/^[a-zA-Z]+$/, "Invalid character entered")
-        .min(5, "Login must be at least 5 characters")
-        .max(24, "Login must be at most 24 characters"),
+        .required("Required"),
     division: Yup.string()
         .trim()
+        .required("Required"),
+    foundationYear: Yup.number()
         .required("Required")
-        .matches(/^[a-zA-Z0-9]+$/, "Invalid character entered")
-        .min(5, "Password must be at least 5 characters")
-        .max(24, "Password must be at most 24 characters"),
-    foundationYear: Yup.number(),
-    conference: Yup.string(),
-    imageUrl: Yup.mixed().required("Required")
+        .min(1950, "Year must be greater than 1950")
+        .max(2050, "Year must be less than 1950"),
+    conference: Yup.string()
+        .required("Required"),
+    imageUrl: Yup.mixed()
+        .required("Required")
 });
