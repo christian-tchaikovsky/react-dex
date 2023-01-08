@@ -3,14 +3,15 @@ import { Upload } from "@/common/components/UI/Upload/Upload";
 import { Typography } from "@/common/components/UI/Typography";
 import { Input } from "@/common/components/UI/Input";
 import { Button } from "@/common/components/UI/Button";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { IFields } from "@/modules/teams/interfaces/IAdd";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import { validationSchema } from "./schema";
+import { upload } from "@/api/image";
 import styles from "./Teams.module.sass";
 
 export const Add: FC = () => {
-    const { handleSubmit, register } = useForm<IFields>({
+    const { handleSubmit, register, control } = useForm<IFields>({
         resolver: yupResolver(validationSchema)
     });
 
@@ -18,12 +19,12 @@ export const Add: FC = () => {
         console.log(data);
     };
 
-    function onHandleChange(e: React.ChangeEvent<HTMLInputElement>): void {
-        if (!e.target.files) return;
-
-        const file = e.target.files[0];
-        console.log(file);
-    }
+    const onHandleUpload = async (file: File): Promise<string> => {
+        const data = new FormData();
+        data.append("file", file);
+        const response = await upload(data);
+        return response.data;
+    };
 
     return (
         <div className={styles["teams-add"]}>
@@ -34,7 +35,22 @@ export const Add: FC = () => {
                     <Typography className={styles.text}>Add new team</Typography>
                 </div>
                 <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-                    <Upload className={styles.upload} onChange={onHandleChange}/>
+                    <Controller
+                        control={control}
+                        name="imageUrl"
+                        render={({ field: { onChange } }) => (
+                            <Upload 
+                                onChange={async e => {
+                                    if (!e.target.files?.[0]) return;
+
+                                    const file = e.target.files[0];
+                                    const str = onHandleUpload(file);
+                                    onChange(str);
+                                }}
+                                className={styles.upload} 
+                            />
+                        )}
+                    />
                     <div className={styles.fields}>
                         <Input
                             {...register("name")}
@@ -46,6 +62,7 @@ export const Add: FC = () => {
                             {...register("division")}
                             label="Division"
                             className={styles.input}
+
                             fullWidth
                         />
                         <Input
@@ -62,7 +79,7 @@ export const Add: FC = () => {
                         />
                         <div className={styles.actions}>
                             <Button
-                                type={"reset"}
+                                type={"button"}
                                 variant="secondary"
                                 fullWidth
                             >
