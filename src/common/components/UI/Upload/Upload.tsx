@@ -6,7 +6,7 @@ import { useAppDispatch } from "@/common/hooks";
 import { addNotification } from "@/common/reducers/notificationReducer";
 
 interface Props {
-    onChange: (e: string) => void
+    onChange: (e: string | null) => void
     className?: string
 }
 
@@ -18,6 +18,7 @@ export const Upload: FC<Props> = (props) => {
     async function onHandleUpload(e: React.ChangeEvent<HTMLInputElement>): Promise<void> {
         if (!e.target.files?.[0]) {
             setPreview(null);
+            onChange(null);
             return;
         }
 
