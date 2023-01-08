@@ -1,11 +1,11 @@
-import React, { FC } from "react";
+import React, { FC, forwardRef } from "react";
 import classNames from "classnames";
 import styles from "./InputBase.module.sass";
 
 interface Props {
     type?: "text" | "password"
     onChange: React.ChangeEventHandler<HTMLInputElement>
-    value: string
+    value?: string
     disabled?: boolean
     className?: string
     error?: string
@@ -15,11 +15,12 @@ interface Props {
     [x: string]: any
 }
 
-const InputBase: FC<Props> = (props) => {
+export const InputBase: FC<Props> = forwardRef<HTMLInputElement, Props>((props, ref) => {
     const { type = "text", value, onChange, disabled, className, error, fullWidth, ...rest } = props;
-    
+
     return (
         <input
+            ref={ref}
             type={type}
             value={value}
             onChange={onChange}
@@ -34,6 +35,6 @@ const InputBase: FC<Props> = (props) => {
             {...rest}
         />
     );
-};
+});
 
-export default InputBase;
+InputBase.displayName = "InputBase";

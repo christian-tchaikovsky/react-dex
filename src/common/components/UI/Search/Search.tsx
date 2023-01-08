@@ -1,8 +1,8 @@
 import React, { FC } from "react";
-import InputBase from "@/common/components/UI/InputBase/InputBase";
+import { InputBase } from "@/common/components/UI/InputBase";
+import { Icon } from "@/common/components/Icon";
 import classNames from "classnames";
 import styles from "./Search.module.sass";
-import { Icon } from "@/common/components/Icon";
 
 interface Props {
     onChange: React.ChangeEventHandler<HTMLInputElement>
