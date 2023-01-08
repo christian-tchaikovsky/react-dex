@@ -10,15 +10,13 @@ import { validationSchema } from "./schema";
 import styles from "./Teams.module.sass";
 
 export const Add: FC = () => {
-    const { handleSubmit, register, control, getValues } = useForm<IFields>({
+    const { handleSubmit, register, control } = useForm<IFields>({
         resolver: yupResolver(validationSchema)
     });
 
     const onSubmit: SubmitHandler<IFields> = async data => {
         console.log(data);
     };
-
-    console.log(getValues());
 
     return (
         <div className={styles["teams-add"]}>
