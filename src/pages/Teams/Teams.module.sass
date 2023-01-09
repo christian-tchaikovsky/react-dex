@@ -8,11 +8,19 @@
   justify-content: space-between
 
 .main
-  display: grid
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr))
-  grid-template-rows: 300px
-  gap: 25px
   margin: 30px 0
+
+  &.flex
+    display: flex
+    justify-content: center
+    align-items: center
+    flex-grow: 1
+
+  &.grid
+    display: grid
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr))
+    grid-template-rows: 300px
+    gap: 25px
 
 .bottom
   display: flex

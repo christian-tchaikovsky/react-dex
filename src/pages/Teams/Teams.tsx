@@ -9,10 +9,13 @@ import { Search } from "@/common/components/UI/Search";
 import { Paginate } from "@/common/components/Paginate";
 import { useNavigate } from "react-router-dom";
 import { Select } from "@/common/components/UI/Select/Select";
+import { Empty } from "@/common/components/Empty";
 import { sizes } from "@/common/constants/sizes";
 import { paths } from "@/routes/constants/paths";
 import { ISizes } from "@/common/interfaces/ISizes";
 import { SingleValue } from "react-select";
+import Image from "@/common/assets/image/im-teams_empty.png";
+import classNames from "classnames";
 import styles from "./Teams.module.sass";
 
 export const Teams: FC = () => {
@@ -49,15 +52,23 @@ export const Teams: FC = () => {
                     Add
                 </Button>
             </div>
-            <div className={styles.main}>
-                {teams?.data.map(data => (
-                    <Card
-                        key={data.id}
-                        title={data.name}
-                        image={data.imageUrl}
-                        subtitle={`Year of foundation: ${data.foundationYear}`}
-                    />
-                ))}
+            <div className={classNames(
+                styles.main, {
+                    [styles.grid]: teams?.data,
+                    [styles.flex]: !teams?.data
+                }
+            )}
+            >
+                {!teams?.data.length
+                    ? <Empty image={Image} title="Empty here" subtitle="Add new teams to continue"/>
+                    : teams?.data.map(data => (
+                        <Card
+                            key={data.id}
+                            title={data.name}
+                            image={data.imageUrl}
+                            subtitle={`Year of foundation: ${data.foundationYear}`}
+                        />
+                    ))}
             </div>
             <div className={styles.bottom}>
                 <Paginate
