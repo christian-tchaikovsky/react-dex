@@ -1,0 +1,47 @@
+@import "@/common/styles/sass/_colors.sass"
+
+.table
+  width: 100%
+  border-spacing: 0
+  white-space: nowrap
+  color: $grey
+  background-color: #ffffff
+
+  caption
+    font-size: 18px
+    text-align: left
+    padding: 10px 20px
+    background-color: inherit
+    border: 1px solid $light-grey
+    border-top-left-radius: 6px
+    border-top-right-radius: 6px
+    border-bottom: none
+
+  th
+    text-align: left
+    border-top: solid 1px $light-grey
+
+  th, td
+    border-bottom: 1px solid $light-grey
+    padding: 10px 20px
+    font-size: 14px
+
+  caption, th, td
+    font-weight: 500
+
+  td:nth-child(2), th:nth-child(2)
+    width: 100%
+
+  th:first-child, td:first-child
+    border-left: 1px solid $light-grey
+
+  th:last-child, td:last-child
+    border-right: 1px solid $light-grey
+
+  /* bottom-left border-radius */
+  tr:last-child td:first-child
+    border-bottom-left-radius: 6px
+
+  /* bottom-right border-radius */
+  tr:last-child td:last-child
+    border-bottom-right-radius: 6px

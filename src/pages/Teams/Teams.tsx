@@ -25,6 +25,7 @@ export const Teams: FC = () => {
     const [search, setSearch] = useState(""); // TODO Search functionality
     const [option, setOption] = useState<SingleValue<ISizes>>(sizes[0]);
     const { teams, loading, error } = useAppSelector(state => state.teams);
+    const teamsLength = teams?.data.length;
 
     useEffect(() => {
         dispatch(fetchTeams({
@@ -54,15 +55,16 @@ export const Teams: FC = () => {
             </div>
             <div className={classNames(
                 styles.main, {
-                    [styles.grid]: teams?.data,
-                    [styles.flex]: !teams?.data
+                    [styles.grid]: teamsLength,
+                    [styles.flex]: !teamsLength
                 }
             )}
             >
-                {!teams?.data.length
+                {!teamsLength
                     ? <Empty image={Image} title="Empty here" subtitle="Add new teams to continue"/>
                     : teams?.data.map(data => (
                         <Card
+                            id={data.id}
                             key={data.id}
                             title={data.name}
                             image={data.imageUrl}

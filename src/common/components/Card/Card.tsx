@@ -1,8 +1,11 @@
 import React, { FC } from "react";
 import { Typography } from "@/common/components/UI/Typography";
+import { useNavigate } from "react-router-dom";
+import { paths } from "@/routes/constants/paths";
 import styles from "./Card.module.sass";
 
 interface Props {
+    id: number
     image: string
     title: string
     subtitle: string
@@ -10,10 +13,16 @@ interface Props {
 }
 
 export const Card: FC<Props> = (props) => {
-    const { title, subtitle, image, number } = props;
+    const { id, title, subtitle, image, number } = props;
+    const navigate = useNavigate();
+    
+    const onHandleNavigate = (): void => {
+        const path = paths.teams_details.replace(":id", String(id));
+        navigate(path);
+    };
     
     return (
-        <div className={styles.card}>
+        <div onClick={onHandleNavigate} className={styles.card}>
             <div className={styles.image}>
                 {image
                     ? <img src={`http://dev.trainee.dex-it.ru${image}`} alt="image"/>

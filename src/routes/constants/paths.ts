@@ -8,5 +8,6 @@ export const paths = {
     register: "/register",
     other: "*",
 
-    teams_add: "/teams/add"
+    teams_add: "/teams/add",
+    teams_details: "/teams/:id" // path ":id" is required
 };
