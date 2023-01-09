@@ -68,7 +68,8 @@ export const Teams: FC = () => {
                             image={data.imageUrl}
                             subtitle={`Year of foundation: ${data.foundationYear}`}
                         />
-                    ))}
+                    ))
+                }
             </div>
             <div className={styles.bottom}>
                 <Paginate
