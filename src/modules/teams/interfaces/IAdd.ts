@@ -6,9 +6,14 @@ interface IRequest {
     imageUrl: string
 }
 
+interface IResponse extends IRequest {
+    id: number
+}
+
 interface IFields extends IRequest {}
 
 export type {
+    IResponse,
     IRequest,
     IFields
 };

@@ -13,7 +13,8 @@ export const validationSchema = Yup.object<Record<keyof IFields, Yup.AnySchema>>
         .min(1950, "Year must be greater than 1950")
         .max(2050, "Year must be less than 1950"),
     conference: Yup.string()
+        .trim()
         .required("Required"),
-    imageUrl: Yup.mixed()
+    imageUrl: Yup.string()
         .required("Required")
 });

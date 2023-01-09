@@ -8,15 +8,35 @@ import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { IFields } from "@/modules/teams/interfaces/IAdd";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import { validationSchema } from "./schema";
+import { addTeam } from "@/api/teams";
+import { addNotification } from "@/common/reducers/notificationReducer";
+import { useAppDispatch } from "@/common/hooks";
+import { useNavigate } from "react-router-dom";
+import { paths } from "@/routes/constants/paths";
 import styles from "./Teams.module.sass";
 
 export const Add: FC = () => {
-    const { handleSubmit, register, control } = useForm<IFields>({
+    const navigate = useNavigate();
+    const dispatch = useAppDispatch();
+    const { handleSubmit, register, control, formState: { errors } } = useForm<IFields>({
         resolver: yupResolver(validationSchema)
     });
 
     const onSubmit: SubmitHandler<IFields> = async data => {
-        console.log(data);
+        try {
+            const response = await addTeam(data);
+            const responseData = response.data;
+            const name: string = responseData.name;
+
+            dispatch(addNotification({
+                message: `${name} was successfully added`,
+                type: "success"
+            }));
+
+            navigate(paths.teams);
+        } catch (e) {
+            dispatch(addNotification("The team was not added"));
+        }
     };
 
     return (
@@ -32,27 +52,30 @@ export const Add: FC = () => {
                         control={control}
                         name="imageUrl"
                         render={({ field: { onChange } }) => (
-                            <Upload 
+                            <Upload
                                 onChange={e => onChange(e)}
-                                className={styles.upload} 
+                                className={styles.upload}
                             />
                         )}
                     />
                     <div className={styles.fields}>
                         <Input
                             {...register("name")}
+                            error={errors.name?.message}
                             label="Name"
                             className={styles.input}
                             fullWidth
                         />
                         <Input
                             {...register("division")}
+                            error={errors.division?.message}
                             label="Division"
                             className={styles.input}
                             fullWidth
                         />
                         <Input
                             {...register("conference")}
+                            error={errors.conference?.message}
                             label="Conference"
                             className={styles.input}
                             fullWidth
@@ -60,11 +83,12 @@ export const Add: FC = () => {
                         <Controller
                             control={control}
                             name="foundationYear"
-                            render={({ field: { onChange } }) => (
+                            render={({ field: { onChange }, fieldState: { error } }) => (
                                 <Number
                                     label="Year of foundation"
                                     onChange={e => onChange(e)}
                                     className={styles.input}
+                                    error={error?.message}
                                     fullWidth
                                 />
                             )}
