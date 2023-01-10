@@ -12,9 +12,9 @@ interface IContext {
 }
 
 const initState = {
+    team: null,
     error: false,
     loading: true,
-    team: null,
     players: null
 };
 
@@ -35,7 +35,7 @@ export const DetailsProvider: FC<Props> = (props) => {
     const [players, setPlayers] = useState<IPlayers | null>(null);
 
     useEffect(() => {
-        onHandleGet(id);
+        void onHandleGet(id);
     }, [id]);
     
     const onHandleGet = async (id: number): Promise<void> => {
