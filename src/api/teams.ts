@@ -15,7 +15,12 @@ async function addTeam(data: IAddRequest): Promise<AxiosResponse<IAddResponse>> 
     return await HTTP.post<IAddResponse>("/Team/Add", data);
 }
 
+async function removeTeam(id: number): Promise<AxiosResponse<IData>> {
+    return await HTTP.delete<IData>("/Team/Delete", { params: { id } });
+}
+
 export {
+    removeTeam,
     getTeams,
     getTeam,
     addTeam

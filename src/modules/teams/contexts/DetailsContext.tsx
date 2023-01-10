@@ -5,6 +5,7 @@ import { getPlayers } from "@/api/players";
 import { getTeam } from "@/api/teams";
 
 interface IContext {
+    id: number
     error: boolean
     loading: boolean
     team: ITeam | null
@@ -12,6 +13,7 @@ interface IContext {
 }
 
 const initState = {
+    id: 0,
     team: null,
     error: false,
     loading: true,
@@ -59,7 +61,7 @@ export const DetailsProvider: FC<Props> = (props) => {
     };
     
     return (
-        <DetailsContext.Provider value={{ team, error, loading, players }}>
+        <DetailsContext.Provider value={{ id, team, error, loading, players }}>
             {children}
         </DetailsContext.Provider>
     );
