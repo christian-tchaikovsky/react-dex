@@ -3,6 +3,7 @@ import { IData } from "@/modules/teams/interfaces/ITeams";
 import { Typography } from "@/common/components/UI/Typography";
 import classNames from "classnames";
 import styles from "./Card.module.sass";
+import { Icon } from "@/common/components/Icon";
 
 interface Props {
     team: IData
@@ -18,10 +19,16 @@ export const Card: FC<Props> = (props) => {
 
     return (
         <div className={classNames(styles.card, className)}>
-            <div className={styles.title}>
-                <Typography className={styles.text}>Teams</Typography>
-                <Typography className={styles["forward-slash"]}>/</Typography>
-                <Typography className={styles.text}>{name}</Typography>
+            <div className={styles.header}>
+                <div>
+                    <Typography className={styles.text}>Teams</Typography>
+                    <Typography className={styles["forward-slash"]}>/</Typography>
+                    <Typography className={styles.text}>{name}</Typography>
+                </div>
+                <div>
+                    <Icon className={styles.create} name="create"/>
+                    <Icon className={styles.delete} name="delete"/>
+                </div>
             </div>
             <div className={styles.content}>
                 <div className={styles.container}>
@@ -33,7 +40,7 @@ export const Card: FC<Props> = (props) => {
                             <Typography size="large" tag="h1" className={styles.name}>{name}</Typography>
                             <div className={styles.grid}>
                                 <div>
-                                    <Typography tag="h4" size="medium" className={styles.header}>
+                                    <Typography tag="h4" size="medium" className={styles.title}>
                                         Year of foundation
                                     </Typography>
                                     <Typography className={classNames(styles.year, styles.text)}>
@@ -41,7 +48,7 @@ export const Card: FC<Props> = (props) => {
                                     </Typography>
                                 </div>
                                 <div>
-                                    <Typography tag="h4" size="medium" className={styles.header}>
+                                    <Typography tag="h4" size="medium" className={styles.title}>
                                         Division
                                     </Typography>
                                     <Typography className={classNames(styles.division, styles.text)}>
@@ -49,7 +56,7 @@ export const Card: FC<Props> = (props) => {
                                     </Typography>
                                 </div>
                                 <div>
-                                    <Typography tag="h4" size="medium" className={styles.header}>
+                                    <Typography tag="h4" size="medium" className={styles.title}>
                                         Conference
                                     </Typography>
                                     <Typography className={classNames(styles.conference, styles.text)}>
