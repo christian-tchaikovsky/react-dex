@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "@/common/hooks";
+import { useAppDispatch, useAppSelector, useDebounce } from "@/common/hooks";
 import { fetchTeams } from "@/modules/teams/reducers/teamsReducer";
 import { Typography } from "@/common/components/UI/Typography";
 import { Card } from "@/common/components/Card";
@@ -25,14 +25,16 @@ export const Teams: FC = () => {
     const [search, setSearch] = useState(""); // TODO Search functionality
     const [option, setOption] = useState<SingleValue<ISizes>>(sizes[0]);
     const { teams, loading, error } = useAppSelector(state => state.teams);
+    const debounced = useDebounce(search, 1000);
     const teamsLength = teams?.data.length;
 
     useEffect(() => {
         dispatch(fetchTeams({
+            Name: debounced,
             Page: page,
             PageSize: option?.value
         }));
-    }, [page, option]);
+    }, [page, option, debounced]);
 
     if (loading) return <Loader/>;
 
