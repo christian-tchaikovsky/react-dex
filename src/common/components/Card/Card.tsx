@@ -12,6 +12,8 @@ interface Props {
     number?: number
 }
 
+const baseUrl = process.env.REACT_APP_BASE_URL;
+
 export const Card: FC<Props> = (props) => {
     const { id, title, subtitle, image, number } = props;
     const navigate = useNavigate();
@@ -25,7 +27,7 @@ export const Card: FC<Props> = (props) => {
         <div onClick={onHandleNavigate} className={styles.card}>
             <div className={styles.image}>
                 {image
-                    ? <img src={`http://dev.trainee.dex-it.ru${image}`} alt="image"/>
+                    ? <img src={`${baseUrl}${image}`} alt="image"/>
                     : "No image here"
                 }
             </div>

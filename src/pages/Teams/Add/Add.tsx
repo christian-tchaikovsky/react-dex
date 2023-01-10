@@ -13,7 +13,7 @@ import { addNotification } from "@/common/reducers/notificationReducer";
 import { useAppDispatch } from "@/common/hooks";
 import { useNavigate } from "react-router-dom";
 import { paths } from "@/routes/constants/paths";
-import styles from "./Teams.module.sass";
+import styles from "./Add.module.sass";
 
 export const Add: FC = () => {
     const navigate = useNavigate();

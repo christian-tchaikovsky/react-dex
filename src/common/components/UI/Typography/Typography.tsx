@@ -3,7 +3,7 @@ import classNames from "classnames";
 import styles from "./Typography.module.sass";
 
 interface Props {
-    children: string
+    children: string | number
     tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span"
     color?: "primary" | "secondary" | "red"
     size?: "small" | "medium" | "large"

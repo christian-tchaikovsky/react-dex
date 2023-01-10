@@ -8,32 +8,28 @@ interface Props {
     data: IData[]
 }
 
+const baseUrl = process.env.REACT_APP_BASE_URL;
+
 export const Body: FC<Props> = (props) => (
     <tbody>
-        {props.data.map(player => {
-            const format = "YYYY-MM-DD[T]HH:mm:ss";
-            const year = moment(player.birthday, format).format("YYYY");
-            const age = moment().year() - Number(year);
-
-            return (
-                <tr key={player.id}>
-                    <td>{player.number}</td>
-                    <td>
-                        <div className={styles.player}>
-                            <div className={styles.avatar}>
-                                <img src={`http://dev.trainee.dex-it.ru${player.avatarUrl}`} alt="avatar"/>
-                            </div>
-                            <div className={styles.info}>
-                                <Typography color="secondary" className={styles.name}>{player.name}</Typography>
-                                <Typography className={styles.position}>{player.position}</Typography>
-                            </div>
+        {props.data.map(player => (
+            <tr key={player.id}>
+                <td>{player.number}</td>
+                <td>
+                    <div className={styles.player}>
+                        <div className={styles.avatar}>
+                            <img src={`${baseUrl}${player.avatarUrl}`} alt="avatar"/>
                         </div>
-                    </td>
-                    <td>{player.height} cm</td>
-                    <td>{player.weight} kg</td>
-                    <td>{age}</td>
-                </tr>
-            );
-        })}
+                        <div className={styles.info}>
+                            <Typography color="secondary" className={styles.name}>{player.name}</Typography>
+                            <Typography className={styles.position}>{player.position}</Typography>
+                        </div>
+                    </div>
+                </td>
+                <td>{player.height} cm</td>
+                <td>{player.weight} kg</td>
+                <td>{moment().diff(player.birthday, "years")}</td>
+            </tr>
+        ))}
     </tbody>
 );
