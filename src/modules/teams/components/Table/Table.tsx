@@ -1,41 +1,21 @@
 import React, { FC } from "react";
+import { IData } from "@/modules/players/interfaces/IPlayers";
+import { Head } from "@/modules/teams/components/Table/Head";
+import { Body } from "@/modules/teams/components/Table/Body";
 import styles from "./Table.module.sass";
 
 interface Props {
-    data: string
+    data: IData[]
 }
 
 export const Table: FC<Props> = (props) => {
     const { data } = props;
 
-    console.log(data);
-    
     return (
         <table className={styles.table}>
             <caption>Roster</caption>
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Player</th>
-                    <th>Height</th>
-                    <th>Weight</th>
-                    <th>Age</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>10</td>
-                    <td>
-                        <div>
-                            <p>Bol Bol</p>
-                            <p>Centerforward</p>
-                        </div>
-                    </td>
-                    <td>218 cm</td>
-                    <td>100 kg</td>
-                    <td>21</td>
-                </tr>
-            </tbody>
+            <Head/>
+            <Body data={data} />
         </table>
     );
 };

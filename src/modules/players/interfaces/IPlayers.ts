@@ -1,9 +1,12 @@
 interface IData {
     name: string
-    foundationYear: number
-    division: string
-    conference: string
-    imageUrl: string
+    number: number
+    position: string
+    team: number
+    birthday: string
+    height: number
+    weight: number
+    avatarUrl: string
     id: number
 }
 
@@ -16,10 +19,10 @@ interface IResponse {
 
 interface IRequest {
     Name?: string
+    TeamIds?: number[] | number
     Page?: number
     PageSize?: number
 }
-
 export type {
     IResponse,
     IRequest,
