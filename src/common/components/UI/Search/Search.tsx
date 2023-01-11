@@ -8,13 +8,22 @@ interface Props {
     onChange: React.ChangeEventHandler<HTMLInputElement>
     value: string
     className?: string
+    onSearch?: () => void
 
     // all other props
     [x: string]: any
 }
 
 export const Search: FC<Props> = (props) => {
-    const { value, onChange, className } = props;
+    const { value, onChange, className, onSearch } = props;
+
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>): void => {
+        if (!onSearch) return;
+
+        if (event.key === "Enter") {
+            onSearch();
+        }
+    };
     
     return (
         <div className={classNames(styles.search, className)}>
@@ -23,9 +32,10 @@ export const Search: FC<Props> = (props) => {
                 className={styles.input}
                 value={value}
                 onChange={onChange}
+                onKeyDown={handleKeyDown}
                 placeholder="Search..."
             />
-            <Icon className={styles.icon} name="search"/>
+            <Icon onClick={onSearch} className={styles.icon} name="search"/>
         </div>
     );
 };

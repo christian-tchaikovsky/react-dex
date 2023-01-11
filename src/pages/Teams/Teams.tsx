@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector, useDebounce } from "@/common/hooks";
+import { useAppDispatch, useAppSelector } from "@/common/hooks";
 import { fetchTeams } from "@/modules/teams/reducers/teamsReducer";
 import { Typography } from "@/common/components/UI/Typography";
 import { Card } from "@/common/components/Card";
@@ -22,19 +22,25 @@ export const Teams: FC = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const [page, setPage] = useState(1);
-    const [search, setSearch] = useState(""); // TODO Search functionality
+    const [name, setName] = useState("");
+    const [search, setSearch] = useState("");
     const [option, setOption] = useState<SingleValue<ISizes>>(sizes[0]);
     const { teams, loading, error } = useAppSelector(state => state.teams);
-    const debounced = useDebounce(search, 1000);
+    const pagination = !!teams?.count && !!teams?.size;
     const teamsLength = teams?.data.length;
 
     useEffect(() => {
         dispatch(fetchTeams({
-            Name: debounced,
+            Name: name,
             Page: page,
             PageSize: option?.value
         }));
-    }, [page, option, debounced]);
+    }, [name, page, option]);
+
+    const onHandleSearch = (): void => {
+        setPage(1);
+        setName(search);
+    };
 
     if (loading) return <Loader/>;
 
@@ -45,6 +51,7 @@ export const Teams: FC = () => {
             <div className={styles.top}>
                 <Search
                     value={search}
+                    onSearch={onHandleSearch}
                     onChange={e => setSearch(e.target.value)}
                 />
                 <Button
@@ -76,12 +83,15 @@ export const Teams: FC = () => {
                 }
             </div>
             <div className={styles.bottom}>
-                <Paginate
-                    value={page}
-                    onChange={e => setPage(e.selected)}
-                    count={Math.ceil(teams!.count / teams!.size)}
-                />
+                {pagination && (
+                    <Paginate
+                        value={page}
+                        onChange={e => setPage(e.selected)}
+                        count={Math.ceil(teams.count / teams.size)}
+                    />
+                )}
                 <Select
+                    className={styles.select}
                     value={option}
                     options={sizes}
                     isMulti={false}

@@ -4,12 +4,12 @@ import { IData } from "@/modules/teams/interfaces/ITeams";
 import { Typography } from "@/common/components/UI/Typography";
 import { useDetails } from "@/modules/teams/contexts/DetailsContext";
 import { removeTeam } from "@/api/teams";
-import classNames from "classnames";
-import styles from "./Card.module.sass";
 import { useAppDispatch } from "@/common/hooks";
 import { addNotification } from "@/common/reducers/notificationReducer";
 import { useNavigate } from "react-router-dom";
 import { paths } from "@/routes/constants/paths";
+import classNames from "classnames";
+import styles from "./Card.module.sass";
 
 interface Props {
     team: IData
@@ -52,8 +52,8 @@ export const Card: FC<Props> = (props) => {
                     <Typography className={styles.text}>{name}</Typography>
                 </div>
                 <div className={styles.actions}>
-                    <Icon className={styles.create} name="create"/>
-                    <Icon onClick={onHandleRemove} className={styles.delete} name="delete"/>
+                    <Icon title="Edit" className={styles.create} name="create"/>
+                    <Icon title="Remove" onClick={onHandleRemove} className={styles.delete} name="delete"/>
                 </div>
             </div>
             <div className={styles.content}>
