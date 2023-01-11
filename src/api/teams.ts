@@ -1,7 +1,7 @@
 import HTTP from "@/configs/axios/axios";
 import { AxiosResponse } from "axios";
 import { IResponse, IRequest, IData } from "@/modules/teams/interfaces/ITeams";
-import { IResponse as IAddResponse, IRequest as IAddRequest } from "@/modules/teams/interfaces/IAdd";
+import { IResponse as IActionResponse, IRequest as IActionRequest } from "@/modules/teams/interfaces/IActions";
 
 async function getTeams(params: IRequest): Promise<AxiosResponse<IResponse>> {
     return await HTTP.get<IResponse>("/Team/GetTeams", { params });
@@ -11,8 +11,12 @@ async function getTeam(id: number): Promise<AxiosResponse<IData>> {
     return await HTTP.get<IData>("/Team/Get", { params: { id } });
 }
 
-async function addTeam(data: IAddRequest): Promise<AxiosResponse<IAddResponse>> {
-    return await HTTP.post<IAddResponse>("/Team/Add", data);
+async function addTeam(data: IActionRequest): Promise<AxiosResponse<IActionResponse>> {
+    return await HTTP.post<IActionResponse>("/Team/Add", data);
+}
+
+async function editTeam(data: IActionRequest): Promise<AxiosResponse<IActionResponse>> {
+    return await HTTP.put<IActionResponse>("/Team/Update", data);
 }
 
 async function removeTeam(id: number): Promise<AxiosResponse<IData>> {
@@ -22,6 +26,7 @@ async function removeTeam(id: number): Promise<AxiosResponse<IData>> {
 export {
     removeTeam,
     getTeams,
+    editTeam,
     getTeam,
     addTeam
 };

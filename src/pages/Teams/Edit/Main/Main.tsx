@@ -5,10 +5,11 @@ import { Loader } from "@/common/components/Loader";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "@/common/hooks";
 import { SubmitHandler } from "react-hook-form";
-import { IFields } from "@/modules/teams/interfaces/IAdd";
+import { IFields } from "@/modules/teams/interfaces/IActions";
 import { useEdit } from "@/modules/teams/contexts/EditContext";
 import { addNotification } from "@/common/reducers/notificationReducer";
 import { paths } from "@/routes/paths";
+import { editTeam } from "@/api/teams";
 import styles from "./Main.module.sass";
 
 export const Main: FC = () => {
@@ -18,9 +19,17 @@ export const Main: FC = () => {
     
     const onSubmit: SubmitHandler<IFields> = async data => {
         try {
-            console.log(data);
+            const response = await editTeam(data);
+            const responseData = response.data;
+
+            dispatch(addNotification({
+                message: `${responseData.name} was successfully edit`,
+                type: "success"
+            }));
+
+            navigate(paths.teams);
         } catch (e) {
-            dispatch(addNotification("The team was not added"));
+            dispatch(addNotification("The team was not edit"));
         }
     };
     

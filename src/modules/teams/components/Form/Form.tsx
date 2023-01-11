@@ -4,7 +4,7 @@ import { Upload } from "@/common/components/UI/Upload";
 import { Input } from "@/common/components/UI/Input";
 import { Number } from "@/common/components/UI/Number";
 import { Button } from "@/common/components/UI/Button";
-import { IFields } from "@/modules/teams/interfaces/IAdd";
+import { IFields } from "@/modules/teams/interfaces/IActions";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import { validationSchema } from "./schema";
 import styles from "./Form.module.sass";

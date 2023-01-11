@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { Typography } from "@/common/components/UI/Typography";
 import { Form } from "@/modules/teams/components/Form";
 import { SubmitHandler } from "react-hook-form";
-import { IFields } from "@/modules/teams/interfaces/IAdd";
+import { IFields } from "@/modules/teams/interfaces/IActions";
 import { addTeam } from "@/api/teams";
 import { addNotification } from "@/common/reducers/notificationReducer";
 import { useAppDispatch } from "@/common/hooks";
