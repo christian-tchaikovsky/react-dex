@@ -26,7 +26,7 @@ export const Add: FC = () => {
         try {
             const response = await addTeam(data);
             const responseData = response.data;
-            const name: string = responseData.name;
+            const name = responseData.name;
 
             dispatch(addNotification({
                 message: `${name} was successfully added`,

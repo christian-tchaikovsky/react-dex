@@ -1,22 +1,24 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useState } from "react";
 import { upload } from "@/api/image";
 import { useAppDispatch } from "@/common/hooks";
 import { addNotification } from "@/common/reducers/notificationReducer";
+import { useDidUpdateEffect } from "@/common/hooks/useDidUpdateEffect";
 import classNames from "classnames";
 import styles from "./Upload.module.sass";
 
 interface Props {
     onChange: (e?: string) => void
+    defaultValue?: string
     className?: string
 }
 
 export const Upload: FC<Props> = (props) => {
-    const { onChange, className } = props;
+    const { onChange, className, defaultValue } = props;
     const dispatch = useAppDispatch();
-    const [selected, setSelected] = useState<File | undefined>();
-    const [preview, setPreview] = useState<string | undefined>();
+    const [selected, setSelected] = useState<File>();
+    const [preview, setPreview] = useState(defaultValue);
 
-    useEffect(() => {
+    useDidUpdateEffect(() => {
         if (!selected) {
             setPreview(undefined);
             onChange(undefined);
@@ -24,25 +26,30 @@ export const Upload: FC<Props> = (props) => {
         }
 
         const preview = URL.createObjectURL(selected);
-        onHandleUpload(selected, preview)
-            .then(() => {
-                dispatch(addNotification({
-                    message: "Image successfully uploaded",
-                    type: "success"
-                }));
-            })
-            .catch(() => dispatch(addNotification("Image was not uploaded")));
+
+        void onHandleUpload(selected, preview);
 
         return () => URL.revokeObjectURL(preview);
     }, [selected]);
 
     async function onHandleUpload(file: File, preview: string): Promise<void> {
-        const data = new FormData();
-        data.append("file", file);
+        try {
+            const formData = new FormData();
+            formData.append("file", file);
 
-        const response = await upload(data);
-        setPreview(preview);
-        onChange(response.data);
+            const response = await upload(formData);
+            const data = response.data;
+
+            setPreview(preview);
+            onChange(data);
+
+            dispatch(addNotification({
+                message: "Image successfully uploaded",
+                type: "success"
+            }));
+        } catch (e) {
+            dispatch(addNotification("Image was not uploaded"));
+        }
     }
 
     function onHandleChange(e: React.ChangeEvent<HTMLInputElement>): void {

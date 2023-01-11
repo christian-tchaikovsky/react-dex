@@ -12,6 +12,11 @@ interface IContext {
     players: IPlayers | null
 }
 
+interface Props {
+    id: number
+    children: React.ReactNode
+}
+
 const initState = {
     id: 0,
     team: null,
@@ -23,11 +28,6 @@ const initState = {
 const DetailsContext = createContext<IContext>(initState);
 
 export const useDetails = (): IContext => useContext(DetailsContext);
-
-interface Props {
-    id: number
-    children: React.ReactNode
-}
 
 export const DetailsProvider: FC<Props> = (props) => {
     const { id, children } = props;
