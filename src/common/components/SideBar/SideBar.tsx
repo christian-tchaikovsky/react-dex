@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { Anchor } from "@/common/components/UI/Anchor";
-import { paths } from "@/routes/constants/paths";
+import { paths } from "@/routes/paths";
 import styles from "./SideBar.module.sass";
 
 export const SideBar: FC = (): JSX.Element => (

@@ -7,7 +7,7 @@ import { removeTeam } from "@/api/teams";
 import { useAppDispatch } from "@/common/hooks";
 import { addNotification } from "@/common/reducers/notificationReducer";
 import { useNavigate } from "react-router-dom";
-import { paths } from "@/routes/constants/paths";
+import { paths } from "@/routes/paths";
 import classNames from "classnames";
 import styles from "./Card.module.sass";
 
@@ -42,6 +42,11 @@ export const Card: FC<Props> = (props) => {
             dispatch(addNotification("The team was not deleted"));
         }
     };
+    
+    const onHandleNavigate = (): void => {
+        const path = paths.teams_edit.replace(":id", String(id));
+        navigate(path);
+    };
 
     return (
         <div className={classNames(styles.card, className)}>
@@ -52,7 +57,7 @@ export const Card: FC<Props> = (props) => {
                     <Typography className={styles.text}>{name}</Typography>
                 </div>
                 <div className={styles.actions}>
-                    <Icon title="Edit" className={styles.create} name="create"/>
+                    <Icon title="Edit" onClick={onHandleNavigate} className={styles.create} name="create"/>
                     <Icon title="Remove" onClick={onHandleRemove} className={styles.delete} name="delete"/>
                 </div>
             </div>

@@ -12,11 +12,14 @@ interface Props {
     className?: string
 }
 
+const baseUrl = process.env.REACT_APP_BASE_URL;
+
 export const Upload: FC<Props> = (props) => {
-    const { onChange, className, defaultValue } = props;
+    const { onChange, className, defaultValue: value } = props;
+    const initValue = value && `${baseUrl}${value}`;
     const dispatch = useAppDispatch();
     const [selected, setSelected] = useState<File>();
-    const [preview, setPreview] = useState(defaultValue);
+    const [preview, setPreview] = useState(initValue);
 
     useDidUpdateEffect(() => {
         if (!selected) {

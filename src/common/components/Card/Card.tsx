@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { Typography } from "@/common/components/UI/Typography";
 import { useNavigate } from "react-router-dom";
-import { paths } from "@/routes/constants/paths";
+import { paths } from "@/routes/paths";
 import styles from "./Card.module.sass";
 
 interface Props {

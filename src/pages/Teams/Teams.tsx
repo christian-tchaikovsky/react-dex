@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { Select } from "@/common/components/UI/Select/Select";
 import { Empty } from "@/common/components/Empty";
 import { sizes } from "@/common/constants/sizes";
-import { paths } from "@/routes/constants/paths";
+import { paths } from "@/routes/paths";
 import { ISizes } from "@/common/interfaces/ISizes";
 import { SingleValue } from "react-select";
 import Image from "@/common/assets/image/im-teams_empty.png";
