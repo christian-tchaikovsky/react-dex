@@ -3,38 +3,22 @@
 .card
   display: block
 
-.header
-  display: flex
+.caption
   padding: 25px
-  align-items: center
-  background-color: white
   border-radius: 10px 10px 0 0
   border: 1px solid $light-grey
-  justify-content: space-between
 
-  .text
-    color: $red
-    display: inline-block
+.create, .delete
+  cursor: pointer
+  height: 24px
+  width: 24px
 
-  .forward-slash
-    margin: 0 5px
-    color: $light-grey
-    display: inline-block
+.create
+  margin-right: 15px
 
-.actions
-  display: flex
-
-  .create, .delete
-    cursor: pointer
-    height: 24px
-    width: 24px
-
-  .create
-    margin-right: 15px
-
-  .delete
-    path
-      fill: $red
+.delete
+  path
+    fill: $red
 
 .content
   padding: 0 25px
@@ -67,6 +51,7 @@
   display: block
 
   .title, .name, .text
+    font-size: 24px
     color: white
 
   .title, .name

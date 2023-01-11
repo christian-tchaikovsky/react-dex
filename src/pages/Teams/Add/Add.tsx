@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Typography } from "@/common/components/UI/Typography";
+import { Caption } from "@/common/components/Caption";
 import { Form } from "@/modules/teams/components/Form";
 import { SubmitHandler } from "react-hook-form";
 import { IFields } from "@/modules/teams/interfaces/IActions";
@@ -34,11 +34,7 @@ export const Add: FC = () => {
     return (
         <div className={styles["teams-add"]}>
             <div className={styles.wrapper}>
-                <div className={styles.title}>
-                    <Typography className={styles.text}>Teams</Typography>
-                    <Typography className={styles["forward-slash"]}>/</Typography>
-                    <Typography className={styles.text}>Add new team</Typography>
-                </div>
+                <Caption path={["Teams", "Add new team"]}/>
                 <Form onSubmit={onSubmit} onCancel={() => navigate(paths.teams)}/>
             </div>
         </div>

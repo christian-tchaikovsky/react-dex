@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import { Caption } from "@/common/components/Caption";
 import { Icon } from "@/common/components/Icon";
 import { IData } from "@/modules/teams/interfaces/ITeams";
 import { Typography } from "@/common/components/UI/Typography";
@@ -50,17 +51,26 @@ export const Card: FC<Props> = (props) => {
 
     return (
         <div className={classNames(styles.card, className)}>
-            <div className={styles.header}>
-                <div className={styles.title}>
-                    <Typography className={styles.text}>Teams</Typography>
-                    <Typography className={styles["forward-slash"]}>/</Typography>
-                    <Typography className={styles.text}>{name}</Typography>
-                </div>
-                <div className={styles.actions}>
-                    <Icon title="Edit" onClick={onHandleNavigate} className={styles.create} name="create"/>
-                    <Icon title="Remove" onClick={onHandleRemove} className={styles.delete} name="delete"/>
-                </div>
-            </div>
+            <Caption
+                className={styles.caption}
+                path={["Teams", name]}
+                actions={
+                    <React.Fragment>
+                        <Icon
+                            title="Edit"
+                            name="create"
+                            onClick={onHandleNavigate}
+                            className={styles.create}
+                        />
+                        <Icon
+                            name="delete"
+                            title="Remove"
+                            onClick={onHandleRemove}
+                            className={styles.delete}
+                        />
+                    </React.Fragment>
+                }
+            />
             <div className={styles.content}>
                 <div className={styles.container}>
                     <div className={styles.flex}>
@@ -71,28 +81,16 @@ export const Card: FC<Props> = (props) => {
                             <Typography size="large" tag="h1" className={styles.name}>{name}</Typography>
                             <div className={styles.grid}>
                                 <div>
-                                    <Typography tag="h4" size="medium" className={styles.title}>
-                                        Year of foundation
-                                    </Typography>
-                                    <Typography className={classNames(styles.year, styles.text)}>
-                                        {foundationYear}
-                                    </Typography>
+                                    <Typography tag="h4" className={styles.title}>Year of foundation</Typography>
+                                    <Typography className={styles.text}>{foundationYear}</Typography>
                                 </div>
                                 <div>
-                                    <Typography tag="h4" size="medium" className={styles.title}>
-                                        Division
-                                    </Typography>
-                                    <Typography className={classNames(styles.division, styles.text)}>
-                                        {division}
-                                    </Typography>
+                                    <Typography tag="h4" className={styles.title}>Division</Typography>
+                                    <Typography className={styles.text}>{division}</Typography>
                                 </div>
                                 <div>
-                                    <Typography tag="h4" size="medium" className={styles.title}>
-                                        Conference
-                                    </Typography>
-                                    <Typography className={classNames(styles.conference, styles.text)}>
-                                        {conference}
-                                    </Typography>
+                                    <Typography tag="h4" className={styles.title}>Conference</Typography>
+                                    <Typography className={styles.text}>{conference}</Typography>
                                 </div>
                             </div>
                         </div>
