@@ -23,6 +23,7 @@ export const Teams: FC = () => {
     const dispatch = useAppDispatch();
     const [page, setPage] = useState(1);
     const [name, setName] = useState("");
+    const [size, setSize] = useState(sizes[0].value);
     const [search, setSearch] = useState("");
     const [option, setOption] = useState<SingleValue<ISizes>>(sizes[0]);
     const { teams, loading, error } = useAppSelector(state => state.teams);
@@ -33,9 +34,16 @@ export const Teams: FC = () => {
         dispatch(fetchTeams({
             Name: name,
             Page: page,
-            PageSize: option?.value
+            PageSize: size
         }));
-    }, [name, page, option]);
+    }, [name, page, size]);
+
+    useEffect(() => {
+        if (!option) return;
+
+        setSize(option.value);
+        setPage(1);
+    }, [option]);
 
     const onHandleSearch = (): void => {
         setPage(1);
