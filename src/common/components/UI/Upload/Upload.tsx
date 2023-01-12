@@ -1,39 +1,42 @@
-import React, { FC, useState } from "react";
-import { upload } from "@/api/image";
-import { useAppDispatch } from "@/common/hooks";
+import React, { FC, useEffect, useState } from "react";
+import { useDropzone } from "react-dropzone";
 import { addNotification } from "@/common/reducers/notificationReducer";
-import { useDidUpdateEffect } from "@/common/hooks/useDidUpdateEffect";
+import { useAppDispatch } from "@/common/hooks";
+import { upload } from "@/api/image";
 import classNames from "classnames";
 import styles from "./Upload.module.sass";
 
 interface Props {
     onChange: (e?: string) => void
-    defaultValue?: string
+    value?: string
     className?: string
 }
 
 const baseUrl = process.env.REACT_APP_BASE_URL;
 
 export const Upload: FC<Props> = (props) => {
-    const { onChange, className, defaultValue: value } = props;
-    const initValue = value && `${baseUrl}${value}`;
+    const { onChange, value = null, className } = props;
+    const defaultValue = value && `${baseUrl}${value}`;
     const dispatch = useAppDispatch();
-    const [selected, setSelected] = useState<File>();
-    const [preview, setPreview] = useState(initValue);
-
-    useDidUpdateEffect(() => {
-        if (!selected) {
-            setPreview(undefined);
-            onChange(undefined);
-            return;
+    const [file, setFile] = useState<File>();
+    const [preview, setPreview] = useState<string | null>(defaultValue);
+    const { getRootProps, getInputProps } = useDropzone({
+        onDrop,
+        multiple: false,
+        accept: {
+            "image/jpeg": [],
+            "image/png": []
         }
+    });
 
-        const preview = URL.createObjectURL(selected);
+    useEffect(() => {
+        if (!file) return;
 
-        void onHandleUpload(selected, preview);
+        const preview = URL.createObjectURL(file);
+        void onHandleUpload(file, preview);
 
         return () => URL.revokeObjectURL(preview);
-    }, [selected]);
+    }, [file]);
 
     async function onHandleUpload(file: File, preview: string): Promise<void> {
         try {
@@ -55,31 +58,23 @@ export const Upload: FC<Props> = (props) => {
         }
     }
 
-    function onHandleChange(e: React.ChangeEvent<HTMLInputElement>): void {
-        if (!e.target.files?.[0]) {
-            setSelected(undefined);
-            return;
-        }
-
-        setSelected(e.target.files[0]);
+    function onDrop(acceptedFiles: File[]): void {
+        setFile(acceptedFiles[0]);
     }
 
     return (
-        <div className={classNames(styles.upload, className)}>
-            <div className={styles.background} />
-            <input
-                type="file"
-                accept="image/*"
-                className={styles.input}
-                onChange={onHandleChange}
-            />
-            {preview && (
-                <img
-                    src={preview}
-                    alt="Preview"
-                    className={styles.preview}
-                />
-            )}
+        <div {...getRootProps()} className={classNames(styles.upload, className)}>
+            <input {...getInputProps()}/>
+            <div className={styles.background}/>
+            <div className={styles["thumb-container"]}>
+                {preview && (
+                    <img
+                        alt="preview"
+                        src={preview}
+                        className={styles.thumb}
+                    />
+                )}
+            </div>
         </div>
     );
 };

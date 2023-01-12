@@ -17,11 +17,13 @@ interface Props {
 
 export const Form: FC<Props> = (props) => {
     const { onSubmit, onCancel, defaultValue } = props;
-    const { handleSubmit, register, control, formState: { errors } } = useForm<IFields>({
+    const { handleSubmit, register, control, formState: { errors }, getValues } = useForm<IFields>({
         resolver: yupResolver(validationSchema),
         defaultValues: defaultValue
     });
-    
+
+    console.log(getValues());
+
     return (
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
             <Controller
@@ -29,7 +31,7 @@ export const Form: FC<Props> = (props) => {
                 name="imageUrl"
                 render={({ field: { onChange, value } }) => (
                     <Upload
-                        defaultValue={value}
+                        value={value}
                         onChange={e => onChange(e)}
                         className={styles.upload}
                     />
@@ -57,19 +59,12 @@ export const Form: FC<Props> = (props) => {
                     className={styles.input}
                     fullWidth
                 />
-                <Controller
-                    control={control}
-                    name="foundationYear"
-                    render={({ field: { onChange, value }, fieldState: { error } }) => (
-                        <Number
-                            label="Year of foundation"
-                            value={value}
-                            onChange={e => onChange(e)}
-                            className={styles.input}
-                            error={error?.message}
-                            fullWidth
-                        />
-                    )}
+                <Number
+                    {...register("foundationYear")}
+                    error={errors.foundationYear?.message}
+                    label="Year of foundation"
+                    className={styles.input}
+                    fullWidth
                 />
                 <div className={styles.actions}>
                     <Button

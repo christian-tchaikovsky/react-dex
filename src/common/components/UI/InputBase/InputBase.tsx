@@ -5,7 +5,7 @@ import styles from "./InputBase.module.sass";
 interface Props {
     type?: "text" | "password"
     onChange: React.ChangeEventHandler<HTMLInputElement>
-    value?: string
+    value?: string | number
     disabled?: boolean
     className?: string
     error?: string

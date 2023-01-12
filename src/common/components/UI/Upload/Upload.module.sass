@@ -11,6 +11,7 @@ $image: url("~@/common/assets/icons/ic-image_add.svg")
   position: relative
   border-radius: 10px
   overflow: hidden
+  cursor: pointer
 
   &:before
     content: $image
@@ -24,15 +25,15 @@ $image: url("~@/common/assets/icons/ic-image_add.svg")
 .background
   background: $light-grey
   position: absolute
+  width: 100%
+  height: 100%
   opacity: 0.5
   z-index: 1
-  width: 100%
-  height: 100%
 
-.input
-  position: absolute
-  cursor: pointer
-  opacity: 0
-  z-index: 3
-  width: 100%
-  height: 100%
+.thumb-container
+  padding: 10px
+
+  .thumb
+    display: block
+    max-width: 100%
+    object-fit: cover

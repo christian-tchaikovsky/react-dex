@@ -5,7 +5,7 @@ import styles from "./Input.module.sass";
 
 interface Props {
     onChange: React.ChangeEventHandler<HTMLInputElement>
-    value?: string
+    value?: string | number
     label: string
     disabled?: boolean
     className?: string
