@@ -88,6 +88,7 @@ export const Players: FC = () => {
                             number={data.number}
                             image={data.avatarUrl}
                             subtitle={data.position}
+                            to={paths.players_details}
                         />
                     ))
                 }

@@ -85,6 +85,7 @@ export const Teams: FC = () => {
                             key={data.id}
                             title={data.name}
                             image={data.imageUrl}
+                            to={paths.teams_details}
                             subtitle={`Year of foundation: ${data.foundationYear}`}
                         />
                     ))
