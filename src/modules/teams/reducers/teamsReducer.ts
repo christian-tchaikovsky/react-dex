@@ -1,13 +1,11 @@
-import { createAsyncThunk, createSlice, isAnyOf, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, isAnyOf } from "@reduxjs/toolkit";
 import { IRequest, IResponse } from "@/modules/teams/interfaces/ITeams";
 import { getTeams } from "@/api/teams";
 
 interface State {
     teams: IResponse | null
     loading: boolean
-    name: string | null
-    page: number
-    size: number
+    error: boolean
 }
 
 export const fetchTeams = createAsyncThunk<IResponse, IRequest, {}>(
@@ -21,32 +19,24 @@ export const fetchTeams = createAsyncThunk<IResponse, IRequest, {}>(
 const initialState: State = {
     teams: null,
     loading: true,
-    name: null,
-    page: 1,
-    size: 6
+    error: false
 };
 
 const userSlice = createSlice({
     name: "teams",
     initialState,
-    reducers: {
-        nextPage: (state) => {
-            state.page += 1;
-        },
-        prevPage: (state) => {
-            state.page -= 1;
-        },
-        changeSize: (state, payload: PayloadAction<number>) => {
-            state.size = payload.payload;
-        }
-    },
+    reducers: {},
     extraReducers: builder => {
         builder
-            .addCase(fetchTeams.pending, (state, _) => {
+            .addCase(fetchTeams.pending, (state) => {
                 state.loading = true;
+                state.error = false;
             })
             .addCase(fetchTeams.fulfilled, (state, { payload }) => {
                 state.teams = payload;
+            })
+            .addCase(fetchTeams.rejected, (state) => {
+                state.error = true;
             })
             .addMatcher(
                 isAnyOf(fetchTeams.fulfilled, fetchTeams.rejected),

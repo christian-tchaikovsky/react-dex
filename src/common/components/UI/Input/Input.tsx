@@ -1,11 +1,11 @@
-import React, { FC } from "react";
+import React, { FC, forwardRef } from "react";
+import { InputBase } from "@/common/components/UI/InputBase";
 import classNames from "classnames";
-import InputBase from "@/common/components/UI/InputBase/InputBase";
 import styles from "./Input.module.sass";
 
 interface Props {
     onChange: React.ChangeEventHandler<HTMLInputElement>
-    value: string
+    value?: string | number
     label: string
     disabled?: boolean
     className?: string
@@ -16,13 +16,14 @@ interface Props {
     [x: string]: any
 }
 
-export const Input: FC<Props> = (props) => {
+export const Input: FC<Props> = forwardRef<HTMLInputElement, Props>((props, ref) => {
     const { value, onChange, label, disabled, className, error, fullWidth, ...rest } = props;
 
     return (
         <div className={classNames(styles.wrapper, className)}>
             <label className={styles.label}>{label}</label>
             <InputBase
+                ref={ref}
                 onChange={onChange}
                 value={value}
                 fullWidth={fullWidth}
@@ -33,4 +34,6 @@ export const Input: FC<Props> = (props) => {
             {error && <span className={styles.error}>{error}</span>}
         </div>
     );
-};
+});
+
+Input.displayName = "Input";

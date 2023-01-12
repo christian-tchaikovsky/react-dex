@@ -15,7 +15,7 @@ import { register } from "@/api/register";
 import { useAppDispatch } from "@/common/hooks";
 import { useNavigate } from "react-router-dom";
 import { AxiosError } from "axios";
-import { paths } from "@/routes/constants/paths";
+import { paths } from "@/routes/paths";
 import Banner from "@/common/assets/image/im-sign-up-banner.png";
 import styles from "./Register.module.sass";
 

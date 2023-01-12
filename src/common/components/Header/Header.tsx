@@ -3,7 +3,7 @@ import { Icon } from "@/common/components/Icon";
 import { Typography } from "@/common/components/UI/Typography";
 import { Link } from "react-router-dom";
 import { IUser } from "@/common/interfaces/IUser";
-import { paths } from "@/routes/constants/paths";
+import { paths } from "@/routes/paths";
 import styles from "./Header.module.sass";
 
 export const Header: FC = () => {

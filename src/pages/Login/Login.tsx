@@ -14,7 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "@/common/hooks";
 import { login } from "@/api/login";
 import { AxiosError } from "axios";
-import { paths } from "@/routes/constants/paths";
+import { paths } from "@/routes/paths";
 import Banner from "@/common/assets/image/im-sign-in-banner.png";
 import styles from "./Login.module.sass";
 

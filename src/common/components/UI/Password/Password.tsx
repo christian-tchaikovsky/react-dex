@@ -1,7 +1,7 @@
 import React, { FC, useState } from "react";
 import classNames from "classnames";
 import { Icon } from "@/common/components/Icon";
-import InputBase from "@/common/components/UI/InputBase/InputBase";
+import { InputBase } from "@/common/components/UI/InputBase";
 import styles from "./Password.module.sass";
 
 interface Props {

@@ -1,5 +1,5 @@
 import { FC, useEffect } from "react";
-import { paths } from "@/routes/constants/paths";
+import { paths } from "@/routes/paths";
 
 export const Logout: FC = () => {
     

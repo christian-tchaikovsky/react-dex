@@ -16,11 +16,12 @@ interface IResponse {
 
 interface IRequest {
     Name?: string
-    Page: number
-    PageSize: number
+    Page?: number
+    PageSize?: number
 }
 
 export type {
     IResponse,
-    IRequest
+    IRequest,
+    IData
 };

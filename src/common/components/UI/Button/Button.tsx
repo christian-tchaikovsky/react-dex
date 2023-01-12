@@ -5,6 +5,7 @@ import { IconKeys } from "@/common/assets/icons";
 import styles from "./Button.module.sass";
 
 interface Props {
+    type?: "submit" | "reset" | "button"
     children: string
     className?: string
     onClick?: React.MouseEventHandler<HTMLButtonElement>
@@ -18,10 +19,21 @@ interface Props {
 }
 
 export const Button: FC<Props> = (props) => {
-    const { children, className, onClick, icon, fullWidth, disabled, variant = "primary", ...rest } = props;
+    const {
+        children,
+        className,
+        onClick,
+        icon,
+        fullWidth,
+        disabled,
+        variant = "primary",
+        type = "submit",
+        ...rest
+    } = props;
 
     return (
         <button
+            type={type}
             onClick={onClick}
             disabled={disabled}
             className={classNames(
