@@ -1,16 +1,17 @@
 import React, { FC, useEffect, useState } from "react";
 import { Select as SelectTeam, Option } from "@/modules/players/components/Select";
 import { Typography } from "@/common/components/UI/Typography";
-import { Select } from "@/common/components/UI/Select";
+import { Condition } from "@/common/components/Condition";
 import { Paginate } from "@/common/components/Paginate";
+import { Select } from "@/common/components/UI/Select";
 import { Search } from "@/common/components/UI/Search";
 import { Button } from "@/common/components/UI/Button";
 import { Loader } from "@/common/components/Loader";
 import { Empty } from "@/common/components/Empty";
 import { Card } from "@/common/components/Card";
 import { fetchPlayers } from "@/modules/players/reducers/playersReducer";
-import { useAppDispatch, useAppSelector } from "@/common/hooks";
 import { useDidUpdateEffect } from "@/common/hooks/useDidUpdateEffect";
+import { useAppDispatch, useAppSelector } from "@/common/hooks";
 import { useNavigate } from "react-router-dom";
 import { sizes } from "@/common/constants/sizes";
 import { paths } from "@/routes/paths";
@@ -59,14 +60,12 @@ export const Players: FC = () => {
         setName(search);
     };
 
-    if (loading) return <Loader/>;
-
     if (error) return <Typography>error</Typography>;
     
     return (
         <div className={styles.players}>
             <div className={styles.top}>
-                <div className={styles.actions}>
+                <div className={styles.inputs}>
                     <Search
                         value={search}
                         className={styles.search}
@@ -75,6 +74,7 @@ export const Players: FC = () => {
                     />
                     <SelectTeam
                         value={teams}
+                        disabled={false}
                         onChange={newValue => setTeams(newValue)}
                     />
                 </div>
@@ -86,45 +86,47 @@ export const Players: FC = () => {
                     Add
                 </Button>
             </div>
-            <div className={classNames(
-                styles.main, {
-                    [styles.grid]: teamsLength,
-                    [styles.flex]: !teamsLength
-                }
-            )}
-            >
-                {!teamsLength
-                    ? <Empty image={Image} title="Empty here" subtitle="Add new teams to continue"/>
-                    : players?.data.map(data => (
-                        <Card
-                            id={data.id}
-                            key={data.id}
-                            variant="player"
-                            title={data.name}
-                            number={data.number}
-                            image={data.avatarUrl}
-                            subtitle={data.position}
-                            to={paths.players_details}
-                        />
-                    ))
-                }
-            </div>
-            <div className={styles.bottom}>
-                {pagination && (
-                    <Paginate
-                        value={page}
-                        onChange={e => setPage(e.selected)}
-                        count={Math.ceil(players.count / players.size)}
-                    />
+            <Condition condition={!loading} otherwise={<Loader className={styles.loader} />}>
+                <div className={classNames(
+                    styles.main, {
+                        [styles.grid]: teamsLength,
+                        [styles.flex]: !teamsLength
+                    }
                 )}
-                <Select
-                    className={styles.select}
-                    value={option}
-                    options={sizes}
-                    isMulti={false}
-                    onChange={e => setOption(e)}
-                />
-            </div>
+                >
+                    {!teamsLength
+                        ? <Empty image={Image} title="Empty here" subtitle="Add new teams to continue"/>
+                        : players?.data.map(data => (
+                            <Card
+                                id={data.id}
+                                key={data.id}
+                                variant="player"
+                                title={data.name}
+                                number={data.number}
+                                image={data.avatarUrl}
+                                subtitle={data.position}
+                                to={paths.players_details}
+                            />
+                        ))
+                    }
+                </div>
+                <div className={styles.bottom}>
+                    {pagination && (
+                        <Paginate
+                            value={page}
+                            onChange={e => setPage(e.selected)}
+                            count={Math.ceil(players.count / players.size)}
+                        />
+                    )}
+                    <Select
+                        className={styles.select}
+                        value={option}
+                        options={sizes}
+                        isMulti={false}
+                        onChange={e => setOption(e)}
+                    />
+                </div>
+            </Condition>
         </div>
     );
 };

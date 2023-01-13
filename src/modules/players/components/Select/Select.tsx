@@ -5,6 +5,7 @@ import { getTeams } from "@/api/teams";
 import styles from "@/pages/Players/Players.module.sass";
 
 interface Props {
+    disabled?: boolean
     value: MultiValue<Option>
     onChange: (newValue: OnChangeValue<Option, true>, actionMeta: ActionMeta<Option>) => void
 }
@@ -15,7 +16,7 @@ export interface Option {
 }
 
 export const Select: FC<Props> = (props) => {
-    const { value, onChange } = props;
+    const { disabled, value, onChange } = props;
 
     async function loadOptions(name: string, callback: unknown, { page }: any) {
         const response = await getTeams({ Name: name, Page: page, PageSize: 10 });
@@ -38,9 +39,11 @@ export const Select: FC<Props> = (props) => {
             defaultOptions
             onChange={onChange}
             isClearable={false}
+            isDisabled={disabled}
             debounceTimeout={500}
             closeMenuOnSelect={false}
             loadOptions={loadOptions}
+            loadOptionsOnMenuOpen={false}
             className={styles["select-team"]}
             additional={{
                 page: 1
