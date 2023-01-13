@@ -5,6 +5,7 @@ import { Logout } from "@/pages/Logout";
 import { Edit } from "@/pages/Teams/Edit";
 import { NoMatch } from "@/pages/NoMatch";
 import { Players } from "@/pages/Players";
+import { Profile } from "@/pages/Profile";
 import { Teams } from "@/pages/Teams/Teams";
 import { Details } from "@/pages/Teams/Details";
 import { Register } from "@/pages/Register/Register";
@@ -27,7 +28,7 @@ function App(): JSX.Element {
                 <Route path={paths.teams_details} element={<Details/>}/>
                 <Route path={paths.players} element={<Players/>}/>
                 <Route path={paths.players_details} element={<div>detail</div>}/>
-                <Route path={paths.profile} element={<div>Profile</div>}/>
+                <Route path={paths.profile} element={<Profile/>}/>
                 <Route path={paths.main} element={<Navigate to={paths.teams}/>}/>
             </Route>
         </Routes>
