@@ -15,7 +15,7 @@ const MoreSelectedBadge = ({ items }: { items: any[] }): JSX.Element => {
     );
 };
 
-export function MultiValue<T>(props: MultiValueProps<T>): JSX.Element {
+export function MultiValue<T>(props: MultiValueProps<T>): JSX.Element | null {
     const { index, getValue, children } = props;
 
     const maxToShow = 2;
@@ -23,7 +23,9 @@ export function MultiValue<T>(props: MultiValueProps<T>): JSX.Element {
         .slice(maxToShow)
         .map((x: any) => x.label);
 
-    return index >= maxToShow
-        ? <MoreSelectedBadge items={overflow}/>
-        : <components.MultiValue {...props}>{children}</components.MultiValue>;
+    return index < maxToShow
+        ? <components.MultiValue {...props}>{children}</components.MultiValue>
+        : index === maxToShow
+            ? <MoreSelectedBadge items={overflow}/>
+            : null;
 }

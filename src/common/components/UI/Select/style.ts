@@ -1,26 +1,31 @@
 import { GroupBase, StylesConfig } from "react-select";
 
-interface Args {
-    fullWidth?: boolean
-}
-
 export function style<
     Option,
     IsMulti extends boolean = false,
     Group extends GroupBase<Option> = GroupBase<Option>
->({ fullWidth }: Args): StylesConfig<Option, IsMulti, Group> {
+>(): StylesConfig<Option, IsMulti, Group> {
     return {
         container: (styles) => ({
             ...styles,
-            width: fullWidth ? "100%" : "auto"
+            display: "inline-block"
         }),
         control: (styles) => ({
-            ...styles
+            ...styles,
+            height: "40px"
         }),
-        option: (styles) => ({
+        option: (styles, { isFocused, isSelected }) => ({
             ...styles,
             fontSize: "14px",
-            cursor: "pointer"
+            cursor: "pointer",
+            color: (isSelected || isFocused)
+                ? "#ffffff"
+                : "#9c9c9c",
+            backgroundColor: isSelected
+                ? "#c60e2e"
+                : isFocused
+                    ? "#ff768e"
+                    : "transparent"
         }),
         valueContainer: (styles) => ({
             ...styles,

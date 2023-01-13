@@ -1,8 +1,13 @@
 import React, { FC } from "react";
 import styles from "./Loader.module.sass";
+import classNames from "classnames";
 
-export const Loader: FC = () => (
-    <div className={styles.wrapper}>
+interface Props {
+    className?: string
+}
+
+export const Loader: FC<Props> = ({ className }) => (
+    <div className={classNames(styles.wrapper, className)}>
         <div className={styles["lds-ripple"]}>
             <div />
             <div />
