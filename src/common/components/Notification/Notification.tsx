@@ -12,6 +12,7 @@ interface Props {
     type?: "success" | "warning" | "error" | "info"
 }
 
+// TODO Rename to toasts
 export const Notification: FC<Props> = ({ id, message, delay, type = "error" }) => {
     const [state, setState] = useState(true);
     const nodeRef = useRef(null);

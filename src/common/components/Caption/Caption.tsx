@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useMemo } from "react";
 import { Typography } from "@/common/components/UI/Typography";
 import classNames from "classnames";
 import styles from "./Caption.module.sass";
@@ -21,7 +21,7 @@ const Separator: FC<{ children: string }> = ({ children }) => (
 export const Caption: FC<Props> = (props) => {
     const { path: title, separator = "/", actions, className } = props;
 
-    const path = React.useMemo(function () {
+    const path = useMemo(function () {
         return title
             .map<React.ReactNode>(t => <Text key={t}>{t}</Text>)
             .reduce((prev, curr, index) => [prev, <Separator key={index}>{separator}</Separator>, curr]);

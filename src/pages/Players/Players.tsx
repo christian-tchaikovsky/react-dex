@@ -34,7 +34,8 @@ export const Players: FC = () => {
     const { players, loading, error } = useAppSelector(state => state.players);
     const pagination = !!players?.count && !!players?.size;
     const teamsLength = players?.data.length;
-    
+
+    // TODO Add debounce and cancel token
     useEffect(() => {
         dispatch(fetchPlayers({
             Name: name,
@@ -96,16 +97,15 @@ export const Players: FC = () => {
                 >
                     {!teamsLength
                         ? <Empty image={Image} title="Empty here" subtitle="Add new teams to continue"/>
-                        : players?.data.map(data => (
+                        : players?.data.map(player => (
                             <Card
-                                id={data.id}
-                                key={data.id}
+                                key={player.id}
                                 variant="player"
-                                title={data.name}
-                                number={data.number}
-                                image={data.avatarUrl}
-                                subtitle={data.position}
-                                to={paths.players_details}
+                                title={player.name}
+                                number={player.number}
+                                image={player.avatarUrl}
+                                subtitle={player.position}
+                                to={`${paths.players}/${player.id}`}
                             />
                         ))
                     }

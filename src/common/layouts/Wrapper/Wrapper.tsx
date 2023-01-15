@@ -7,6 +7,7 @@ interface Props {
     children: ReactNode
 }
 
+// TODO Rename main layout
 export const Wrapper: FC<Props> = ({ children }) => (
     <div className={styles.wrapper}>
         <Header/>

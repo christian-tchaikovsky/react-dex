@@ -79,14 +79,13 @@ export const Teams: FC = () => {
             >
                 {!teamsLength
                     ? <Empty image={Image} title="Empty here" subtitle="Add new teams to continue"/>
-                    : teams?.data.map(data => (
+                    : teams?.data.map(team => (
                         <Card
-                            id={data.id}
-                            key={data.id}
-                            title={data.name}
-                            image={data.imageUrl}
-                            to={paths.teams_details}
-                            subtitle={`Year of foundation: ${data.foundationYear}`}
+                            key={team.id}
+                            title={team.name}
+                            image={team.imageUrl}
+                            to={`${paths.teams}/${team.id}`}
+                            subtitle={`Year of foundation: ${team.foundationYear}`}
                         />
                     ))
                 }

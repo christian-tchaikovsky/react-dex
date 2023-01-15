@@ -38,6 +38,7 @@ export const Upload: FC<Props> = (props) => {
         return () => URL.revokeObjectURL(preview);
     }, [file]);
 
+    // TODO Call functions on save
     async function onHandleUpload(file: File, preview: string): Promise<void> {
         try {
             const formData = new FormData();

@@ -5,25 +5,24 @@ import classNames from "classnames";
 import styles from "./Card.module.sass";
 
 interface Props {
-    id: number
     to: string
     image: string
     title: string
     subtitle: string
     number?: number
-    variant?: "player" | "team"
+    variant?: "player" | "team" // TODO Change props to "position"
 }
 
 const baseUrl = process.env.REACT_APP_BASE_URL;
 
 export const Card: FC<Props> = (props) => {
-    const { id, title, subtitle, image, number, variant = "team", to } = props;
+    const { title, subtitle, image, number, variant = "team", to } = props;
     const navigate = useNavigate();
     const src = `${baseUrl}${image}`;
-    
+
+    // TODO Change to Link
     const onHandleNavigate = (): void => {
-        const path = to.replace(":id", String(id));
-        navigate(path);
+        navigate(to);
     };
     
     return (

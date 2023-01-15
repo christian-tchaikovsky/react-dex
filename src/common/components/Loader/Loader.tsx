@@ -1,6 +1,6 @@
 import React, { FC } from "react";
-import styles from "./Loader.module.sass";
 import classNames from "classnames";
+import styles from "./Loader.module.sass";
 
 interface Props {
     className?: string
