@@ -25,7 +25,12 @@ export function style<
                 ? "#c60e2e"
                 : isFocused
                     ? "#ff768e"
-                    : "transparent"
+                    : "transparent",
+
+            ":active": {
+                backgroundColor: "#c60e2e",
+                color: "#ffffff"
+            }
         }),
         valueContainer: (styles) => ({
             ...styles,
