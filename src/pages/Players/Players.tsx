@@ -11,7 +11,7 @@ import { Empty } from "@/common/components/Empty";
 import { Card } from "@/common/components/Card";
 import { fetchPlayers } from "@/modules/players/reducers/playersReducer";
 import { useDidUpdateEffect } from "@/common/hooks/useDidUpdateEffect";
-import { useAppDispatch, useAppSelector } from "@/common/hooks";
+import { useAppDispatch, useAppSelector, useDebounce } from "@/common/hooks";
 import { useNavigate } from "react-router-dom";
 import { sizes } from "@/common/constants/sizes";
 import { paths } from "@/routes/paths";
@@ -31,18 +31,22 @@ export const Players: FC = () => {
     const [teamsIds, setTeamsIds] = useState<number[]>([]);
     const [option, setOption] = useState<SingleValue<ISizes>>(sizes[0]);
     const [teams, setTeams] = useState<MultiValue<Option>>([]);
+    const debounced = useDebounce(teams, 1000);
     const { players, loading, error } = useAppSelector(state => state.players);
     const pagination = !!players?.count && !!players?.size;
     const teamsLength = players?.data.length;
 
-    // TODO Add debounce and cancel token
     useEffect(() => {
-        dispatch(fetchPlayers({
+        const dispatchPlayers = dispatch(fetchPlayers({
             Name: name,
             Page: page,
             PageSize: size,
             TeamIds: teamsIds
         }));
+
+        return () => {
+            dispatchPlayers.abort();
+        };
     }, [name, page, size, teamsIds]);
 
     useEffect(() => {
@@ -54,7 +58,7 @@ export const Players: FC = () => {
 
     useDidUpdateEffect(() => {
         setTeamsIds(teams.map(team => team.value));
-    }, [teams]);
+    }, [debounced]);
 
     const onHandleSearch = (): void => {
         setPage(1);
@@ -100,8 +104,8 @@ export const Players: FC = () => {
                         : players?.data.map(player => (
                             <Card
                                 key={player.id}
-                                variant="player"
                                 title={player.name}
+                                imagePosition="bottom"
                                 number={player.number}
                                 image={player.avatarUrl}
                                 subtitle={player.position}

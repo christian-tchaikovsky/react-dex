@@ -1,9 +1,9 @@
 import React, { FC, useEffect, useRef, useState } from "react";
 import { useAppDispatch } from "@/common/hooks";
-import { removeNotification } from "@/common/reducers/notificationReducer";
+import { removeToast } from "@/common/reducers/toastsReducer";
 import { Transition } from "react-transition-group";
 import classNames from "classnames";
-import styles from "./Notification.module.sass";
+import styles from "./Toast.module.sass";
 
 interface Props {
     id: string
@@ -12,8 +12,7 @@ interface Props {
     type?: "success" | "warning" | "error" | "info"
 }
 
-// TODO Rename to toasts
-export const Notification: FC<Props> = ({ id, message, delay, type = "error" }) => {
+export const Toast: FC<Props> = ({ id, message, delay, type = "error" }) => {
     const [state, setState] = useState(true);
     const nodeRef = useRef(null);
     const dispatch = useAppDispatch();
@@ -23,15 +22,17 @@ export const Notification: FC<Props> = ({ id, message, delay, type = "error" }) 
             setState(false);
         }, delay);
 
-        return () => clearTimeout(timer);
+        return () => {
+            clearTimeout(timer);
+        };
     }, [delay, id]);
 
     const onClick = (): void => {
         setState(false);
     };
 
-    const onExit = (): void => {
-        dispatch(removeNotification(id));
+    const onExit = () => {
+        dispatch(removeToast(id));
     };
 
     return (
@@ -40,15 +41,15 @@ export const Notification: FC<Props> = ({ id, message, delay, type = "error" }) 
             mountOnEnter
             unmountOnExit
             timeout={350}
+            onExit={onExit}
             nodeRef={nodeRef}
-            onExited={onExit}
         >
             {state => (
                 <div
                     ref={nodeRef}
                     onClick={onClick}
                     className={classNames(
-                        styles.notification,
+                        styles.toast,
                         styles[`animation-${state}`],
                         styles[type]
                     )}

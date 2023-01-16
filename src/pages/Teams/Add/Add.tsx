@@ -4,7 +4,7 @@ import { Form } from "@/modules/teams/components/Form";
 import { SubmitHandler } from "react-hook-form";
 import { IFields } from "@/modules/teams/interfaces/IActions";
 import { addTeam } from "@/api/teams";
-import { addNotification } from "@/common/reducers/notificationReducer";
+import { addToast } from "@/common/reducers/toastsReducer";
 import { useAppDispatch } from "@/common/hooks";
 import { useNavigate } from "react-router-dom";
 import { paths } from "@/routes/paths";
@@ -20,14 +20,14 @@ export const Add: FC = () => {
             const responseData = response.data;
             const name = responseData.name;
 
-            dispatch(addNotification({
+            dispatch(addToast({
                 message: `${name} was successfully added`,
                 type: "success"
             }));
 
             navigate(paths.teams);
         } catch (e) {
-            dispatch(addNotification("The team was not added"));
+            dispatch(addToast("The team was not added"));
         }
     };
 

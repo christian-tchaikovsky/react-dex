@@ -12,7 +12,7 @@ import { Register } from "@/pages/Register/Register";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { PrivateRoute } from "@/routes/PrivateRoute";
 import { paths } from "@/routes/paths";
-import withNotification from "@/common/hoc/withNotification";
+import withToasts from "@/common/hoc/withToasts";
 
 function App(): JSX.Element {
     return (
@@ -35,4 +35,4 @@ function App(): JSX.Element {
     );
 }
 
-export default withNotification(App, 3);
+export default withToasts(App, 3);

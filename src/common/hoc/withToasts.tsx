@@ -1,27 +1,27 @@
 import React, { useMemo } from "react";
 import { useAppSelector } from "@/common/hooks";
-import { Notification } from "@/common/components/Notification";
+import { Toast } from "@/common/components/Toast";
 import { NotificationLayout } from "@/common/layouts/NotificationLayout";
 
-const withNotification = (Component: React.ComponentType, delay: number): () => JSX.Element => {
+const withToasts = (Component: React.ComponentType, delay: number): () => JSX.Element => {
     function WithNotification(): JSX.Element {
-        const { notifications } = useAppSelector(state => state.notification);
+        const { toasts } = useAppSelector(state => state.toasts);
 
         const renderNotifications = useMemo(() => {
-            if (notifications.length === 0) return null;
+            if (toasts.length === 0) return null;
 
             const duration = delay * 1000;
 
-            return notifications.map(notification => (
-                <Notification
-                    key={notification.id}
-                    id={notification.id}
-                    message={notification.message}
-                    type={notification.type}
+            return toasts.map(toast => (
+                <Toast
+                    key={toast.id}
+                    id={toast.id}
+                    message={toast.message}
+                    type={toast.type}
                     delay={duration}
                 />
             ));
-        }, [notifications]);
+        }, [toasts]);
 
         return (
             <React.Fragment>
@@ -40,4 +40,4 @@ const withNotification = (Component: React.ComponentType, delay: number): () => 
     return WithNotification;
 };
 
-export default withNotification;
+export default withToasts;

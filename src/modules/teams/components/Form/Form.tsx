@@ -17,21 +17,18 @@ interface Props {
 
 export const Form: FC<Props> = (props) => {
     const { onSubmit, onCancel, defaultValue } = props;
-    const { handleSubmit, register, control, formState: { errors }, getValues } = useForm<IFields>({
+    const { handleSubmit, register, control, formState: { errors } } = useForm<IFields>({
         resolver: yupResolver(validationSchema),
         defaultValues: defaultValue
     });
-
-    console.log(getValues());
 
     return (
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
             <Controller
                 control={control}
                 name="imageUrl"
-                render={({ field: { onChange, value } }) => (
+                render={({ field: { onChange } }) => (
                     <Upload
-                        value={value}
                         onChange={e => onChange(e)}
                         className={styles.upload}
                     />

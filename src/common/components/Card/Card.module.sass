@@ -1,11 +1,15 @@
 @import "@/common/styles/sass/_colors.sass"
 
+.card-link
+  display: block
+  text-decoration: none
+
 .card
   display: flex
   flex-direction: column
   border-radius: 4px
   overflow: hidden
-  cursor: pointer
+  height: 100%
 
 .image-container
   display: flex
@@ -15,18 +19,19 @@
 
   .image
     display: block
+    max-width: 100%
 
-  &.team
+  &.top
+    align-items: flex-start
+
+  &.center
     align-items: center
 
     .image
       max-width: 150px
 
-  &.player
+  &.bottom
     align-items: flex-end
-
-    .image
-      max-width: 100%
 
 .info
   background-color: $dark-grey

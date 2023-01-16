@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
-import { addNotification } from "@/common/reducers/notificationReducer";
+import { addToast } from "@/common/reducers/toastsReducer";
 import { useAppDispatch } from "@/common/hooks";
 import { upload } from "@/api/image";
 import classNames from "classnames";
@@ -50,12 +50,12 @@ export const Upload: FC<Props> = (props) => {
             setPreview(preview);
             onChange(data);
 
-            dispatch(addNotification({
+            dispatch(addToast({
                 message: "Image successfully uploaded",
                 type: "success"
             }));
         } catch (e) {
-            dispatch(addNotification("Image was not uploaded"));
+            dispatch(addToast("Image was not uploaded"));
         }
     }
 

@@ -6,7 +6,7 @@ import { Typography } from "@/common/components/UI/Typography";
 import { useDetails } from "@/modules/teams/contexts/DetailsContext";
 import { removeTeam } from "@/api/teams";
 import { useAppDispatch } from "@/common/hooks";
-import { addNotification } from "@/common/reducers/notificationReducer";
+import { addToast } from "@/common/reducers/toastsReducer";
 import { useNavigate } from "react-router-dom";
 import { paths } from "@/routes/paths";
 import classNames from "classnames";
@@ -33,14 +33,14 @@ export const Card: FC<Props> = (props) => {
             const response = await removeTeam(id);
             const data = response.data;
 
-            dispatch(addNotification({
+            dispatch(addToast({
                 message: `${data.name} was successfully deleted`,
                 type: "success"
             }));
 
             navigate(paths.teams);
         } catch (e) {
-            dispatch(addNotification("The team was not deleted"));
+            dispatch(addToast("The team was not deleted"));
         }
     };
     

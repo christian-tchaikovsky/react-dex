@@ -8,7 +8,7 @@ import { useAppDispatch } from "@/common/hooks";
 import { SubmitHandler } from "react-hook-form";
 import { IFields } from "@/modules/teams/interfaces/IActions";
 import { useEdit } from "@/modules/teams/contexts/EditContext";
-import { addNotification } from "@/common/reducers/notificationReducer";
+import { addToast } from "@/common/reducers/toastsReducer";
 import { IData } from "@/modules/teams/interfaces/ITeams";
 import { paths } from "@/routes/paths";
 import { editTeam } from "@/api/teams";
@@ -24,14 +24,14 @@ export const Main: FC = () => {
             const response = await editTeam(data);
             const responseData = response.data;
 
-            dispatch(addNotification({
+            dispatch(addToast({
                 message: `${responseData.name} was successfully edit`,
                 type: "success"
             }));
 
             navigate(paths.teams);
         } catch (e) {
-            dispatch(addNotification("The team was not edit"));
+            dispatch(addToast("The team was not edit"));
         }
     };
     

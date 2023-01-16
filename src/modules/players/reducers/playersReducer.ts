@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, isAnyOf } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { IRequest, IResponse } from "../interfaces/IPlayers";
 import { getPlayers } from "@/api/players";
 
@@ -10,8 +10,10 @@ interface State {
 
 export const fetchPlayers = createAsyncThunk<IResponse, IRequest, {}>(
     "players/fetchPlayers",
-    async (params) => {
-        const response = await getPlayers(params);
+    async (args, { signal }) => {
+        const response = await getPlayers(args, {
+            signal
+        });
         return response.data;
     }
 );
@@ -34,16 +36,14 @@ const playersSlice = createSlice({
             })
             .addCase(fetchPlayers.fulfilled, (state, { payload }) => {
                 state.players = payload;
+                state.loading = false;
             })
-            .addCase(fetchPlayers.rejected, (state) => {
+            .addCase(fetchPlayers.rejected, (state, { error }) => {
+                if (error.message === "Aborted") return;
+
                 state.error = true;
-            })
-            .addMatcher(
-                isAnyOf(fetchPlayers.fulfilled, fetchPlayers.rejected),
-                (state) => {
-                    state.loading = false;
-                }
-            );
+                state.loading = false;
+            });
     }
 });
 
