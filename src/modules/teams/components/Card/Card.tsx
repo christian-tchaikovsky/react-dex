@@ -52,13 +52,12 @@ export const Card: FC<Props> = (props) => {
     };
     
     const onHandleNavigate = (): void => {
-        const path = `${paths.teams}/edit/${id}`;
-        navigate(path);
+        navigate(`${paths.teams}/edit/${id}`);
     };
 
     return (
         <div className={classNames(styles.card, className)}>
-            <FormHeader className={styles.caption}>
+            <FormHeader className={styles["form-header"]}>
                 <Breadcrumbs path={breadcrumbs}/>
                 <div>
                     <Icon
