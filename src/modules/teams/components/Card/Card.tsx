@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import { FormActions } from "@/common/components/Form/FormActions";
 import { FormHeader } from "@/common/components/Form/FormHeader";
 import { Breadcrumbs } from "@/common/components/Breadcrumbs";
 import { FormBody } from "@/common/components/Form/FormBody";
@@ -59,7 +60,7 @@ export const Card: FC<Props> = (props) => {
         <div className={classNames(styles.card, className)}>
             <FormHeader className={styles["form-header"]}>
                 <Breadcrumbs path={breadcrumbs}/>
-                <div>
+                <FormActions>
                     <Icon
                         title="Edit"
                         name="create"
@@ -72,7 +73,7 @@ export const Card: FC<Props> = (props) => {
                         onClick={onHandleRemove}
                         className={styles.delete}
                     />
-                </div>
+                </FormActions>
             </FormHeader>
             <FormBody className={styles.content}>
                 <div className={styles.container}>

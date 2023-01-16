@@ -1,6 +1,6 @@
 import React, { FC, ReactNode } from "react";
-import styles from "./FormBody.module.sass";
 import classNames from "classnames";
+import styles from "./FormBody.module.sass";
 
 interface Props {
     children: ReactNode
