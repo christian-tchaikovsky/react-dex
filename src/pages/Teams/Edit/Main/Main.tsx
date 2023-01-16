@@ -1,15 +1,16 @@
 import React, { FC } from "react";
+import { FormHeader } from "@/common/components/Form/FormHeader";
 import { Typography } from "@/common/components/UI/Typography";
+import { FormBody } from "@/common/components/Form/FormBody";
 import { Form } from "@/modules/teams/components/Form";
 import { Loader } from "@/common/components/Loader";
-import { Caption } from "@/common/components/Caption";
+import { Breadcrumbs } from "@/common/components/Breadcrumbs";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "@/common/hooks";
 import { SubmitHandler } from "react-hook-form";
 import { IFields } from "@/modules/teams/interfaces/IActions";
 import { useEdit } from "@/modules/teams/contexts/EditContext";
 import { addToast } from "@/common/reducers/toastsReducer";
-import { IData } from "@/modules/teams/interfaces/ITeams";
 import { paths } from "@/routes/paths";
 import { editTeam } from "@/api/teams";
 import styles from "./Main.module.sass";
@@ -39,14 +40,23 @@ export const Main: FC = () => {
 
     if (error) return <Typography>error</Typography>;
 
-    const data = team as IData;
-    
+    const breadcrumbs = [
+        { name: "Teams", to: paths.teams },
+        { name: team!.name, to: "" }
+    ];
+
     return (
         <div className={styles["teams-edit"]}>
-            <div className={styles.wrapper}>
-                <Caption path={["Teams", data.name]}/>
-                <Form defaultValue={data} onSubmit={onSubmit} onCancel={() => navigate(paths.teams)}/>
-            </div>
+            <FormHeader>
+                <Breadcrumbs path={breadcrumbs}/>
+            </FormHeader>
+            <FormBody className={styles["form-body"]}>
+                <Form
+                    onSubmit={onSubmit}
+                    defaultValue={team!}
+                    onCancel={() => navigate(paths.teams)}
+                />
+            </FormBody>
         </div>
     );
 };

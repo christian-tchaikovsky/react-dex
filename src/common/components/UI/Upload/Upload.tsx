@@ -16,10 +16,9 @@ const baseUrl = process.env.REACT_APP_BASE_URL;
 
 export const Upload: FC<Props> = (props) => {
     const { onChange, value = null, className } = props;
-    const defaultValue = value && `${baseUrl}${value}`;
     const dispatch = useAppDispatch();
     const [file, setFile] = useState<File>();
-    const [preview, setPreview] = useState<string | null>(defaultValue);
+    const [preview, setPreview] = useState<string | null>(getDefaultValue);
     const { getRootProps, getInputProps } = useDropzone({
         onDrop,
         multiple: false,
@@ -38,7 +37,16 @@ export const Upload: FC<Props> = (props) => {
         return () => URL.revokeObjectURL(preview);
     }, [file]);
 
-    // TODO Call functions on save
+    function onDrop(acceptedFiles: File[]): void {
+        setFile(acceptedFiles[0]);
+    }
+
+    function getDefaultValue(): string | null {
+        if (!value) return null;
+
+        return `${baseUrl}${value}`;
+    }
+
     async function onHandleUpload(file: File, preview: string): Promise<void> {
         try {
             const formData = new FormData();
@@ -57,10 +65,6 @@ export const Upload: FC<Props> = (props) => {
         } catch (e) {
             dispatch(addToast("Image was not uploaded"));
         }
-    }
-
-    function onDrop(acceptedFiles: File[]): void {
-        setFile(acceptedFiles[0]);
     }
 
     return (

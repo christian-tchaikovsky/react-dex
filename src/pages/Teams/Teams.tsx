@@ -2,6 +2,7 @@ import React, { FC, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/common/hooks";
 import { fetchTeams } from "@/modules/teams/reducers/teamsReducer";
 import { Typography } from "@/common/components/UI/Typography";
+import { Condition } from "@/common/components/Condition";
 import { Paginate } from "@/common/components/Paginate";
 import { Button } from "@/common/components/UI/Button";
 import { Search } from "@/common/components/UI/Search";
@@ -50,8 +51,6 @@ export const Teams: FC = () => {
         setName(search);
     };
 
-    if (loading) return <Loader/>;
-
     if (error) return <Typography>error</Typography>;
 
     return (
@@ -70,42 +69,44 @@ export const Teams: FC = () => {
                     Add
                 </Button>
             </div>
-            <div className={classNames(
-                styles.main, {
-                    [styles.grid]: teamsLength,
-                    [styles.flex]: !teamsLength
-                }
-            )}
-            >
-                {!teamsLength
-                    ? <Empty image={Image} title="Empty here" subtitle="Add new teams to continue"/>
-                    : teams?.data.map(team => (
-                        <Card
-                            key={team.id}
-                            title={team.name}
-                            image={team.imageUrl}
-                            to={`${paths.teams}/${team.id}`}
-                            subtitle={`Year of foundation: ${team.foundationYear}`}
-                        />
-                    ))
-                }
-            </div>
-            <div className={styles.bottom}>
-                {pagination && (
-                    <Paginate
-                        value={page}
-                        onChange={e => setPage(e.selected)}
-                        count={Math.ceil(teams.count / teams.size)}
-                    />
+            <Condition condition={!loading} otherwise={<Loader className={styles.loader} />}>
+                <div className={classNames(
+                    styles.main, {
+                        [styles.grid]: teamsLength,
+                        [styles.flex]: !teamsLength
+                    }
                 )}
-                <Select
-                    className={styles.select}
-                    value={option}
-                    options={sizes}
-                    isMulti={false}
-                    onChange={e => setOption(e)}
-                />
-            </div>
+                >
+                    {!teamsLength
+                        ? <Empty image={Image} title="Empty here" subtitle="Add new teams to continue"/>
+                        : teams?.data.map(team => (
+                            <Card
+                                key={team.id}
+                                title={team.name}
+                                image={team.imageUrl}
+                                to={`${paths.teams}/${team.id}`}
+                                subtitle={`Year of foundation: ${team.foundationYear}`}
+                            />
+                        ))
+                    }
+                </div>
+                <div className={styles.bottom}>
+                    {pagination && (
+                        <Paginate
+                            value={page}
+                            onChange={e => setPage(e.selected)}
+                            count={Math.ceil(teams.count / teams.size)}
+                        />
+                    )}
+                    <Select
+                        className={styles.select}
+                        value={option}
+                        options={sizes}
+                        isMulti={false}
+                        onChange={e => setOption(e)}
+                    />
+                </div>
+            </Condition>
         </div>
     );
 };

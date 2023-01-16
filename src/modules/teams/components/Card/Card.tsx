@@ -1,5 +1,7 @@
 import React, { FC } from "react";
-import { Caption } from "@/common/components/Caption";
+import { FormHeader } from "@/common/components/Form/FormHeader";
+import { Breadcrumbs } from "@/common/components/Breadcrumbs";
+import { FormBody } from "@/common/components/Form/FormBody";
 import { Icon } from "@/common/components/Icon";
 import { IData } from "@/modules/teams/interfaces/ITeams";
 import { Typography } from "@/common/components/UI/Typography";
@@ -28,6 +30,11 @@ export const Card: FC<Props> = (props) => {
     const { imageUrl, name, foundationYear, division, conference } = team;
     const image = `${baseUrl}${imageUrl}`;
 
+    const breadcrumbs = [
+        { name: "Teams", to: paths.teams },
+        { name, to: "" }
+    ];
+
     const onHandleRemove = async (): Promise<void> => {
         try {
             const response = await removeTeam(id);
@@ -45,33 +52,30 @@ export const Card: FC<Props> = (props) => {
     };
     
     const onHandleNavigate = (): void => {
-        const path = paths.teams_edit.replace(":id", String(id));
+        const path = `${paths.teams}/edit/${id}`;
         navigate(path);
     };
 
     return (
         <div className={classNames(styles.card, className)}>
-            <Caption
-                className={styles.caption}
-                path={["Teams", name]}
-                actions={
-                    <React.Fragment>
-                        <Icon
-                            title="Edit"
-                            name="create"
-                            onClick={onHandleNavigate}
-                            className={styles.create}
-                        />
-                        <Icon
-                            name="delete"
-                            title="Remove"
-                            onClick={onHandleRemove}
-                            className={styles.delete}
-                        />
-                    </React.Fragment>
-                }
-            />
-            <div className={styles.content}>
+            <FormHeader className={styles.caption}>
+                <Breadcrumbs path={breadcrumbs}/>
+                <div>
+                    <Icon
+                        title="Edit"
+                        name="create"
+                        onClick={onHandleNavigate}
+                        className={styles.create}
+                    />
+                    <Icon
+                        name="delete"
+                        title="Remove"
+                        onClick={onHandleRemove}
+                        className={styles.delete}
+                    />
+                </div>
+            </FormHeader>
+            <FormBody className={styles.content}>
                 <div className={styles.container}>
                     <div className={styles.flex}>
                         <div className={styles.image}>
@@ -96,7 +100,7 @@ export const Card: FC<Props> = (props) => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </FormBody>
         </div>
     );
 };

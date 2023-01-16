@@ -1,5 +1,7 @@
 import React, { FC } from "react";
-import { Caption } from "@/common/components/Caption";
+import { FormHeader } from "@/common/components/Form/FormHeader";
+import { Breadcrumbs } from "@/common/components/Breadcrumbs";
+import { FormBody } from "@/common/components/Form/FormBody";
 import { Form } from "@/modules/teams/components/Form";
 import { SubmitHandler } from "react-hook-form";
 import { IFields } from "@/modules/teams/interfaces/IActions";
@@ -13,6 +15,11 @@ import styles from "./Add.module.sass";
 export const Add: FC = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
+
+    const breadcrumbs = [
+        { name: "Teams", to: paths.teams },
+        { name: "Add new team", to: "" }
+    ];
 
     const onSubmit: SubmitHandler<IFields> = async data => {
         try {
@@ -33,10 +40,12 @@ export const Add: FC = () => {
 
     return (
         <div className={styles["teams-add"]}>
-            <div className={styles.wrapper}>
-                <Caption path={["Teams", "Add new team"]}/>
+            <FormHeader>
+                <Breadcrumbs path={breadcrumbs}/>
+            </FormHeader>
+            <FormBody className={styles["form-body"]}>
                 <Form onSubmit={onSubmit} onCancel={() => navigate(paths.teams)}/>
-            </div>
+            </FormBody>
         </div>
     );
 };
