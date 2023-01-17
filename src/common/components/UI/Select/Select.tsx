@@ -10,7 +10,9 @@ export function Select<
 >(props: SelectProps<Option, IsMulti, Group>): JSX.Element {
     const { components, ...rest } = props;
     const MultiValueComponent = MultiValue<Option>;
-    const styles = style<Option, IsMulti, Group>();
+    const styles = style<Option, IsMulti, Group>({
+        variant: "primary"
+    });
 
     return (
         <ReactSelect
