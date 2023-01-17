@@ -27,6 +27,9 @@ export function style<
             ...styles,
             fontSize: "14px",
             cursor: "pointer",
+            overflow: "hidden",
+            whiteSpace: "nowrap",
+            textOverflow: "ellipsis",
             color: (isSelected || isFocused)
                 ? "#ffffff"
                 : "#9c9c9c",

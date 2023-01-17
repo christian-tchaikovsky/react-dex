@@ -18,7 +18,10 @@ export const Add: FC = () => {
                 <Breadcrumbs path={breadcrumbs}/>
             </FormHeader>
             <FormBody className={styles["form-body"]}>
-                <Form onSubmit={() => console.log("data")} onCancel={() => console.log("canceled")}/>
+                <Form
+                    onSubmit={() => console.log("data")} 
+                    onCancel={() => console.log("canceled")}
+                />
             </FormBody>
         </div>
     );

@@ -10,6 +10,7 @@ import { IFields } from "@/modules/players/interfaces/IPlayers";
 import { positionOptions } from "@/modules/players/components/Select/Position";
 import { teamOptions } from "@/modules/players/components/Select/Team";
 import styles from "./Form.module.sass";
+import { Date } from "@/common/components/UI/Date";
 
 interface Props {
     onSubmit: SubmitHandler<IFields>
@@ -76,27 +77,36 @@ export const Form: FC<Props> = (props) => {
                         />
                     )}
                 />
-                <Number
-                    {...register("height")}
-                    error={errors.height?.message}
-                    label="Height (cm)"
-                    className={styles.input}
-                    fullWidth
-                />
-                <Number
-                    {...register("weight")}
-                    error={errors.weight?.message}
-                    label="Weight (kg)"
-                    className={styles.input}
-                    fullWidth
-                />
-                <Number
-                    {...register("number")}
-                    error={errors.number?.message}
-                    label="Number"
-                    className={styles.input}
-                    fullWidth
-                />
+                <div className={styles.grid}>
+                    <Number
+                        {...register("height")}
+                        error={errors.height?.message}
+                        label="Height (cm)"
+                        className={styles.input}
+                        fullWidth
+                    />
+                    <Number
+                        {...register("weight")}
+                        error={errors.weight?.message}
+                        label="Weight (kg)"
+                        className={styles.input}
+                        fullWidth
+                    />
+                    <Date
+                        fullWidth
+                        label="Birthdate"
+                        placeholder="MM/DD/YYYY"
+                        className={styles.input}
+                        onChange={e => console.log(e.target.value)}
+                    />
+                    <Number
+                        {...register("number")}
+                        error={errors.number?.message}
+                        label="Number"
+                        className={styles.input}
+                        fullWidth
+                    />
+                </div>
                 <div className={styles.actions}>
                     <Button
                         type={"button"}
