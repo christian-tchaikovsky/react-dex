@@ -1,10 +1,10 @@
 import React, { FC } from "react";
 import { MultiValue, ActionMeta, OnChangeValue } from "react-select";
-import { Async } from "@/common/components/UI/Select/Async";
+import { Paginate } from "@/common/components/UI/Select/Paginate";
 import { getTeams } from "@/api/teams";
-import styles from "@/pages/Players/Players.module.sass";
 
 interface Props {
+    className?: string
     disabled?: boolean
     value: MultiValue<Option>
     onChange: (newValue: OnChangeValue<Option, true>, actionMeta: ActionMeta<Option>) => void
@@ -15,8 +15,8 @@ export interface Option {
     value: number
 }
 
-export const Select: FC<Props> = (props) => {
-    const { disabled, value, onChange } = props;
+export const SelectTeam: FC<Props> = (props) => {
+    const { disabled, value, onChange, className } = props;
 
     async function loadOptions(name: string, callback: unknown, { page }: any) {
         const response = await getTeams({ Name: name, Page: page, PageSize: 10 });
@@ -33,7 +33,7 @@ export const Select: FC<Props> = (props) => {
     }
     
     return (
-        <Async
+        <Paginate
             isMulti
             value={value}
             defaultOptions
@@ -44,7 +44,7 @@ export const Select: FC<Props> = (props) => {
             closeMenuOnSelect={false}
             loadOptions={loadOptions}
             loadOptionsOnMenuOpen={false}
-            className={styles["select-team"]}
+            className={className}
             additional={{
                 page: 1
             }}

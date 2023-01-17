@@ -12,5 +12,6 @@ export const paths = {
     teams_details: "/teams/:id",
     teams_edit: "/teams/edit/:id",
 
+    players_add: "/players/add",
     players_details: "/players/:id"
 };

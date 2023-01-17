@@ -11,6 +11,11 @@ async function getPlayers(params: IRequest = {}, config?: AxiosRequestConfig): P
     });
 }
 
+async function getPositions(): Promise<AxiosResponse<string[]>> {
+    return await HTTP.get<string[]>("/Player/GetPositions");
+}
+
 export {
+    getPositions,
     getPlayers
 };

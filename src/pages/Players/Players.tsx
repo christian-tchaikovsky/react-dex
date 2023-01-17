@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
-import { Select as SelectTeam, Option } from "@/modules/players/components/Select";
+import { SelectTeam, Option } from "@/modules/players/components/Select/Team";
 import { Typography } from "@/common/components/UI/Typography";
 import { Condition } from "@/common/components/Condition";
 import { Paginate } from "@/common/components/Paginate";
@@ -80,13 +80,14 @@ export const Players: FC = () => {
                     <SelectTeam
                         value={teams}
                         disabled={false}
+                        className={styles["select-team"]}
                         onChange={newValue => setTeams(newValue)}
                     />
                 </div>
                 <Button
                     icon="add"
                     variant="primary"
-                    onClick={() => navigate(paths.teams_add)}
+                    onClick={() => navigate(paths.players_add)}
                 >
                     Add
                 </Button>

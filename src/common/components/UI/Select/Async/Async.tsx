@@ -1,28 +1,27 @@
 import React from "react";
-import { AsyncPaginate, AsyncPaginateProps } from "react-select-async-paginate";
-import { MultiValue } from "../components/MultiValue";
+import AsyncSelect, { AsyncProps } from "react-select/async";
 import { GroupBase } from "react-select";
-import { style } from "../style";
+import { MultiValue } from "@/common/components/UI/Select/components/MultiValue";
+import { style } from "@/common/components/UI/Select/style";
 
 export function Async<
-    OptionType,
-    Additional,
-    Group extends GroupBase<OptionType>,
-    IsMulti extends boolean = false
->(props: AsyncPaginateProps<OptionType, Group, Additional, IsMulti>): JSX.Element {
-    const { components, ...rest } = props;
-    const MultiValueComponent = MultiValue<OptionType>;
-    const styles = style<OptionType, IsMulti, Group>();
-
+    Option,
+    IsMulti extends boolean = false,
+    Group extends GroupBase<Option> = GroupBase<Option>
+>(props: AsyncProps<Option, IsMulti, Group>): JSX.Element {
+    const { components } = props;
+    const MultiValueComponent = MultiValue<Option>;
+    const styles = style<Option, IsMulti, Group>();
+    
     return (
-        <AsyncPaginate
+        <AsyncSelect
             menuPlacement="auto"
             styles={styles}
             components={{
                 MultiValue: MultiValueComponent,
                 ...components
             }}
-            {...rest}
+            {...props}
         />
     );
 }

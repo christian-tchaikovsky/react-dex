@@ -1,6 +1,6 @@
 import React from "react";
 import { components, MultiValueProps } from "react-select";
-import styles from "../Select.module.sass";
+import styles from "./MultiValue.module.sass";
 
 const MoreSelectedBadge = ({ items }: { items: any[] }): JSX.Element => {
     const title = items.join(", ");
