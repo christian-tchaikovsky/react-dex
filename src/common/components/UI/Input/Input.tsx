@@ -1,5 +1,6 @@
 import React, { FC, forwardRef } from "react";
 import { InputBase } from "@/common/components/UI/InputBase";
+import { Label } from "@/common/components/UI/Label";
 import classNames from "classnames";
 import styles from "./Input.module.sass";
 
@@ -21,7 +22,7 @@ export const Input: FC<Props> = forwardRef<HTMLInputElement, Props>((props, ref)
 
     return (
         <div className={classNames(styles.wrapper, className)}>
-            <label className={styles.label}>{label}</label>
+            <Label>{label}</Label>
             <InputBase
                 ref={ref}
                 onChange={onChange}

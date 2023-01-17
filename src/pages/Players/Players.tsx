@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
-import { SelectTeam, Option } from "@/modules/players/components/Select/Team";
+import { Paginate as SelectPaginate } from "@/common/components/UI/Select/Paginate";
 import { Typography } from "@/common/components/UI/Typography";
 import { Condition } from "@/common/components/Condition";
 import { Paginate } from "@/common/components/Paginate";
@@ -17,6 +17,7 @@ import { sizes } from "@/common/constants/sizes";
 import { paths } from "@/routes/paths";
 import { ISizes } from "@/common/interfaces/ISizes";
 import { MultiValue, SingleValue } from "react-select";
+import { IOption, teamOptions } from "@/modules/players/components/Select/Team";
 import Image from "@/common/assets/image/im-players_empty.png";
 import classNames from "classnames";
 import styles from "./Players.module.sass";
@@ -30,7 +31,7 @@ export const Players: FC = () => {
     const [search, setSearch] = useState("");
     const [teamsIds, setTeamsIds] = useState<number[]>([]);
     const [option, setOption] = useState<SingleValue<ISizes>>(sizes[0]);
-    const [teams, setTeams] = useState<MultiValue<Option>>([]);
+    const [teams, setTeams] = useState<MultiValue<IOption>>([]);
     const debounced = useDebounce(teams, 1000);
     const { players, loading, error } = useAppSelector(state => state.players);
     const pagination = !!players?.count && !!players?.size;
@@ -77,9 +78,12 @@ export const Players: FC = () => {
                         onSearch={onHandleSearch}
                         onChange={e => setSearch(e.target.value)}
                     />
-                    <SelectTeam
+                    <SelectPaginate
                         value={teams}
-                        disabled={false}
+                        isMulti={true}
+                        isClearable={false}
+                        loadOptions={teamOptions}
+                        closeMenuOnSelect={false}
                         className={styles["select-team"]}
                         onChange={newValue => setTeams(newValue)}
                     />

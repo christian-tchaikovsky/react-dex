@@ -1,18 +1,27 @@
 import { GroupBase, StylesConfig } from "react-select";
 
+interface CustomProps {
+    variant?: "primary" | "secondary"
+}
+
 export function style<
     Option,
     IsMulti extends boolean = false,
     Group extends GroupBase<Option> = GroupBase<Option>
->(): StylesConfig<Option, IsMulti, Group> {
+>(props: CustomProps = {}): StylesConfig<Option, IsMulti, Group> {
+    const { variant } = props;
+
     return {
-        container: (styles) => ({
-            ...styles,
-            display: "inline-block"
-        }),
         control: (styles) => ({
             ...styles,
-            height: "40px"
+            height: "40px",
+            fontWeight: 500,
+            border: variant === "primary"
+                ? "1px solid #d1d1d1"
+                : "none",
+            backgroundColor: variant === "primary"
+                ? "#ffffff"
+                : "#f6f6f6"
         }),
         option: (styles, { isFocused, isSelected }) => ({
             ...styles,
@@ -31,6 +40,23 @@ export function style<
                 backgroundColor: "#c60e2e",
                 color: "#ffffff"
             }
+        }),
+        placeholder: (styles) => ({
+            ...styles,
+            color: "#707070"
+        }),
+        singleValue: (styles) => ({
+            ...styles,
+            color: "#303030"
+        }),
+        indicatorsContainer: (styles) => ({
+            ...styles,
+            cursor: "pointer",
+            svg: { fill: "#d1d1d1" }
+        }),
+        indicatorSeparator: (styles) => ({
+            ...styles,
+            backgroundColor: "#d1d1d1"
         }),
         valueContainer: (styles) => ({
             ...styles,
