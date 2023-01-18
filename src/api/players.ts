@@ -11,6 +11,10 @@ async function getPlayers(params: IRequest = {}, config?: AxiosRequestConfig): P
     });
 }
 
+async function getPlayer(id: number): Promise<AxiosResponse<IData>> {
+    return await HTTP.get<IData>("/Player/Get", { params: { id } });
+}
+
 async function getPositions(): Promise<AxiosResponse<string[]>> {
     return await HTTP.get<string[]>("/Player/GetPositions");
 }
@@ -18,8 +22,15 @@ async function getPositions(): Promise<AxiosResponse<string[]>> {
 async function addPlayer(data: Omit<IData, "id">): Promise<AxiosResponse<IData>> {
     return await HTTP.post<IData>("/Player/Add", data);
 }
+
+async function removePlayer(id: number): Promise<AxiosResponse<IData>> {
+    return await HTTP.delete<IData>("/Player/Delete", { params: { id } });
+}
+
 export {
+    removePlayer,
     getPositions,
     getPlayers,
+    getPlayer,
     addPlayer
 };
