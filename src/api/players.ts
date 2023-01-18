@@ -1,6 +1,6 @@
 import HTTP from "@/configs/axios/axios";
 import { AxiosRequestConfig, AxiosResponse } from "axios";
-import { IData, IRequest, IResponse } from "@/modules/players/interfaces/IPlayers";
+import { IData, IDetails, IRequest, IResponse } from "@/modules/players/interfaces/IPlayers";
 import qs from "qs";
 
 async function getPlayers(params: IRequest = {}, config?: AxiosRequestConfig): Promise<AxiosResponse<IResponse>> {
@@ -11,8 +11,8 @@ async function getPlayers(params: IRequest = {}, config?: AxiosRequestConfig): P
     });
 }
 
-async function getPlayer(id: number): Promise<AxiosResponse<IData>> {
-    return await HTTP.get<IData>("/Player/Get", { params: { id } });
+async function getPlayer(id: number): Promise<AxiosResponse<IDetails>> {
+    return await HTTP.get<IDetails>("/Player/Get", { params: { id } });
 }
 
 async function getPositions(): Promise<AxiosResponse<string[]>> {
@@ -23,6 +23,10 @@ async function addPlayer(data: Omit<IData, "id">): Promise<AxiosResponse<IData>>
     return await HTTP.post<IData>("/Player/Add", data);
 }
 
+async function editPlayer(data: Omit<IData, "id">): Promise<AxiosResponse<IData>> {
+    return await HTTP.put<IData>("/Player/Update", data);
+}
+
 async function removePlayer(id: number): Promise<AxiosResponse<IData>> {
     return await HTTP.delete<IData>("/Player/Delete", { params: { id } });
 }
@@ -30,6 +34,7 @@ async function removePlayer(id: number): Promise<AxiosResponse<IData>> {
 export {
     removePlayer,
     getPositions,
+    editPlayer,
     getPlayers,
     getPlayer,
     addPlayer

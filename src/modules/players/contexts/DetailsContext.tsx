@@ -1,15 +1,12 @@
 import React, { useState, createContext, FC, useEffect, useContext } from "react";
-import { IData as IPlayer } from "@/modules/players/interfaces/IPlayers";
-import { IData as ITeam } from "@/modules/teams/interfaces/ITeams";
+import { IDetails } from "@/modules/players/interfaces/IPlayers";
 import { getPlayer } from "@/api/players";
-import { getTeam } from "@/api/teams";
 
 interface IContext {
     id: number
     error: boolean
     loading: boolean
-    team: ITeam | null
-    player: IPlayer | null
+    player: IDetails | null
 }
 
 interface Props {
@@ -19,7 +16,6 @@ interface Props {
 
 const initState = {
     id: 0,
-    team: null,
     error: false,
     loading: true,
     player: null
@@ -33,8 +29,7 @@ export const DetailsProvider: FC<Props> = (props) => {
     const { id, children } = props;
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(true);
-    const [team, setTeam] = useState<ITeam | null>(null);
-    const [player, setPlayer] = useState<IPlayer | null>(null);
+    const [player, setPlayer] = useState<IDetails | null>(null);
 
     useEffect(() => {
         void onHandleGet(id);
@@ -48,10 +43,6 @@ export const DetailsProvider: FC<Props> = (props) => {
             const player = await getPlayer(id);
             const playerData = player.data;
 
-            const team = await getTeam(playerData.team);
-            const teamData = team.data;
-
-            setTeam(teamData);
             setPlayer(playerData);
         } catch (e) {
             setError(true);
@@ -61,7 +52,7 @@ export const DetailsProvider: FC<Props> = (props) => {
     };
 
     return (
-        <DetailsContext.Provider value={{ id, team, error, loading, player }}>
+        <DetailsContext.Provider value={{ id, error, loading, player }}>
             {children}
         </DetailsContext.Provider>
     );

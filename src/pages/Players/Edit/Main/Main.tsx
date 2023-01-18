@@ -1,58 +1,68 @@
 import React, { FC } from "react";
+import { useEdit } from "@/modules/players/contexts/EditContext";
+import { Typography } from "@/common/components/UI/Typography";
+import { Loader } from "@/common/components/Loader";
+import { Form } from "@/modules/players/components/Form";
 import { FormHeader } from "@/common/components/Form/FormHeader";
 import { Breadcrumbs } from "@/common/components/Breadcrumbs";
 import { FormBody } from "@/common/components/Form/FormBody";
-import { Form } from "@/modules/players/components/Form";
+import { paths } from "@/routes/paths";
+import { SubmitHandler } from "react-hook-form";
 import { IFields } from "@/modules/players/interfaces/IPlayers";
 import { addToast } from "@/common/reducers/toastsReducer";
-import { SubmitHandler } from "react-hook-form";
-import { useAppDispatch } from "@/common/hooks";
 import { useNavigate } from "react-router-dom";
-import { addPlayer } from "@/api/players";
-import { paths } from "@/routes/paths";
-import styles from "./Add.module.sass";
+import { useAppDispatch } from "@/common/hooks";
+import { editPlayer } from "@/api/players";
 
-export const Add: FC = () => {
+export const Main: FC = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
-    const breadcrumbs = [
-        { name: "Players", to: paths.players },
-        { name: "Add new player", to: "" }
-    ];
+    const { player, loading, error } = useEdit();
 
     const onSubmit: SubmitHandler<IFields> = async data => {
         try {
             const team = data.team.value;
             const position = data.position.value;
+            const cloned = JSON.parse(JSON.stringify(data));
 
-            const obj = Object.assign(data, {
+            const obj = Object.assign(cloned, {
                 team,
                 position
             });
 
-            const response = await addPlayer(obj);
+            const response = await editPlayer(obj);
             const responseData = response.data;
             const name = responseData.name;
 
             dispatch(addToast({
-                message: `${name} was successfully added`,
+                message: `${name} was successfully edit`,
                 type: "success"
             }));
 
             navigate(paths.players);
         } catch (e) {
-            dispatch(addToast("The player was not added"));
+            dispatch(addToast("The player was not edit"));
         }
     };
 
+    if (loading) return <Loader/>;
+
+    if (error) return <Typography>error</Typography>;
+
+    const breadcrumbs = [
+        { name: "Players", to: paths.players },
+        { name: player!.name, to: "" }
+    ];
+    
     return (
         <div>
             <FormHeader>
                 <Breadcrumbs path={breadcrumbs}/>
             </FormHeader>
-            <FormBody className={styles["form-body"]}>
+            <FormBody>
                 <Form
-                    onSubmit={onSubmit} 
+                    defaultValue={player!}
+                    onSubmit={onSubmit}
                     onCancel={() => navigate(paths.players)}
                 />
             </FormBody>

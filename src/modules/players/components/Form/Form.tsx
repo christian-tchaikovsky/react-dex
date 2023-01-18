@@ -97,13 +97,20 @@ export const Form: FC<Props> = (props) => {
                         className={styles.input}
                         fullWidth
                     />
-                    <Date
-                        fullWidth
-                        max="9999-12-31"
-                        label="Birthdate"
-                        className={styles.input}
-                        {...register("birthday")}
-                        error={errors.birthday?.message}
+                    <Controller
+                        control={control}
+                        name="birthday"
+                        render={({ field: { onChange, value }, fieldState: { error } }) => (
+                            <Date
+                                fullWidth
+                                value={value}
+                                max="9999-12-31"
+                                label="Birthdate"
+                                onChange={onChange}
+                                error={error?.message}
+                                className={styles.input}
+                            />
+                        )}
                     />
                     <Number
                         {...register("number")}

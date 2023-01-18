@@ -27,6 +27,10 @@ interface IRequest {
     PageSize?: number
 }
 
+interface IDetails extends IData {
+    teamName: string
+}
+
 interface IFields extends Omit<IData, "position" | "team" | "id"> {
     position: IPositionOption
     team: ITeamOption
@@ -34,6 +38,7 @@ interface IFields extends Omit<IData, "position" | "team" | "id"> {
 
 export type {
     IResponse,
+    IDetails,
     IRequest,
     IFields,
     IData

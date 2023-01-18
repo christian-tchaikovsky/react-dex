@@ -4,9 +4,9 @@ import { FormHeader } from "@/common/components/Form/FormHeader";
 import { Breadcrumbs } from "@/common/components/Breadcrumbs";
 import { FormBody } from "@/common/components/Form/FormBody";
 import { Icon } from "@/common/components/Icon";
-import { IData } from "@/modules/players/interfaces/IPlayers";
+import { IDetails } from "@/modules/players/interfaces/IPlayers";
 import { Typography } from "@/common/components/UI/Typography";
-import { useDetails } from "@/modules/teams/contexts/DetailsContext";
+import { useDetails } from "@/modules/players/contexts/DetailsContext";
 import { useAppDispatch } from "@/common/hooks";
 import { removePlayer } from "@/api/players";
 import { addToast } from "@/common/reducers/toastsReducer";
@@ -17,20 +17,19 @@ import styles from "./Card.module.sass";
 import moment from "moment";
 
 interface Props {
-    team: string
-    player: IData
+    player: IDetails
     className?: string
 }
 
 const baseUrl = process.env.REACT_APP_BASE_URL;
 
 export const Card: FC<Props> = (props) => {
-    const { team, player, className } = props;
+    const { player, className } = props;
     const { id } = useDetails();
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
-    const { number, name, position, height, weight, birthday, avatarUrl } = player;
+    const { teamName, number, name, position, height, weight, birthday, avatarUrl } = player;
     const image = `${baseUrl}${avatarUrl}`;
     const age = calculateAge();
 
@@ -39,11 +38,11 @@ export const Card: FC<Props> = (props) => {
         { name, to: "" }
     ];
 
-    function calculateAge (): number {
+    function calculateAge(): number {
         const format = moment(birthday, "YYYY-MM-DD[T]HH:mm:ss");
         return moment().diff(format, "years");
     }
-    
+
     async function onHandleRemove(): Promise<void> {
         try {
             const response = await removePlayer(id);
@@ -59,7 +58,7 @@ export const Card: FC<Props> = (props) => {
             dispatch(addToast("The team was not deleted"));
         }
     }
-    
+
     function onHandleNavigate(): void {
         navigate(`${paths.players}/edit/${id}`);
     }
@@ -101,7 +100,7 @@ export const Card: FC<Props> = (props) => {
                                 </div>
                                 <div>
                                     <Typography tag="h4" className={styles.title}>Team</Typography>
-                                    <Typography className={styles.text}>{team}</Typography>
+                                    <Typography className={styles.text}>{teamName}</Typography>
                                 </div>
                                 <div>
                                     <Typography tag="h4" className={styles.title}>Height</Typography>
