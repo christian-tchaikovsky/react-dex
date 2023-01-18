@@ -4,7 +4,7 @@ import { Breadcrumbs } from "@/common/components/Breadcrumbs";
 import { FormBody } from "@/common/components/Form/FormBody";
 import { Form } from "@/modules/teams/components/Form";
 import { SubmitHandler } from "react-hook-form";
-import { IFields } from "@/modules/teams/interfaces/IActions";
+import { IFields } from "@/modules/teams/interfaces/ITeams";
 import { addTeam } from "@/api/teams";
 import { addToast } from "@/common/reducers/toastsReducer";
 import { useAppDispatch } from "@/common/hooks";

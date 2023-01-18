@@ -1,6 +1,7 @@
 import React, { FC, forwardRef } from "react";
 import { InputBase } from "@/common/components/UI/InputBase";
 import { Label } from "@/common/components/UI/Label";
+import { Error } from "@/common/components/UI/Error";
 import classNames from "classnames";
 import styles from "./Input.module.sass";
 
@@ -32,7 +33,7 @@ export const Input: FC<Props> = forwardRef<HTMLInputElement, Props>((props, ref)
                 disabled={disabled}
                 {...rest}
             />
-            {error && <span className={styles.error}>{error}</span>}
+            {error && <Error>{error}</Error>}
         </div>
     );
 });

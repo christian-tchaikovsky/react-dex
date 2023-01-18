@@ -3,10 +3,12 @@ import { MultiValue } from "@/common/components/UI/Select/components/MultiValue"
 import AsyncSelect, { AsyncProps } from "react-select/async";
 import { style } from "@/common/components/UI/Select/style";
 import { Label } from "@/common/components/UI/Label";
+import { Error } from "@/common/components/UI/Error";
 import { GroupBase } from "react-select";
 
 interface CustomProps {
     label?: string
+    error?: string
     variant?: "primary" | "secondary"
 }
 
@@ -15,14 +17,15 @@ export function Async<
     IsMulti extends boolean = false,
     Group extends GroupBase<Option> = GroupBase<Option>
 >(props: AsyncProps<Option, IsMulti, Group> & CustomProps): JSX.Element {
-    const { components, label, variant = "primary" } = props;
+    const { className, components, label, variant = "primary", error, ...rest } = props;
     const MultiValueComponent = MultiValue<Option>;
     const styles = style<Option, IsMulti, Group>({
-        variant
+        variant,
+        error
     });
     
     return (
-        <div>
+        <div className={className}>
             {label && <Label>Position</Label>}
             <AsyncSelect
                 menuPlacement="auto"
@@ -31,8 +34,9 @@ export function Async<
                     MultiValue: MultiValueComponent,
                     ...components
                 }}
-                {...props}
+                {...rest}
             />
+            {error && <Error>{error}</Error>}
         </div>
     );
 }

@@ -1,8 +1,9 @@
 import React, { FC, useState } from "react";
-import classNames from "classnames";
-import { Icon } from "@/common/components/Icon";
-import { Label } from "@/common/components/UI/Label";
 import { InputBase } from "@/common/components/UI/InputBase";
+import { Label } from "@/common/components/UI/Label";
+import { Error } from "@/common/components/UI/Error";
+import { Icon } from "@/common/components/Icon";
+import classNames from "classnames";
 import styles from "./Password.module.sass";
 
 interface Props {
@@ -46,7 +47,7 @@ export const Password: FC<Props> = (props) => {
                     className={styles.icon}
                 />
             </div>
-            {error && <span className={styles.error}>{error}</span>}
+            {error && <Error>{error}</Error>}
         </div>
     );
 };

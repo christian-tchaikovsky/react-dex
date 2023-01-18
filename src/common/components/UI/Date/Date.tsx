@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, forwardRef } from "react";
 import { Input } from "@/common/components/UI/Input";
 
 interface Props {
@@ -11,11 +11,12 @@ interface Props {
     [x: string]: any
 }
 
-export const Date: FC<Props> = (props) => {
+export const Date: FC<Props> = forwardRef<HTMLInputElement, Props>((props, ref) => {
     const { label, value, onChange, className, ...rest } = props;
-    
+
     return (
         <Input
+            ref={ref}
             type="date"
             label={label}
             value={value}
@@ -24,4 +25,6 @@ export const Date: FC<Props> = (props) => {
             {...rest}
         />
     );
-};
+});
+
+Date.displayName = "Date";

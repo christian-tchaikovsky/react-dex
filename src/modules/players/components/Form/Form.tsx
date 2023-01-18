@@ -6,11 +6,13 @@ import { Number } from "@/common/components/UI/Number";
 import { Button } from "@/common/components/UI/Button";
 import { Input } from "@/common/components/UI/Input";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { IFields } from "@/modules/players/interfaces/IPlayers";
 import { positionOptions } from "@/modules/players/components/Select/Position";
 import { teamOptions } from "@/modules/players/components/Select/Team";
-import styles from "./Form.module.sass";
+import { IFields } from "@/modules/players/interfaces/IPlayers";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { Date } from "@/common/components/UI/Date";
+import { validationSchema } from "./schema";
+import styles from "./Form.module.sass";
 
 interface Props {
     onSubmit: SubmitHandler<IFields>
@@ -21,6 +23,7 @@ interface Props {
 export const Form: FC<Props> = (props) => {
     const { defaultValue, onSubmit, onCancel } = props;
     const { handleSubmit, register, control, formState: { errors } } = useForm<IFields>({
+        resolver: yupResolver(validationSchema),
         defaultValues: defaultValue
     });
 
@@ -48,13 +51,14 @@ export const Form: FC<Props> = (props) => {
                 <Controller
                     control={control}
                     name="position"
-                    render={({ field: { onChange, value } }) => (
+                    render={({ field: { onChange, value }, fieldState: { error } }) => (
                         <Async
                             isClearable
                             value={value}
                             defaultOptions
                             label="Position"
                             variant="secondary"
+                            error={error?.message}
                             className={styles.input}
                             loadOptions={positionOptions}
                             onChange={value => onChange(value)}
@@ -64,13 +68,14 @@ export const Form: FC<Props> = (props) => {
                 <Controller
                     control={control}
                     name="team"
-                    render={({ field: { onChange, value } }) => (
+                    render={({ field: { onChange, value }, fieldState: { error } }) => (
                         <Paginate
                             isClearable
                             value={value}
                             defaultOptions
                             label="Team"
                             variant="secondary"
+                            error={error?.message}
                             className={styles.input}
                             loadOptions={teamOptions}
                             onChange={value => onChange(value)}
@@ -94,10 +99,11 @@ export const Form: FC<Props> = (props) => {
                     />
                     <Date
                         fullWidth
+                        max="9999-12-31"
                         label="Birthdate"
-                        placeholder="MM/DD/YYYY"
                         className={styles.input}
-                        onChange={e => console.log(e.target.value)}
+                        {...register("birthday")}
+                        error={errors.birthday?.message}
                     />
                     <Number
                         {...register("number")}

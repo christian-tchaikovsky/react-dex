@@ -2,6 +2,7 @@ import { GroupBase, StylesConfig } from "react-select";
 
 interface CustomProps {
     variant?: "primary" | "secondary"
+    error?: string
 }
 
 export function style<
@@ -9,16 +10,18 @@ export function style<
     IsMulti extends boolean = false,
     Group extends GroupBase<Option> = GroupBase<Option>
 >(props: CustomProps = {}): StylesConfig<Option, IsMulti, Group> {
-    const { variant } = props;
+    const { variant, error } = props;
 
     return {
         control: (styles) => ({
             ...styles,
             height: "40px",
             fontWeight: 500,
-            border: variant === "primary"
-                ? "1px solid #d1d1d1"
-                : "none",
+            border: error
+                ? "1px solid #ff768e"
+                : variant === "primary"
+                    ? "1px solid #d1d1d1"
+                    : "none",
             backgroundColor: variant === "primary"
                 ? "#ffffff"
                 : "#f6f6f6"

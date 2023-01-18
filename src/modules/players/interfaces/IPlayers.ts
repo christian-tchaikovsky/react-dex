@@ -27,7 +27,7 @@ interface IRequest {
     PageSize?: number
 }
 
-interface IFields extends Omit<IData, "position" | "team"> {
+interface IFields extends Omit<IData, "position" | "team" | "id"> {
     position: IPositionOption
     team: ITeamOption
 }

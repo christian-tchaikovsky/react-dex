@@ -8,7 +8,7 @@ import { Breadcrumbs } from "@/common/components/Breadcrumbs";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "@/common/hooks";
 import { SubmitHandler } from "react-hook-form";
-import { IFields } from "@/modules/teams/interfaces/IActions";
+import { IFields } from "@/modules/teams/interfaces/ITeams";
 import { useEdit } from "@/modules/teams/contexts/EditContext";
 import { addToast } from "@/common/reducers/toastsReducer";
 import { paths } from "@/routes/paths";
