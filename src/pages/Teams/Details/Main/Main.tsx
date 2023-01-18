@@ -4,9 +4,9 @@ import { Loader } from "@/common/components/Loader";
 import { Typography } from "@/common/components/UI/Typography";
 import { Table } from "@/modules/teams/components/Table";
 import { Card } from "@/modules/teams/components/Card";
-import styles from "./Info.module.sass";
+import styles from "./Main.module.sass";
 
-export const Info: FC = () => {
+export const Main: FC = () => {
     const { team, loading, error, players } = useDetails();
 
     if (loading) return <Loader />;
