@@ -1,10 +1,10 @@
 import React, { useMemo } from "react";
 import { useAppSelector } from "@/common/hooks";
 import { Toast } from "@/common/components/Toast";
-import { NotificationLayout } from "@/common/layouts/NotificationLayout";
+import { ToastLayout } from "@/common/layouts/ToastLayout";
 
 const withToasts = (Component: React.ComponentType, delay: number): () => JSX.Element => {
-    function WithNotification(): JSX.Element {
+    function WithToasts(): JSX.Element {
         const { toasts } = useAppSelector(state => state.toasts);
 
         const renderNotifications = useMemo(() => {
@@ -27,17 +27,17 @@ const withToasts = (Component: React.ComponentType, delay: number): () => JSX.El
             <React.Fragment>
                 <Component/>
                 {renderNotifications && (
-                    <NotificationLayout>
+                    <ToastLayout>
                         {renderNotifications}
-                    </NotificationLayout>
+                    </ToastLayout>
                 )}
             </React.Fragment>
         );
     }
 
-    WithNotification.displayName = `WithNotification(${(Component.displayName ?? Component.name) || "Component"})`;
+    WithToasts.displayName = `WithToasts(${(Component.displayName ?? Component.name) || "Component"})`;
 
-    return WithNotification;
+    return WithToasts;
 };
 
 export default withToasts;

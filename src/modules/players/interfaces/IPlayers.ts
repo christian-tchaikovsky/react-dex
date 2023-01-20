@@ -1,5 +1,5 @@
-import { IOption as IPositionOption } from "@/modules/players/components/Select/Position";
-import { IOption as ITeamOption } from "@/modules/players/components/Select/Team";
+import { IOption as IPositionOption } from "../utils/positionOptions";
+import { IOption as ITeamOption } from "../utils/teamOptions";
 
 interface IData {
     name: string

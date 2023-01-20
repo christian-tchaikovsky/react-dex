@@ -17,7 +17,7 @@ import { sizes } from "@/common/constants/sizes";
 import { paths } from "@/routes/paths";
 import { ISizes } from "@/common/interfaces/ISizes";
 import { MultiValue, SingleValue } from "react-select";
-import { IOption, teamOptions } from "@/modules/players/components/Select/Team";
+import { IOption, teamOptions } from "@/modules/players/utils/teamOptions";
 import Image from "@/common/assets/image/im-players_empty.png";
 import classNames from "classnames";
 import styles from "./Players.module.sass";
