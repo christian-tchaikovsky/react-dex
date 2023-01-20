@@ -22,7 +22,7 @@ const initialState: State = {
     error: false
 };
 
-const userSlice = createSlice({
+const teamsSlice = createSlice({
     name: "teams",
     initialState,
     reducers: {},
@@ -47,4 +47,4 @@ const userSlice = createSlice({
     }
 });
 
-export default userSlice.reducer;
+export default teamsSlice.reducer;

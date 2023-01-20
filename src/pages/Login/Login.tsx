@@ -7,7 +7,7 @@ import { Button } from "@/common/components/UI/Button";
 import { Link } from "@/common/components/UI/Link";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SubmitHandler, useForm, Controller } from "react-hook-form";
-import { addNotification } from "@/common/reducers/notificationReducer";
+import { addToast } from "@/common/reducers/toastsReducer";
 import { validationSchema } from "@/pages/Login/schema";
 import { IFields } from "@/modules/auth/interfaces/ILogin";
 import { useNavigate } from "react-router-dom";
@@ -37,7 +37,7 @@ export const Login: FC = () => {
             
             localStorage.setItem("user", JSON.stringify({ name, avatarUrl }));
             localStorage.setItem("token", token);
-            dispatch(addNotification({
+            dispatch(addToast({
                 message: "You have successfully logged in",
                 type: "success"
             }));
@@ -47,7 +47,7 @@ export const Login: FC = () => {
             const error = e as AxiosError;
 
             if (error.response?.status === 401) {
-                dispatch(addNotification(
+                dispatch(addToast(
                     "User with the specified username / password was not found"
                 ));
             }

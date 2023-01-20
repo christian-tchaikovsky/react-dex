@@ -1,5 +1,5 @@
 import * as Yup from "yup";
-import { IFields } from "@/modules/teams/interfaces/IActions";
+import { IFields } from "@/modules/teams/interfaces/ITeams";
 
 export const validationSchema = Yup.object<Record<keyof IFields, Yup.AnySchema>>({
     name: Yup.string()

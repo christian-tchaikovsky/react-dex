@@ -1,3 +1,6 @@
+import { IOption as IPositionOption } from "@/modules/players/components/Select/Position";
+import { IOption as ITeamOption } from "@/modules/players/components/Select/Team";
+
 interface IData {
     name: string
     number: number
@@ -23,8 +26,20 @@ interface IRequest {
     Page?: number
     PageSize?: number
 }
+
+interface IDetails extends IData {
+    teamName: string
+}
+
+interface IFields extends Omit<IData, "position" | "team" | "id"> {
+    position: IPositionOption
+    team: ITeamOption
+}
+
 export type {
     IResponse,
+    IDetails,
     IRequest,
+    IFields,
     IData
 };

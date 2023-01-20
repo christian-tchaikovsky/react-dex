@@ -19,8 +19,8 @@ HTTP.interceptors.response.use(
     response => response,
     async error => {
 
-        if (error.response.status === 401) {
-            // TODO Redirect to "/login"
+        if (error.response?.status === 401) {
+            // Redirect to "/login"
         }
 
         return await Promise.reject(error);

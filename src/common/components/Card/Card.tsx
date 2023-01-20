@@ -1,55 +1,56 @@
 import React, { FC } from "react";
 import { Typography } from "@/common/components/UI/Typography";
-import { useNavigate } from "react-router-dom";
-import { paths } from "@/routes/paths";
+import { Link } from "react-router-dom";
+import classNames from "classnames";
 import styles from "./Card.module.sass";
 
 interface Props {
-    id: number
+    to: string
     image: string
     title: string
     subtitle: string
     number?: number
+    imagePosition?: "center" | "bottom" | "top"
 }
 
 const baseUrl = process.env.REACT_APP_BASE_URL;
 
 export const Card: FC<Props> = (props) => {
-    const { id, title, subtitle, image, number } = props;
-    const navigate = useNavigate();
-    
-    const onHandleNavigate = (): void => {
-        const path = paths.teams_details.replace(":id", String(id));
-        navigate(path);
-    };
+    const { title, subtitle, image, number, imagePosition = "center", to } = props;
+    const src = `${baseUrl}${image}`;
     
     return (
-        <div onClick={onHandleNavigate} className={styles.card}>
-            <div className={styles.image}>
-                {image
-                    ? <img src={`${baseUrl}${image}`} alt="image"/>
-                    : "No image here"
-                }
-            </div>
-            <div className={styles.info}>
-                <div className={styles.title}>
-                    <Typography
-                        tag="h4"
-                        className={styles.main}
-                    >
-                        {title}
-                    </Typography>
-                    {number && (
-                        <Typography
-                            className={styles.number}
-                            color="red"
-                        >
-                            {`#${number}`}
-                        </Typography>
-                    )}
+        <Link className={styles["card-link"]} to={to}>
+            <div className={styles.card}>
+                <div className={classNames(
+                    styles["image-container"], {
+                        [styles.top]: imagePosition === "top",
+                        [styles.center]: imagePosition === "center",
+                        [styles.bottom]: imagePosition === "bottom"
+                    }
+                )}>
+                    <img className={styles.image} src={src} alt="image"/>
                 </div>
-                <Typography className={styles.subtitle}>{subtitle}</Typography>
+                <div className={styles.info}>
+                    <div className={styles.title}>
+                        <Typography
+                            tag="h4"
+                            className={styles.main}
+                        >
+                            {title}
+                        </Typography>
+                        {number && (
+                            <Typography
+                                className={styles.number}
+                                color="red"
+                            >
+                                {`#${number}`}
+                            </Typography>
+                        )}
+                    </div>
+                    <Typography className={styles.subtitle}>{subtitle}</Typography>
+                </div>
             </div>
-        </div>
+        </Link>
     );
 };

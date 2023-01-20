@@ -1,12 +1,15 @@
 import React, { FC } from "react";
-import { Caption } from "@/common/components/Caption";
+import { FormActions } from "@/common/components/Form/FormActions";
+import { FormHeader } from "@/common/components/Form/FormHeader";
+import { Breadcrumbs } from "@/common/components/Breadcrumbs";
+import { FormBody } from "@/common/components/Form/FormBody";
 import { Icon } from "@/common/components/Icon";
 import { IData } from "@/modules/teams/interfaces/ITeams";
 import { Typography } from "@/common/components/UI/Typography";
 import { useDetails } from "@/modules/teams/contexts/DetailsContext";
 import { removeTeam } from "@/api/teams";
 import { useAppDispatch } from "@/common/hooks";
-import { addNotification } from "@/common/reducers/notificationReducer";
+import { addToast } from "@/common/reducers/toastsReducer";
 import { useNavigate } from "react-router-dom";
 import { paths } from "@/routes/paths";
 import classNames from "classnames";
@@ -28,50 +31,51 @@ export const Card: FC<Props> = (props) => {
     const { imageUrl, name, foundationYear, division, conference } = team;
     const image = `${baseUrl}${imageUrl}`;
 
+    const breadcrumbs = [
+        { name: "Teams", to: paths.teams },
+        { name, to: "" }
+    ];
+
     const onHandleRemove = async (): Promise<void> => {
         try {
             const response = await removeTeam(id);
             const data = response.data;
 
-            dispatch(addNotification({
+            dispatch(addToast({
                 message: `${data.name} was successfully deleted`,
                 type: "success"
             }));
 
             navigate(paths.teams);
         } catch (e) {
-            dispatch(addNotification("The team was not deleted"));
+            dispatch(addToast("The team was not deleted"));
         }
     };
     
     const onHandleNavigate = (): void => {
-        const path = paths.teams_edit.replace(":id", String(id));
-        navigate(path);
+        navigate(`${paths.teams}/edit/${id}`);
     };
 
     return (
         <div className={classNames(styles.card, className)}>
-            <Caption
-                className={styles.caption}
-                path={["Teams", name]}
-                actions={
-                    <React.Fragment>
-                        <Icon
-                            title="Edit"
-                            name="create"
-                            onClick={onHandleNavigate}
-                            className={styles.create}
-                        />
-                        <Icon
-                            name="delete"
-                            title="Remove"
-                            onClick={onHandleRemove}
-                            className={styles.delete}
-                        />
-                    </React.Fragment>
-                }
-            />
-            <div className={styles.content}>
+            <FormHeader className={styles["form-header"]}>
+                <Breadcrumbs path={breadcrumbs}/>
+                <FormActions>
+                    <Icon
+                        title="Update"
+                        name="create"
+                        onClick={onHandleNavigate}
+                        className={styles.create}
+                    />
+                    <Icon
+                        name="delete"
+                        title="Remove"
+                        onClick={onHandleRemove}
+                        className={styles.delete}
+                    />
+                </FormActions>
+            </FormHeader>
+            <FormBody className={styles.content}>
                 <div className={styles.container}>
                     <div className={styles.flex}>
                         <div className={styles.image}>
@@ -96,7 +100,7 @@ export const Card: FC<Props> = (props) => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </FormBody>
         </div>
     );
 };

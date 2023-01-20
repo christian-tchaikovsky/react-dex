@@ -20,8 +20,11 @@ interface IRequest {
     PageSize?: number
 }
 
+type IFields = Omit<IData, "id">;
+
 export type {
     IResponse,
     IRequest,
+    IFields,
     IData
 };

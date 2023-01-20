@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { AuthLayout } from "@/modules/auth/layouts/AuthLayout";
 import { Typography } from "@/common/components/UI/Typography";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { addNotification } from "@/common/reducers/notificationReducer";
+import { addToast } from "@/common/reducers/toastsReducer";
 import { Input } from "@/common/components/UI/Input";
 import { Password } from "@/common/components/UI/Password";
 import { Button } from "@/common/components/UI/Button";
@@ -42,7 +42,7 @@ export const Register: FC = () => {
 
             localStorage.setItem("user", JSON.stringify({ name, avatarUrl }));
             localStorage.setItem("token", token);
-            dispatch(addNotification({
+            dispatch(addToast({
                 message: "You have successfully registered",
                 type: "success"
             }));
@@ -52,7 +52,7 @@ export const Register: FC = () => {
             const error = e as AxiosError;
 
             if (error.response?.status === 409) {
-                dispatch(addNotification(
+                dispatch(addToast(
                     "User with the specified login already exist"
                 ));
             }

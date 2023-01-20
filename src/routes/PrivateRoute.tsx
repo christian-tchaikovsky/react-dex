@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Navigate, Outlet } from "react-router-dom";
-import { Wrapper } from "@/common/layouts/Wrapper";
+import { MainLayout } from "@/common/layouts/MainLayout";
 
 export const PrivateRoute = (): JSX.Element | null => {
     const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
@@ -14,7 +14,7 @@ export const PrivateRoute = (): JSX.Element | null => {
 
     return (
         isAuthenticated
-            ? <Wrapper><Outlet/></Wrapper>
+            ? <MainLayout><Outlet/></MainLayout>
             : <Navigate to='/login'/>
     );
 };

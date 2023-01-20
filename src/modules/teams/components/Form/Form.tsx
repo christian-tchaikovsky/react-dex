@@ -1,10 +1,10 @@
 import React, { FC } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { Upload } from "@/common/components/UI/Upload";
 import { Input } from "@/common/components/UI/Input";
+import { Upload } from "@/common/components/UI/Upload";
 import { Number } from "@/common/components/UI/Number";
 import { Button } from "@/common/components/UI/Button";
-import { IFields } from "@/modules/teams/interfaces/IActions";
+import { IFields } from "@/modules/teams/interfaces/ITeams";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import { validationSchema } from "./schema";
 import styles from "./Form.module.sass";
@@ -17,12 +17,10 @@ interface Props {
 
 export const Form: FC<Props> = (props) => {
     const { onSubmit, onCancel, defaultValue } = props;
-    const { handleSubmit, register, control, formState: { errors }, getValues } = useForm<IFields>({
+    const { handleSubmit, register, control, formState: { errors } } = useForm<IFields>({
         resolver: yupResolver(validationSchema),
         defaultValues: defaultValue
     });
-
-    console.log(getValues());
 
     return (
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>

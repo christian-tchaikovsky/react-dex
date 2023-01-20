@@ -3,7 +3,7 @@ import classNames from "classnames";
 import styles from "./InputBase.module.sass";
 
 interface Props {
-    type?: "text" | "password"
+    type?: "text" | "password" | "date"
     onChange: React.ChangeEventHandler<HTMLInputElement>
     value?: string | number
     disabled?: boolean

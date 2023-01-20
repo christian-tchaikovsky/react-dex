@@ -25,9 +25,15 @@ const initState = {
     players: null
 };
 
-const DetailsContext = createContext<IContext>(initState);
+const Context = createContext<IContext>(initState);
 
-export const useDetails = (): IContext => useContext(DetailsContext);
+export const useDetails = (): IContext => {
+    const context = useContext(Context);
+
+    if (context) return context;
+
+    throw new Error("Context must be used within Provider!");
+};
 
 export const DetailsProvider: FC<Props> = (props) => {
     const { id, children } = props;
@@ -61,8 +67,8 @@ export const DetailsProvider: FC<Props> = (props) => {
     };
     
     return (
-        <DetailsContext.Provider value={{ id, team, error, loading, players }}>
+        <Context.Provider value={{ id, team, error, loading, players }}>
             {children}
-        </DetailsContext.Provider>
+        </Context.Provider>
     );
 };
