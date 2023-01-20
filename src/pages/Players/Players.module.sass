@@ -1,0 +1,45 @@
+.players
+  display: flex
+  flex-direction: column
+  min-height: 100%
+
+.top
+  display: flex
+  justify-content: space-between
+
+  .inputs
+    display: flex
+
+.main
+  margin: 30px 0
+
+  &.flex
+    display: flex
+    justify-content: center
+    align-items: center
+    flex-grow: 1
+
+  &.grid
+    display: grid
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr))
+    grid-auto-rows: 380px
+    gap: 25px
+
+.bottom
+  display: flex
+  margin-top: auto
+
+  .select
+    margin-left: auto
+
+.search
+  margin-right: 25px
+  display: inline-block
+
+.select-team
+  height: 40px
+  min-width: 200px
+  display: inline-block
+
+.loader
+  flex-grow: 1

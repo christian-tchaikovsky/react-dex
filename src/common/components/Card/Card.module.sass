@@ -1,0 +1,57 @@
+@import "@/common/styles/sass/_colors.sass"
+
+.card-link
+  display: block
+  text-decoration: none
+
+.card
+  display: flex
+  flex-direction: column
+  border-radius: 4px
+  overflow: hidden
+  height: 100%
+
+.image-container
+  display: flex
+  flex-grow: 1
+  justify-content: center
+  background: linear-gradient(121.57deg, #707070 1.62%, #393939 81.02%)
+
+  .image
+    display: block
+    max-width: 275px
+
+  &.top
+    align-items: flex-start
+
+  &.center
+    align-items: center
+
+    .image
+      max-width: 150px
+
+  &.bottom
+    align-items: flex-end
+
+.info
+  background-color: $dark-grey
+  text-align: center
+  padding: 20px
+
+  .title
+    font-size: 18px
+    margin-bottom: 10px
+
+  .main
+    font-size: inherit
+    display: inline-block
+    color: #ffffff
+
+  .number
+    font-size: inherit
+    display: inline-block
+    margin-left: 5px
+
+  .subtitle
+    color: $light-grey
+    font-size: 14px

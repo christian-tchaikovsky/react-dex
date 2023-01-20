@@ -1,0 +1,67 @@
+@import "@/common/styles/sass/_colors.sass"
+
+.card
+  display: block
+
+.form-header
+  border: 1px solid $light-grey
+
+.create, .delete
+  cursor: pointer
+  height: 24px
+  width: 24px
+
+.create
+  margin-right: 15px
+
+.delete
+  path
+    fill: $red
+
+.content
+  padding: 0 25px
+  background: linear-gradient(90deg, $grey, #393939)
+
+.container
+  margin: 0 auto
+  padding: 65px 0
+  max-width: 1024px
+
+.flex
+  display: flex
+  align-items: center
+  justify-content: space-between
+
+.grid
+  gap: 50px
+  display: grid
+  grid-template-columns: 1fr 1fr
+
+.image
+  flex-shrink: 0
+  max-width: 210px
+
+  img
+    width: 100%
+
+.info
+  display: block
+
+  .title, .name, .text
+    color: white
+
+  .title, .text
+    font-size: 24px
+
+  .title, .name
+    font-weight: 800
+
+  .name
+    font-size: 36px
+    margin-bottom: 40px
+
+  .title
+    margin-bottom: 10px
+
+  .text
+    font-size: 18px

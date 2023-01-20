@@ -1,0 +1,29 @@
+=disableSelection()
+  -webkit-user-select: none /* Safari */
+  -ms-user-select: none /* IE 10 and IE 11 */
+  user-select: none /* Standard syntax */
+
+=keyframes($name)
+  @-webkit-keyframes #{$name}
+    @content
+  @-moz-keyframes #{$name}
+    @content
+  @-ms-keyframes #{$name}
+    @content
+  @keyframes #{$name}
+    @content
+
+=breakpointUp($deviceMin)
+  @media (min-width: $deviceMin)
+    @content
+
+=breakpointDown($deviceMax)
+  @media (max-width: $deviceMax)
+    @content
+
+=breakpointBetween($deviceMin, $deviceMax)
+  @media (max-width: $deviceMax) and (min-width: $deviceMin)
+    @content
+
+=breakpointOnly($device)
+  +breakpointBetween($device, $device)

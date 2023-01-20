@@ -1,0 +1,42 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": [
+        "plugin:react/recommended",
+        "standard-with-typescript"
+    ],
+    "overrides": [
+    ],
+    "parserOptions": {
+        "project": "tsconfig.json",
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react"
+    ],
+    "rules": {
+        // pure settings
+        "padded-blocks": "off",
+        "no-trailing-spaces": "off",
+        "arrow-body-style": ["error", "as-needed"],
+        "max-len": ["error", { "code": 120, "ignoreTrailingComments": true, "ignoreUrls": true }],
+
+        // typescript settings
+        "@typescript-eslint/indent": ["error", 4],
+        "@typescript-eslint/semi": ["error", "always"],
+        "@typescript-eslint/no-misused-promises": "off",
+        "@typescript-eslint/no-floating-promises": "off",
+        "@typescript-eslint/no-non-null-assertion": "off",
+        "@typescript-eslint/strict-boolean-expressions": "off",
+        "@typescript-eslint/space-before-function-paren": "off",
+        "@typescript-eslint/restrict-template-expressions": "off",
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/quotes": ["error", "double", { "allowTemplateLiterals": true }],
+
+        // react settings
+        "react/self-closing-comp": ["error", { "component": true, "html": true }]
+    }
+}
