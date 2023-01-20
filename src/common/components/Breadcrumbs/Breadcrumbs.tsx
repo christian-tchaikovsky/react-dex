@@ -33,7 +33,8 @@ export const Breadcrumbs: FC<Props> = (props) => {
         return breadcrumbs
             .map<React.ReactNode>(path => <Text key={path.to} to={path.to} name={path.name} />)
             .reduce((prev, curr, index) => {
-                return [prev, <Separator key={index}>{separator}</Separator>, curr];
+                const sep = <Separator key={index}>{separator}</Separator>;
+                return [prev, sep, curr];
             });
     }, []);
 
