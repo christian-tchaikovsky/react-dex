@@ -23,11 +23,17 @@ const initState = {
     player: null
 };
 
-const EditContext = createContext<IContext>(initState);
+const UpdateContext = createContext<IContext>(initState);
 
-export const useEdit = (): IContext => useContext(EditContext);
+export const useUpdateContext = (): IContext => {
+    const context = useContext(UpdateContext);
 
-export const EditProvider: FC<Props> = (props) => {
+    if (context) return context;
+
+    throw new Error("Context must be used within Provider!");
+};
+
+export const UpdateProvider: FC<Props> = (props) => {
     const { id, children } = props;
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(true);
@@ -65,8 +71,8 @@ export const EditProvider: FC<Props> = (props) => {
     };
 
     return (
-        <EditContext.Provider value={{ id, error, loading, player }}>
+        <UpdateContext.Provider value={{ id, error, loading, player }}>
             {children}
-        </EditContext.Provider>
+        </UpdateContext.Provider>
     );
 };

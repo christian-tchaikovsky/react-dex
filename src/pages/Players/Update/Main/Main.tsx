@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { useEdit } from "@/modules/players/contexts/EditContext";
+import { useUpdateContext } from "@/modules/players/contexts/UpdateContext";
 import { Typography } from "@/common/components/UI/Typography";
 import { Loader } from "@/common/components/Loader";
 import { Form } from "@/modules/players/components/Form";
@@ -17,7 +17,7 @@ import { editPlayer } from "@/api/players";
 export const Main: FC = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
-    const { player, loading, error } = useEdit();
+    const { player, loading, error } = useUpdateContext();
 
     const onSubmit: SubmitHandler<IFields> = async data => {
         try {
@@ -49,9 +49,11 @@ export const Main: FC = () => {
 
     if (error) return <Typography>error</Typography>;
 
+    if (!player) return null;
+
     const breadcrumbs = [
         { name: "Players", to: paths.players },
-        { name: player!.name, to: "" }
+        { name: player.name, to: "" }
     ];
     
     return (
@@ -61,7 +63,7 @@ export const Main: FC = () => {
             </FormHeader>
             <FormBody>
                 <Form
-                    defaultValue={player!}
+                    defaultValue={player}
                     onSubmit={onSubmit}
                     onCancel={() => navigate(paths.players)}
                 />

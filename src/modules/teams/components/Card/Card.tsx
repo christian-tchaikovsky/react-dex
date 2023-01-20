@@ -62,7 +62,7 @@ export const Card: FC<Props> = (props) => {
                 <Breadcrumbs path={breadcrumbs}/>
                 <FormActions>
                     <Icon
-                        title="Edit"
+                        title="Update"
                         name="create"
                         onClick={onHandleNavigate}
                         className={styles.create}

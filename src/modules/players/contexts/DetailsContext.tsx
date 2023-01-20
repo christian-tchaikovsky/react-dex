@@ -23,7 +23,13 @@ const initState = {
 
 const DetailsContext = createContext<IContext>(initState);
 
-export const useDetails = (): IContext => useContext(DetailsContext);
+export const useDetails = (): IContext => {
+    const context = useContext(DetailsContext);
+
+    if (context) return context;
+
+    throw new Error("Context must be used within Provider!");
+};
 
 export const DetailsProvider: FC<Props> = (props) => {
     const { id, children } = props;

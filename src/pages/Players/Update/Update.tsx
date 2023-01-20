@@ -1,14 +1,14 @@
 import React from "react";
-import { EditProvider } from "@/modules/players/contexts/EditContext";
+import { UpdateProvider } from "@/modules/players/contexts/UpdateContext";
 import { useParams } from "react-router-dom";
 import { Main } from "./Main";
 
-export const Edit = () => {
+export const Update = () => {
     const { id } = useParams();
     
     return (
-        <EditProvider id={Number(id)}>
+        <UpdateProvider id={Number(id)}>
             <Main/>
-        </EditProvider>
+        </UpdateProvider>
     );
 };

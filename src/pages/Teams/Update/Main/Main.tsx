@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "@/common/hooks";
 import { SubmitHandler } from "react-hook-form";
 import { IFields } from "@/modules/teams/interfaces/ITeams";
-import { useEdit } from "@/modules/teams/contexts/EditContext";
+import { useUpdateContext } from "@/modules/teams/contexts/UpdateContext";
 import { addToast } from "@/common/reducers/toastsReducer";
 import { paths } from "@/routes/paths";
 import { editTeam } from "@/api/teams";
@@ -18,7 +18,7 @@ import styles from "./Main.module.sass";
 export const Main: FC = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
-    const { team, loading, error } = useEdit();
+    const { team, loading, error } = useUpdateContext();
     
     const onSubmit: SubmitHandler<IFields> = async data => {
         try {
@@ -40,9 +40,11 @@ export const Main: FC = () => {
 
     if (error) return <Typography>error</Typography>;
 
+    if (!team) return null;
+
     const breadcrumbs = [
         { name: "Teams", to: paths.teams },
-        { name: team!.name, to: "" }
+        { name: team.name, to: "" }
     ];
 
     return (
@@ -53,7 +55,7 @@ export const Main: FC = () => {
             <FormBody className={styles["form-body"]}>
                 <Form
                     onSubmit={onSubmit}
-                    defaultValue={team!}
+                    defaultValue={team}
                     onCancel={() => navigate(paths.teams)}
                 />
             </FormBody>
