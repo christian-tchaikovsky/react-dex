@@ -94,24 +94,23 @@ export const Card: FC<Props> = (props) => {
                                 <Typography className={styles.number}>{`#${number}`}</Typography>
                             </div>
                             <div className={styles.grid}>
-                                <div>
+                                <div className={styles.element}>
                                     <Typography tag="h4" className={styles.title}>Position</Typography>
                                     <Typography className={styles.text}>{position}</Typography>
                                 </div>
-                                <div>
+                                <div className={styles.element}>
                                     <Typography tag="h4" className={styles.title}>Team</Typography>
                                     <Typography className={styles.text}>{teamName}</Typography>
                                 </div>
-                                <div>
+                                <div className={styles.element}>
                                     <Typography tag="h4" className={styles.title}>Height</Typography>
                                     <Typography className={styles.text}>{height}</Typography>
                                 </div>
-
-                                <div>
+                                <div className={styles.element}>
                                     <Typography tag="h4" className={styles.title}>Weight</Typography>
                                     <Typography className={styles.text}>{weight}</Typography>
                                 </div>
-                                <div>
+                                <div className={styles.element}>
                                     <Typography tag="h4" className={styles.title}>Age</Typography>
                                     <Typography className={styles.text}>{age}</Typography>
                                 </div>
