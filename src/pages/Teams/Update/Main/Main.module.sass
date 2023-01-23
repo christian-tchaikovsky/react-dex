@@ -1,7 +1,9 @@
-@import "@/common/styles/sass/_colors.sass"
+@import "@/common/styles/sass/index.sass"
 
 .teams-edit
   display: block
+  +breakpointDown($device--mobile-l)
+    padding: 20px 0
 
 .form-body
   background-color: #ffffff

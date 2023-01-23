@@ -1,15 +1,28 @@
+@import "@/common/styles/sass/_variables.sass"
+@import "@/common/styles/sass/_mixins.sass"
+
 .form
   display: flex
   padding: 25px
+  +breakpointDown($device--tablet-m)
+    padding: 0
+  +breakpointDown($device--desktop-s)
+    flex-direction: column
 
 .upload
   margin-right: 130px
   width: 300px
   height: 250px
+  +breakpointDown($device--desktop-s)
+    margin-bottom: 50px
+    width: 185px
+    height: 185px
 
 .fields
   width: 360px
   display: inline-block
+  +breakpointDown($device--desktop-s)
+    width: 100%
 
   .input
     margin-bottom: 25px
