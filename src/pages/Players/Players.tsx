@@ -91,6 +91,7 @@ export const Players: FC = () => {
                 <Button
                     icon="add"
                     variant="primary"
+                    className={styles.button}
                     onClick={() => navigate(paths.players_add)}
                 >
                     Add

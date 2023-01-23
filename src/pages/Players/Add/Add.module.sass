@@ -1,2 +1,14 @@
+@import "@/common/styles/sass/_variables.sass"
+@import "@/common/styles/sass/_mixins.sass"
+
+.player-add
+  display: block
+  +breakpointDown($device--mobile-l)
+    padding: 20px 0
+
+.form-header, .form-body
+  +breakpointDown($device--mobile-l)
+    border-radius: 0
+
 .select-position
   min-width: 200px

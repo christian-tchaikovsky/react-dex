@@ -46,8 +46,8 @@ export const Add: FC = () => {
     };
 
     return (
-        <div>
-            <FormHeader>
+        <div className={styles["player-add"]}>
+            <FormHeader className={styles["form-header"]}>
                 <Breadcrumbs path={breadcrumbs}/>
             </FormHeader>
             <FormBody className={styles["form-body"]}>

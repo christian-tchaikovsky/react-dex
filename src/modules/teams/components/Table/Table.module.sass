@@ -1,4 +1,4 @@
-@import "@/common/styles/sass/_colors.sass"
+@import "@/common/styles/sass/index.sass"
 
 .table
   width: 100%
@@ -6,6 +6,8 @@
   white-space: nowrap
   color: $grey
   background-color: #ffffff
+  +breakpointDown($device--mobile-l)
+    width: auto
 
   caption
     font-size: 18px
@@ -16,6 +18,9 @@
     border-top-left-radius: 6px
     border-top-right-radius: 6px
     border-bottom: none
+    +breakpointDown($device--mobile-l)
+      border-top-left-radius: 0
+      border-top-right-radius: 0
 
   th
     text-align: left
@@ -41,10 +46,14 @@
   /* bottom-left border-radius */
   tr:last-child td:first-child
     border-bottom-left-radius: 6px
+    +breakpointDown($device--mobile-l)
+      border-bottom-left-radius: 0
 
   /* bottom-right border-radius */
   tr:last-child td:last-child
     border-bottom-right-radius: 6px
+    +breakpointDown($device--mobile-l)
+      border-bottom-right-radius: 0
 
 .avatar
   display: inline-block

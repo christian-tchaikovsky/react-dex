@@ -40,7 +40,7 @@ export const Add: FC = () => {
 
     return (
         <div className={styles["teams-add"]}>
-            <FormHeader>
+            <FormHeader className={styles["form-header"]}>
                 <Breadcrumbs path={breadcrumbs}/>
             </FormHeader>
             <FormBody className={styles["form-body"]}>

@@ -1,11 +1,22 @@
+@import "@/common/styles/sass/_mixins.sass"
+@import "@/common/styles/sass/_variables.sass"
+
 .teams
   display: flex
   flex-direction: column
   min-height: 100%
+  +breakpointDown($device--mobile-l)
+    padding: 20px
 
 .top
   display: flex
   justify-content: space-between
+  +breakpointDown($device--tablet-m)
+    flex-direction: column
+
+  .button
+    +breakpointDown($device--tablet-m)
+      margin-top: 15px
 
 .main
   margin: 30px 0

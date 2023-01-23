@@ -14,7 +14,7 @@ export const Main: FC = () => {
     if (error) return <Typography>error</Typography>;
 
     return (
-        <div>
+        <div className={styles.details}>
             <Card className={styles.card} team={team!}/>
             <Table data={players!.data}/>
         </div>

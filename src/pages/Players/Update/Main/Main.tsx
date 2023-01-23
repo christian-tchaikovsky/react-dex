@@ -13,6 +13,7 @@ import { addToast } from "@/common/reducers/toastsReducer";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "@/common/hooks";
 import { editPlayer } from "@/api/players";
+import styles from "./Main.module.sass";
 
 export const Main: FC = () => {
     const navigate = useNavigate();
@@ -57,7 +58,7 @@ export const Main: FC = () => {
     ];
     
     return (
-        <div>
+        <div className={styles["player-edit"]}>
             <FormHeader>
                 <Breadcrumbs path={breadcrumbs}/>
             </FormHeader>
