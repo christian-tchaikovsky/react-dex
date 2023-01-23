@@ -1,18 +1,27 @@
-@import "@/common/styles/sass/_colors.sass"
+@import "@/common/styles/sass/index.sass"
 
 .header
-  display: flex
-  align-items: center
-  justify-content: space-between
-  padding: 0 40px
+  z-index: 1
   width: 100%
   height: 80px
+  display: flex
+  padding: 0 40px
   position: relative
+  align-items: center
   background-color: #ffffff
   box-shadow: 0 1px 10px rgba(209, 209, 209, 0.5)
+  +breakpointDown($device--tablet-m)
+    padding: 0 20px
 
 .logo
+  cursor: pointer
   max-width: 175px
+
+  &.center
+    margin: 0 auto
+
+.user
+  margin-left: auto
 
 .name
   display: inline-block
@@ -31,3 +40,30 @@
   .image
     width: 100%
     height: 100%
+
+.button-inner
+  position: absolute
+  width: 18px
+  padding: 6px 0
+  cursor: pointer
+
+.button-menu,
+.button-menu::before,
+.button-menu::after
+  width: 100%
+  height: 2px
+  display: block
+  border-radius: 2px
+  position: relative
+  background-color: $light-grey
+  transition: transform 400ms cubic-bezier(0.23, 1, 0.32, 1)
+
+.button-menu::before
+  content: ""
+  margin-top: -5px
+  position: absolute
+
+.button-menu::after
+  position: absolute
+  margin-top: 5px
+  content: ""

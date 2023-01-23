@@ -66,7 +66,8 @@ export function style<
         }),
         valueContainer: (styles) => ({
             ...styles,
-            fontSize: "14px"
+            fontSize: "14px",
+            flexWrap: "nowrap"
         }),
         multiValue: (styles) => ({
             ...styles,

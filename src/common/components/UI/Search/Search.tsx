@@ -34,6 +34,7 @@ export const Search: FC<Props> = (props) => {
                 onChange={onChange}
                 onKeyDown={handleKeyDown}
                 placeholder="Search..."
+                fullWidth
             />
             <Icon onClick={onSearch} className={styles.icon} name="search"/>
         </div>

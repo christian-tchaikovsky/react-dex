@@ -1,10 +1,16 @@
-@import "@/common/styles/sass/_colors.sass"
+@import "@/common/styles/sass/index.sass"
 
 .card
   display: block
 
 .form-header
   border: 1px solid $light-grey
+  +breakpointDown($device--tablet-m)
+    padding: 15px
+
+.form-header, .content
+  +breakpointDown($device--mobile-l)
+    border-radius: 0
 
 .create, .delete
   cursor: pointer
@@ -25,20 +31,34 @@
 .container
   margin: 0 auto
   max-width: 1024px
+  +breakpointDown($device--desktop-s)
+    padding: 65px 0
 
 .flex
   display: flex
   align-items: center
   justify-content: space-between
+  +breakpointDown($device--desktop-s)
+    flex-direction: column
 
 .grid
   gap: 50px
   display: grid
   grid-template-columns: 1fr 1fr
+  +breakpointDown($device--desktop-s)
+    display: block
+
+  .element
+    +breakpointDown($device--desktop-s)
+      text-align: center
+      margin-top: 20px
 
 .image
   align-self: flex-end
   max-width: 500px
+  +breakpointDown($device--desktop-s)
+    align-self: center
+    margin-bottom: 50px
 
   img
     display: block
@@ -48,6 +68,8 @@
   display: block
   padding: 65px 0
   white-space: nowrap
+  +breakpointDown($device--desktop-s)
+    padding: 0
 
   .title, .name, .number
     font-weight: 800
@@ -55,6 +77,8 @@
   .name, .number
     display: inline-block
     font-size: 36px
+    +breakpointDown($device--desktop-s)
+      font-size: 22px
 
   .title, .text
     font-size: 24px
@@ -69,9 +93,15 @@
 
   .header
     margin-bottom: 40px
+    +breakpointDown($device--desktop-s)
+      text-align: center
 
   .title
     margin-bottom: 10px
+    +breakpointDown($device--desktop-s)
+      font-size: 17px
 
   .text
     font-size: 18px
+    +breakpointDown($device--desktop-s)
+      font-size: 15px
