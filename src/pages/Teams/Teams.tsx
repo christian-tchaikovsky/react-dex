@@ -64,6 +64,7 @@ export const Teams: FC = () => {
                 <Button
                     icon="add"
                     variant="primary"
+                    className={styles.button}
                     onClick={() => navigate(paths.teams_add)}
                 >
                     Add
