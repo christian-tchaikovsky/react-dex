@@ -3,8 +3,8 @@
 
 .sidebar-inner
   height: 100%
-  display: block
   position: relative
+  transform: translate(-100px)
 
   &.mobile
     z-index: 1
@@ -13,16 +13,14 @@
     &.open
       width: 100%
 
+  &.open
+    transform: translate(0px)
+
 .sidebar
   height: 100%
   position: relative
   display: inline-block
   background-color: #ffffff
-  transform: translate(-100px)
-  transition: transform .5s ease-in-out
-
-  &.open
-    transform: translateX(0px)
 
 .navigation
   height: 100%

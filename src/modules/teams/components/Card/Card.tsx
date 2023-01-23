@@ -84,15 +84,15 @@ export const Card: FC<Props> = (props) => {
                         <div className={styles.info}>
                             <Typography size="large" tag="h1" className={styles.name}>{name}</Typography>
                             <div className={styles.grid}>
-                                <div>
+                                <div className={styles.element}>
                                     <Typography tag="h4" className={styles.title}>Year of foundation</Typography>
                                     <Typography className={styles.text}>{foundationYear}</Typography>
                                 </div>
-                                <div>
+                                <div className={styles.element}>
                                     <Typography tag="h4" className={styles.title}>Division</Typography>
                                     <Typography className={styles.text}>{division}</Typography>
                                 </div>
-                                <div>
+                                <div className={styles.element}>
                                     <Typography tag="h4" className={styles.title}>Conference</Typography>
                                     <Typography className={styles.text}>{conference}</Typography>
                                 </div>

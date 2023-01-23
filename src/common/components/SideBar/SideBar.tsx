@@ -16,17 +16,13 @@ export const SideBar: FC = (): JSX.Element => {
                 [styles.open]: state
             }
         )}>
-            <Condition condition={mobile && state} otherwise={null}>
+            <Condition condition={state} otherwise={null}>
                 <div
                     onClick={onChangeHandler}
                     className={styles.backdrop}
                 />
             </Condition>
-            <div className={classNames(
-                styles.sidebar, { 
-                    [styles.open]: state
-                }
-            )}>
+            <div className={classNames(styles.sidebar)}>
                 <nav className={styles.navigation}>
                     <div className={styles.main}>
                         <Anchor
