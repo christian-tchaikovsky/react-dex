@@ -1,5 +1,8 @@
 import * as Yup from "yup";
 import { IFields } from "@/modules/teams/interfaces/ITeams";
+import moment from "moment";
+
+const currentYear = moment().year();
 
 export const validationSchema = Yup.object<Record<keyof IFields, Yup.AnySchema>>({
     name: Yup.string()
@@ -13,7 +16,7 @@ export const validationSchema = Yup.object<Record<keyof IFields, Yup.AnySchema>>
         .transform(value => value || null)
         .required("Required")
         .min(1950, "Year must be greater than 1950")
-        .max(2050, "Year must be less than 1950"),
+        .max(currentYear, `Year must be less than ${currentYear}`),
     conference: Yup.string()
         .trim()
         .required("Required"),

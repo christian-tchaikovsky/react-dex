@@ -10,7 +10,9 @@
   padding: 0 120px
   align-items: center
   justify-content: center
-  +breakpointDown($device--desktop-l)
+  +breakpointDown($device--desktop-m)
+    padding: 0 60px
+  +breakpointDown($device--desktop-s)
     width: 100%
     padding: 0 20px
 
@@ -20,10 +22,14 @@
   align-items: center
   justify-content: center
   background-color: $light-blue
-  +breakpointDown($device--desktop-l)
+  +breakpointDown($device--desktop-s)
     display: none
+
+.banner-inner
+  max-width: 600px
+  margin: 0 40px
 
 .banner
   display: block
-  max-width: 600px
-  margin: 0 40px
+  width: 100%
+  object-fit: cover

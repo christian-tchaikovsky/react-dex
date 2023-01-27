@@ -5,7 +5,7 @@ export const validationSchema = Yup.object<Record<keyof IFields, Yup.AnySchema>>
     login: Yup.string()
         .trim()
         .required("Required")
-        .matches(/^[a-zA-Z]+$/, "Invalid character entered")
+        .matches(/^[a-zA-Z]+$/, "The login must contain only letters")
         .min(5, "Login must be at least 5 characters")
         .max(24, "Login must be at most 24 characters"),
     password: Yup.string()

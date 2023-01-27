@@ -1,6 +1,13 @@
 @import "@/common/styles/sass/_mixins.sass"
 @import "@/common/styles/sass/_variables.sass"
 
+$grid-column-count: 3
+$grid-layout-gap: 25px
+$grid-item--min-width: 100px
+$gap-count: calc($grid-column-count - 1)
+$total-gap-width: calc($gap-count * $grid-layout-gap)
+$grid-item--max-width: calc((100% - $total-gap-width) / $grid-column-count)
+
 .teams
   display: flex
   flex-direction: column
@@ -29,9 +36,9 @@
 
   &.grid
     display: grid
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr))
+    grid-template-columns: repeat(auto-fill, minmax(max(300px, $grid-item--max-width), 1fr))
     grid-auto-rows: 380px
-    gap: 25px
+    grid-gap: $grid-layout-gap
 
 .bottom
   display: flex

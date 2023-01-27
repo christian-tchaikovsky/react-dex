@@ -5,6 +5,8 @@ import { Label } from "@/common/components/UI/Label";
 import { Error } from "@/common/components/UI/Error";
 import { GroupBase } from "react-select";
 import { style } from "../style";
+import styles from "../Select.module.sass";
+import classNames from "classnames";
 
 interface CustomProps {
     label?: string
@@ -20,24 +22,24 @@ export function Paginate<
 >(props: AsyncPaginateProps<OptionType, Group, Additional, IsMulti> & CustomProps): JSX.Element {
     const { className, components, label, variant = "primary", error, ...rest } = props;
     const MultiValueComponent = MultiValue<OptionType>;
-    const styles = style<OptionType, IsMulti, Group>({
+    const customStyles = style<OptionType, IsMulti, Group>({
         variant,
         error
     });
 
     return (
-        <div className={className}>
+        <div className={classNames(styles.wrapper, className)}>
             {label && <Label>{label}</Label>}
             <AsyncPaginate
                 menuPlacement="auto"
-                styles={styles}
+                styles={customStyles}
                 components={{
                     MultiValue: MultiValueComponent,
                     ...components
                 }}
                 {...rest}
             />
-            {error && <Error>{error}</Error>}
+            {error && <Error className={styles.error}>{error}</Error>}
         </div>
     );
 }

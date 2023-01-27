@@ -33,7 +33,7 @@ export const Input: FC<Props> = forwardRef<HTMLInputElement, Props>((props, ref)
                 disabled={disabled}
                 {...rest}
             />
-            {error && <Error>{error}</Error>}
+            {error && <Error className={styles.error}>{error}</Error>}
         </div>
     );
 });

@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "@/common/hooks";
+import { useAppDispatch, useAppSelector, useDebounce } from "@/common/hooks";
 import { fetchTeams } from "@/modules/teams/reducers/teamsReducer";
 import { Typography } from "@/common/components/UI/Typography";
 import { Condition } from "@/common/components/Condition";
@@ -28,6 +28,7 @@ export const Teams: FC = () => {
     const [search, setSearch] = useState("");
     const [option, setOption] = useState<SingleValue<ISizes>>(sizes[0]);
     const { teams, loading, error } = useAppSelector(state => state.teams);
+    const debounced = useDebounce(search, 1000);
     const pagination = !!teams?.count && !!teams?.size;
     const teamsLength = teams?.data.length;
 
@@ -45,6 +46,11 @@ export const Teams: FC = () => {
         setSize(option.value);
         setPage(1);
     }, [option]);
+
+    useEffect(() => {
+        setPage(1);
+        setName(debounced);
+    }, [debounced]);
 
     const onHandleSearch = (): void => {
         setPage(1);
