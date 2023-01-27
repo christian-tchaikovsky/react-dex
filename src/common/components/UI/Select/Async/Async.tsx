@@ -5,6 +5,8 @@ import { style } from "@/common/components/UI/Select/style";
 import { Label } from "@/common/components/UI/Label";
 import { Error } from "@/common/components/UI/Error";
 import { GroupBase } from "react-select";
+import styles from "../Select.module.sass";
+import classNames from "classnames";
 
 interface CustomProps {
     label?: string
@@ -19,24 +21,24 @@ export function Async<
 >(props: AsyncProps<Option, IsMulti, Group> & CustomProps): JSX.Element {
     const { className, components, label, variant = "primary", error, ...rest } = props;
     const MultiValueComponent = MultiValue<Option>;
-    const styles = style<Option, IsMulti, Group>({
+    const customStyles = style<Option, IsMulti, Group>({
         variant,
         error
     });
-    
+
     return (
-        <div className={className}>
+        <div className={classNames(styles.wrapper, className)}>
             {label && <Label>Position</Label>}
             <AsyncSelect
                 menuPlacement="auto"
-                styles={styles}
+                styles={customStyles}
                 components={{
                     MultiValue: MultiValueComponent,
                     ...components
                 }}
                 {...rest}
             />
-            {error && <Error>{error}</Error>}
+            {error && <Error className={styles.error}>{error}</Error>}
         </div>
     );
 }

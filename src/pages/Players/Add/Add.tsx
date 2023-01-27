@@ -52,7 +52,10 @@ export const Add: FC = () => {
             </FormHeader>
             <FormBody className={styles["form-body"]}>
                 <Form
-                    onSubmit={onSubmit} 
+                    defaultValue={{
+                        birthday: ""
+                    }}
+                    onSubmit={onSubmit}
                     onCancel={() => navigate(paths.players)}
                 />
             </FormBody>

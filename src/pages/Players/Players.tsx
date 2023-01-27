@@ -32,6 +32,7 @@ export const Players: FC = () => {
     const [teamsIds, setTeamsIds] = useState<number[]>([]);
     const [option, setOption] = useState<SingleValue<ISizes>>(sizes[0]);
     const [teams, setTeams] = useState<MultiValue<IOption>>([]);
+    const debouncedName = useDebounce(search, 1000);
     const debounced = useDebounce(teams, 1000);
     const { players, loading, error } = useAppSelector(state => state.players);
     const pagination = !!players?.count && !!players?.size;
@@ -57,6 +58,11 @@ export const Players: FC = () => {
         setPage(1);
     }, [option]);
 
+    useEffect(() => {
+        setPage(1);
+        setName(debouncedName);
+    }, [debouncedName]);
+
     useDidUpdateEffect(() => {
         setTeamsIds(teams.map(team => team.value));
     }, [debounced]);
@@ -67,7 +73,7 @@ export const Players: FC = () => {
     };
 
     if (error) return <Typography>error</Typography>;
-    
+
     return (
         <div className={styles.players}>
             <div className={styles.top}>
@@ -84,6 +90,7 @@ export const Players: FC = () => {
                         isClearable={false}
                         loadOptions={teamOptions}
                         closeMenuOnSelect={false}
+                        hideSelectedOptions={false}
                         className={styles["select-team"]}
                         onChange={newValue => setTeams(newValue)}
                     />

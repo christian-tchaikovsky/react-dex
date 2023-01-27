@@ -32,11 +32,12 @@ export const Form: FC<Props> = (props) => {
             <Controller
                 control={control}
                 name="avatarUrl"
-                render={({ field: { onChange, value } }) => (
+                render={({ field: { onChange, value }, fieldState: { error } }) => (
                     <Upload
                         value={value}
                         onChange={e => onChange(e)}
                         className={styles.upload}
+                        error={error?.message}
                     />
                 )}
             />
@@ -105,6 +106,7 @@ export const Form: FC<Props> = (props) => {
                                 fullWidth
                                 value={value}
                                 max="9999-12-31"
+                                min="1950-01-01"
                                 label="Birthdate"
                                 onChange={onChange}
                                 error={error?.message}

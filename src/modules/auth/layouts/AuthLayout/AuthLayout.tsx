@@ -15,7 +15,9 @@ export const AuthLayout: FC<Props> = (props) => {
                 {children}
             </div>
             <div className={styles.right}>
-                <img className={styles.banner} src={image} alt="banner"/>
+                <div className={styles["banner-inner"]}>
+                    <img className={styles.banner} src={image} alt="banner"/>
+                </div>
             </div>
         </div>
     );

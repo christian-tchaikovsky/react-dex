@@ -10,12 +10,13 @@ interface Props {
     onChange: (e?: string) => void
     value?: string
     className?: string
+    error?: string
 }
 
 const baseUrl = process.env.REACT_APP_BASE_URL;
 
 export const Upload: FC<Props> = (props) => {
-    const { onChange, value = null, className } = props;
+    const { onChange, value = null, className, error } = props;
     const dispatch = useAppDispatch();
     const [file, setFile] = useState<File>();
     const [preview, setPreview] = useState<string | null>(getDefaultValue);
@@ -68,7 +69,14 @@ export const Upload: FC<Props> = (props) => {
     }
 
     return (
-        <div {...getRootProps()} className={classNames(styles.upload, className)}>
+        <div
+            className={classNames(
+                styles.upload,
+                { [styles.error]: error },
+                className
+            )}
+            {...getRootProps()}
+        >
             <input {...getInputProps()}/>
             <div className={styles.background}/>
             <div className={styles["thumb-container"]}>

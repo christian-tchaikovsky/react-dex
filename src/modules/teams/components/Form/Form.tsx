@@ -27,11 +27,12 @@ export const Form: FC<Props> = (props) => {
             <Controller
                 control={control}
                 name="imageUrl"
-                render={({ field: { onChange, value } }) => (
+                render={({ field: { onChange, value }, fieldState: { error } }) => (
                     <Upload
                         value={value}
                         onChange={e => onChange(e)}
                         className={styles.upload}
+                        error={error?.message}
                     />
                 )}
             />
